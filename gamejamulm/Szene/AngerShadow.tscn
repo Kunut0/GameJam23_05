@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpu6frat1qktu"]
+
+[ext_resource type="Script" path="res://Script/AngerShadow.gd" id="1_decky"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_decky")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, 3, 5, 1, -1, -1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://c482ab8jeb5l1"]
+
+[ext_resource type="Script" path="res://Script/player_1.gd" id="1_p1qkr"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_p1qkr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -5, 6, 1, -2, 2)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlaceholderSprite" type="Sprite2D" parent="."]
+
+[node name="Lichtkegel" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lichtkegel"]
+polygon = PackedVector2Array(0, -5, 6, 1, -2, 2)
