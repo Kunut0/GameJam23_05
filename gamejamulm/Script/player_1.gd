@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var sprite = $PlaceholderSprite
+@onready var camera = $Camera2D
 
 # noch nicht getestet
 var jump_force = 400
@@ -36,3 +37,16 @@ func _process(delta: float) -> void:
 		pass
 	
 	move_and_slide()
+	
+	
+	#Kamera Lerping not tested yet
+	var shadow_ref = get_tree().get_first_node_in_group("shadow")
+	var pos_diff = self.global_position - shadow_ref.global_position
+	var camera_pos
+	if  pos_diff < -200:
+		camera_pos = 100
+	elif pos_diff > 200:
+		camera_pos = -100
+	else:
+		camera_pos = pos_diff * (-0.5)
+	camera.position = lerp(camera.position, pos_diff, 0.1)

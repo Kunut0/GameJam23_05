@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Script/AngerShadow.gd" id="1_decky"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
 script = ExtResource("1_decky")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
