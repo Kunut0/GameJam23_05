@@ -7,6 +7,9 @@ extends CharacterBody2D
 var jump_force = 400
 var direction
 var speed = 400
+var shadow_ref
+
+var respawn_ref
 
 func _process(delta: float) -> void:
 	
@@ -40,7 +43,7 @@ func _process(delta: float) -> void:
 	
 	
 	#Kamera Lerping not tested yet
-	var shadow_ref = get_tree().get_first_node_in_group("shadow")
+	shadow_ref = get_tree().get_first_node_in_group("shadow")
 	var pos_diff = self.global_position - shadow_ref.global_position
 	var camera_pos
 	if  pos_diff < -200:
@@ -50,3 +53,14 @@ func _process(delta: float) -> void:
 	else:
 		camera_pos = pos_diff * (-0.5)
 	camera.position = lerp(camera.position, pos_diff, 0.1)
+
+#respawn
+func respawn():
+	self.global_position = respawn_ref.global_position
+	var respawn_point_array = get_tree().get_nodes_in_group("respawn_point")
+	var shadow_res = 0
+	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
+		if respawn_point_array[i].global_position - global_position < 0:
+			if shadow_res > respawn_point_array[i].global_position - global_position or shadow_res == 0:
+				shadow_res = respawn_point_array[i].global_position
+	shadow_ref.global_position = shadow_res
