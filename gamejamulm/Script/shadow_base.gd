@@ -9,10 +9,12 @@ var jump_force = 400
 var direction
 var speed = 400
 
-var dash_speed = 1500
+var dash_speed = 500
 var dashing = false
 var dash_allowed = true
 
+func _ready() -> void:
+	sprite = self.get_node("sprite")
 
 func _process(delta: float) -> void:
 	
