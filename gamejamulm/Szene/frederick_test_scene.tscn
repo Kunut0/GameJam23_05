@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://vbvarpiq0yf1"]
+[gd_scene load_steps=22 format=4 uid="uid://vbvarpiq0yf1"]
 
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_w0pvb"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="2_bq1tl"]
@@ -9,6 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://drpkfsvsabt22" path="res://Assets/background/background_water_2.png" id="7_r65jg"]
 [ext_resource type="Texture2D" uid="uid://c7v16wveiervi" path="res://Assets/background/background_water_3.png" id="8_bfp6s"]
 [ext_resource type="Texture2D" uid="uid://c6jyiuf2eo0r8" path="res://Assets/background/background_water_4.png" id="9_3kewj"]
+[ext_resource type="Texture2D" uid="uid://g4gxsvl04sy6" path="res://Assets/background/rain_1.png" id="10_txhlj"]
+[ext_resource type="Texture2D" uid="uid://ci005lvkg6pth" path="res://Assets/background/rain_2.png" id="11_eyhg7"]
+[ext_resource type="Texture2D" uid="uid://c5xncqupgy2fr" path="res://Assets/background/rain_3.png" id="12_0kuvi"]
+[ext_resource type="Texture2D" uid="uid://djihpnnjg2v28" path="res://Assets/background/rain_4.png" id="13_3fhx5"]
+[ext_resource type="Texture2D" uid="uid://dko5ujbrsua1i" path="res://Assets/background/rain_5.png" id="14_vk801"]
+[ext_resource type="Texture2D" uid="uid://civ4nlpljix2c" path="res://Assets/background/rain_6.png" id="15_bdj5d"]
+[ext_resource type="Texture2D" uid="uid://cg7qgafk5l6uy" path="res://Assets/background/rain_7.png" id="16_vow18"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ixq41"]
 texture = ExtResource("2_bq1tl")
@@ -135,7 +142,36 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ai2la"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_txhlj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_eyhg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0kuvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_3fhx5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vk801")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bdj5d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_vow18")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
 }]
 
 [node name="frederick_test_scene" type="Node2D"]
@@ -158,9 +194,29 @@ scroll_limit_begin = Vector2(-2000, 0)
 scroll_limit_end = Vector2(4000, 0)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.7, 1)
 motion_mirroring = Vector2(1700, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
 sprite_frames = SubResource("SpriteFrames_b237y")
 autoplay = "default"
-frame_progress = 0.0681746
+frame_progress = 0.950461
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(875, 602)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ai2la")
+autoplay = "default"
+frame = 6
+frame_progress = 0.404333
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(1690, 0)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ai2la")
+autoplay = "default"
+frame = 6
+frame_progress = 0.404333
