@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bucvbe5gj7e0l"]
+[gd_scene load_steps=11 format=3 uid="uid://bucvbe5gj7e0l"]
 
 [ext_resource type="Script" path="res://Script/AnxietyShadow.gd" id="1_c86et"]
 [ext_resource type="Texture2D" uid="uid://70kmouvfm5h" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_mlvtf"]
@@ -24,7 +24,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -36,11 +36,15 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc8bb"]
-radius = 15.0
+radius = 16.0
 height = 42.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8qwec"]
 radius = 131.137
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dcgf1"]
+radius = 15.0
+height = 36.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
 script = ExtResource("1_c86et")
@@ -51,17 +55,11 @@ scale = Vector2(0.138, 0.138)
 sprite_frames = SubResource("SpriteFrames_pdy03")
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -15)
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_sc8bb")
-
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-visible = false
 position = Vector2(0, -16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sc8bb")
@@ -80,6 +78,11 @@ collision_mask = 2
 visible = false
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_8qwec")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dcgf1")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

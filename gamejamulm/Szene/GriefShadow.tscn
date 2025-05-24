@@ -1,32 +1,102 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfvfe30dr8e7i"]
+[gd_scene load_steps=12 format=3 uid="uid://dfvfe30dr8e7i"]
 
 [ext_resource type="Script" path="res://Script/GriefShadow.gd" id="1_0qffg"]
-[ext_resource type="Texture2D" uid="uid://cxhrnrsi061xq" path="res://icon.svg" id="2_5s0eh"]
+[ext_resource type="Texture2D" uid="uid://cmdfb4y6vwwvg" path="res://Assets/grief/Katharsis_grief_eye_close_frame1.png" id="2_7c25q"]
+[ext_resource type="Texture2D" uid="uid://b2sr61i6cmgce" path="res://Assets/grief/Katharsis_grief_eye_close_frame_2.png" id="3_o0fhq"]
+[ext_resource type="Texture2D" uid="uid://hi8joo8ds4ry" path="res://Assets/grief/Katharsis_grief_eye_close_frame_3.png" id="4_1fkcb"]
+[ext_resource type="Texture2D" uid="uid://c7ss37fjw5d33" path="res://Assets/grief/Katharsis_grief_move_frame_1.png" id="5_ieboa"]
+[ext_resource type="Texture2D" uid="uid://djgm80k832i8a" path="res://Assets/grief/Katharsis_grief_move_frame_2.png" id="6_1ifyr"]
+[ext_resource type="Texture2D" uid="uid://nidjbdpk25rw" path="res://Assets/grief/Katharsis_grief_move_frame3.png" id="7_54fhh"]
+[ext_resource type="Texture2D" uid="uid://bcb35pvgu5b8t" path="res://Assets/grief/Katharsis_grief_move_frame4.png" id="8_3tbno"]
+[ext_resource type="Texture2D" uid="uid://wdr8wflgaeyl" path="res://Assets/grief/Katharsis_grief_move_frame_5.png" id="9_amoqw"]
+[ext_resource type="Texture2D" uid="uid://6no5cn8lufai" path="res://Assets/grief/Katharsis_grief_move_frame_6.png" id="10_71ohq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7jyy7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7c25q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o0fhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1fkcb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o0fhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7c25q")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7c25q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ieboa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1ifyr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_54fhh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3tbno")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_amoqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_71ohq")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
+scale = Vector2(0.375, 0.375)
 script = ExtResource("1_0qffg")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-4, 3, 5, 1, -1, -1)
+position = Vector2(53.1812, 44.6187)
+scale = Vector2(8.9375, 21.2813)
+polygon = PackedVector2Array(-19.7126, 3.44816, 6.69301, 3.21322, -4.27203, -7.45345, -11.321, -7.59442)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
-polygon = PackedVector2Array(-4, 3, 5, 1, -1, -1)
+position = Vector2(-16.3056, -65.8125)
+scale = Vector2(18.6111, 47.8125)
+polygon = PackedVector2Array(-6.75373, 3.92811, 8.18358, 3.90719, 2.32687, -1.25882, -2.56269, -1.23791)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.500002, 0.5)
-scale = Vector2(0.164063, 0.164062)
-texture = ExtResource("2_5s0eh")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7jyy7")
+animation = &"walk"
+autoplay = "default"
+frame = 2
+frame_progress = 0.454971
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.1
 
 [node name="PuddleSpawnpoint1" type="Marker2D" parent="."]
+position = Vector2(0, -34)
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

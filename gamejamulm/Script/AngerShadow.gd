@@ -21,7 +21,7 @@ var trail: Trail
 
 func _ready() -> void:
 	speed = 300
-	stun_time = 0.3
+	stun_time = 1
 	
 
 func _process(delta: float) -> void:
