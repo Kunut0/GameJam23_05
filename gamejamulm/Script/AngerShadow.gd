@@ -3,6 +3,7 @@ extends CharacterBody2D
 #var anger : ShadowBase = ShadowBase.new()
 @onready var sprite 
 @onready var dash_timer = $DashTimer
+@onready var firetrail = $Line2D
 
 var jump_force = -400
 var direction
@@ -14,6 +15,8 @@ var dash_allowed = true
 
 var stunned = false
 var stun_time
+
+var trail: Trail
 
 func _ready() -> void:
 	speed = 300
@@ -57,6 +60,11 @@ func _process(delta: float) -> void:
 			dash_allowed = false
 			dash_timer.start()
 		
+		if Input.is_action_just_pressed("ui_ctrl"):
+			firetrail.get_child(0).adding = true
+			await get_tree().create_timer(0.5).timeout
+			firetrail.get_child(0).adding = false
+		
 	move_and_slide()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
@@ -86,3 +94,8 @@ func _on_dash_timer_timeout() -> void:
 	dashing = false
 	await get_tree().create_timer(0.1).timeout
 	dash_allowed = true
+
+
+func _on_line_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player1"):
+		body.respawn()
