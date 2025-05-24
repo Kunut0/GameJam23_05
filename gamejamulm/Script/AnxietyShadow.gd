@@ -3,14 +3,15 @@ extends CharacterBody2D
 #var anger : ShadowBase = ShadowBase.new()
 @onready var sprite = $AnimatedSprite2D
 @onready var dash_timer = $DashTimer
+@onready var hurt = $Hurtbox
 
 signal scream
 
-var jump_force = -400
+var jump_force = -2000
 var direction
-var speed = 400
+var speed = 900
 
-var dash_speed = 1500
+var dash_speed = 2000
 var dashing = false
 var dash_allowed = true
 
@@ -18,15 +19,17 @@ var stunned = false
 var stun_time
 
 func _ready() -> void:
-	speed = 300
-	stun_time = 0.3
+	stun_time = 0.5
 	
 
 func _process(delta: float) -> void:
 	
 	#generates gravity for player
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if velocity.y > 0:
+			velocity += get_gravity() * delta * 8
+		else:
+			velocity += get_gravity() * delta * 8.75
 	
 	if stunned == false:
 		#gets direction imput
@@ -76,8 +79,10 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 
 func stun():
 	stunned = true
+	hurt.monitoring = false
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
+	hurt.monitoring = true
 
 func spawn():
 	var respawn_point_array = get_tree().get_nodes_in_group("respawn_point")

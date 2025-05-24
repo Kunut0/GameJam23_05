@@ -99,7 +99,6 @@ func _process(delta: float) -> void:
 			lichtkegel.hide()
 			lichtkegel.monitoring = false
 			lichtkegel_sichtbar = false
-			await get_tree().create_timer(0.5).timeout
 			flashlight.emit()
 	
 	if lichtkegel_sichtbar and enemy_sight:

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var sprite 
 @onready var dash_timer = $DashTimer
 @onready var firetrail = $Line2D
+@onready var hurt = $Hurtbox
 
 var jump_force = -400
 var direction
@@ -76,8 +77,10 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 
 func stun():
 	stunned = true
+	hurt.monitoring = false
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
+	hurt.monitoring = true
 
 func spawn():
 	var respawn_point_array = get_tree().get_nodes_in_group("respawn_point")

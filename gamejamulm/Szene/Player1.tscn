@@ -180,6 +180,7 @@ wait_time = 0.15
 position = Vector2(1, -35)
 scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_323vs")
+animation = &"jump"
 autoplay = "default"
 
 [connection signal="body_entered" from="Lichtkegel" to="." method="_on_lichtkegel_body_entered"]

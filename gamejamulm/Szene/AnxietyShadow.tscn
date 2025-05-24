@@ -70,7 +70,7 @@ shape = SubResource("CapsuleShape2D_sc8bb")
 position = Vector2(0, -11)
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.15
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

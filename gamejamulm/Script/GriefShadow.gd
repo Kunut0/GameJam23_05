@@ -3,6 +3,7 @@ extends CharacterBody2D
 #var anger : ShadowBase = ShadowBase.new()
 @onready var sprite 
 @onready var dash_timer = $DashTimer
+@onready var hurt = $Hurtbox
 
 var puddle_scene = preload("res://Szene/puddle.tscn")
 
@@ -80,8 +81,10 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 
 func stun():
 	stunned = true
+	hurt.monitoring = false
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
+	hurt.monitoring = true
 
 func spawn():
 	var respawn_point_array = get_tree().get_nodes_in_group("respawn_point")
