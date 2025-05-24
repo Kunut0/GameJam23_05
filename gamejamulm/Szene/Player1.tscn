@@ -155,8 +155,9 @@ scale = Vector2(1.98438, 5.8125)
 polygon = PackedVector2Array(11.222, -7.1, 11.726, 3.22258, -3.89606, 3.22258, -4.4, -7.27204)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -59)
+zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
-position_smoothing_speed = 1.0
 
 [node name="Lichtkegel" type="Area2D" parent="."]
 
@@ -179,7 +180,6 @@ wait_time = 0.15
 position = Vector2(1, -35)
 scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_323vs")
-animation = &"jump"
 autoplay = "default"
 
 [connection signal="body_entered" from="Lichtkegel" to="." method="_on_lichtkegel_body_entered"]

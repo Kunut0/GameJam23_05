@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #var anger : ShadowBase = ShadowBase.new()
-@onready var sprite 
+@onready var sprite = $AnimatedSprite2D
 @onready var dash_timer = $DashTimer
 
 signal scream
@@ -60,8 +60,10 @@ func _process(delta: float) -> void:
 			dash_timer.start()
 		
 		if Input.is_action_just_pressed("ui_ctrl"):
+			sprite.play("scream")
 			await get_tree().create_timer(0.5).timeout
 			scream.emit()
+			sprite.play("default")
 		
 	move_and_slide()
 

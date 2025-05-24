@@ -128,7 +128,7 @@ func _process(delta: float) -> void:
 		camera_pos = -100
 	else:
 		camera_pos = pos_diff.x * (-0.5)
-	camera.position.x = lerp(camera.position.x, camera_pos, 0.2)
+	camera.position.x = lerp(camera.position.x, camera_pos, 0.01)
 	
 	#animations
 	if is_on_floor():

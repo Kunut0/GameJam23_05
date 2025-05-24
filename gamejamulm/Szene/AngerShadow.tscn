@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Script/AngerShadow.gd" id="1_decky"]
 [ext_resource type="Texture2D" uid="uid://cxhrnrsi061xq" path="res://icon.svg" id="2_0bn4b"]
-[ext_resource type="PackedScene" uid="uid://dtmnqp3oqf2ce" path="res://Szene/firetrail.tscn" id="3_jsoal"]
+[ext_resource type="PackedScene" path="res://Szene/firetrail.tscn" id="3_jsoal"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
 script = ExtResource("1_decky")
