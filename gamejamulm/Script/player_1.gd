@@ -10,16 +10,17 @@ extends CharacterBody2D
 signal flashlight
 
 # noch nicht getestet
-var jump_force = -400
+var jump_force = -1000
 var direction
-var speed = 400
+var speed = 450
 
-var dash_speed = 1500
+var dash_speed = 1000
 var dashing = false
-var dash_allowed = true
 
 var shadow_ref
 var respawn_ref
+
+var jumping = false
 
 var light_timer
 var lichtkegel_sichtbar: bool = false
@@ -32,10 +33,13 @@ func _ready() -> void:
 	lichtkegel.monitoring = false
 
 func _process(delta: float) -> void:
-	
 	#generates gravity for player
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if velocity.y > 0:
+			velocity += get_gravity() * delta * 4
+		else:
+			velocity += get_gravity() * delta * 4.375
+		
 	
 	#gets direction imput
 	direction = Input.get_axis("ui_a", "ui_d")
@@ -44,13 +48,9 @@ func _process(delta: float) -> void:
 	if direction < 0:
 		self.scale.y = -1
 		self.rotation_degrees = 180
-		sprite.play("walk")
 	elif direction > 0:
 		self.scale.y = 1
 		self.rotation_degrees = 0
-		sprite.play("walk")
-	elif direction == 0:
-		sprite.play("default")
 	
 	#generates character movement
 	if direction:
@@ -67,24 +67,29 @@ func _process(delta: float) -> void:
 	#makes player jump when on floor
 	if Input.is_action_just_pressed("ui_w") and is_on_floor():
 		velocity.y = jump_force
+		sprite.play("jump")
 	
 	#slide
-	if Input.is_action_just_pressed("ui_s") and is_on_floor() and dash_allowed:
-		dashing = true
-		dash_allowed = false
-		dash_collision.disabled = false
-		default_collision.disabled = true
-		dash_timer.start()
+	if Input.is_action_just_pressed("ui_s"):
+		if is_on_floor() and Cooldown.on_cooldown["dashing"][0] == false:
+			Cooldown.on_cooldown["dashing"][0] = true
+			dashing = true
+			dash_collision.disabled = false
+			default_collision.disabled = true
+			sprite.offset = Vector2(0, 160)
+			dash_timer.start()
+			await get_tree().create_timer(0.1).timeout
+			sprite.offset = Vector2(0, 0)
+		elif not is_on_floor():
+			velocity += get_gravity() * delta * 200
 	
 	move_and_slide()
-	
-	if Input.is_action_just_pressed("ui_select"):
+	if Input.is_action_pressed("ui_select") and Cooldown.on_cooldown["flashlight"][0] == false:
 		if lichtkegel_sichtbar == false:
 			lichtkegel.show()
 			lichtkegel.monitoring = true
 			lichtkegel_sichtbar = true
 			
-	
 	
 	elif Input.is_action_just_released("ui_select"):
 		if lichtkegel_sichtbar == true:
@@ -98,6 +103,9 @@ func _process(delta: float) -> void:
 		light_timer += 1*delta
 		if light_timer > 1:
 			flashlight.emit()
+			Cooldown.on_cooldown["flashlight"][0] = true
+			lichtkegel.hide()
+			lichtkegel.monitoring = false
 	else:
 		light_timer = 0
 	
@@ -111,6 +119,20 @@ func _process(delta: float) -> void:
 	else:
 		camera_pos = pos_diff.x * (-0.5)
 	camera.position.x = lerp(camera.position.x, camera_pos, 0.1)
+	
+	#animations
+	if is_on_floor():
+		jumping = false
+		if dashing:
+			sprite.play("dash")
+		elif direction == 0:
+			sprite.play("default")
+		elif direction != 0:
+			sprite.play("walk")
+	elif velocity.y < 0 and jumping == false:
+		sprite.play("jump")
+		jumping = true
+	
 
 #respawn
 func respawn():
@@ -122,8 +144,7 @@ func _on_timer_timeout() -> void:
 	dashing = false
 	default_collision.disabled = false
 	dash_collision.disabled = true
-	await get_tree().create_timer(0.1).timeout
-	dash_allowed = true
+	await get_tree().create_timer(1).timeout
 
 
 func _on_lichtkegel_body_entered(body: Node2D) -> void:
