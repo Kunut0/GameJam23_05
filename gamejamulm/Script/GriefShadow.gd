@@ -1,17 +1,17 @@
 extends CharacterBody2D
 
 #var anger : ShadowBase = ShadowBase.new()
-@onready var sprite 
+@onready var sprite = $AnimatedSprite2D
 @onready var dash_timer = $DashTimer
 @onready var hurt = $Hurtbox
 
 var puddle_scene = preload("res://Szene/puddle.tscn")
 
-var jump_force = -400
+var jump_force = -1600
 var direction
-var speed = 400
+var speed = 700
 
-var dash_speed = 900
+var dash_speed = 1200
 var dashing = false
 var dash_allowed = true
 
@@ -19,33 +19,39 @@ var stunned = false
 var stun_time
 
 func _ready() -> void:
-	speed = 300
-	stun_time = 0.3
+	stun_time = 0.5
 	
 
 func _process(delta: float) -> void:
 	
 	#generates gravity for player
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if velocity.y > 0:
+			velocity += get_gravity() * delta * 8
+		else:
+			velocity += get_gravity() * delta * 8.75
 	
 	if stunned == false:
 		#gets direction imput
 		direction =  Input.get_axis("ui_left", "ui_right")
 		
 		#checks direction to flip sprite
-#		if direction < 0:
-#			sprite.flip_h = true
-#		else:
-#			sprite.flip_h = false
+		if direction < 0:
+			sprite.flip_h = true
+		else:
+			sprite.flip_h = false
 		
 		#generates character movement
 		if direction:
+			if sprite.animation != "blink":
+				sprite.play("walk")
 			if dashing:
 				velocity.x = dash_speed * direction
 			else:
 				velocity.x = speed * direction
 		else:
+			if sprite.animation != "blink":
+				sprite.play("default")
 			if dashing:
 				velocity.x = dash_speed * -1
 			else:
@@ -61,12 +67,14 @@ func _process(delta: float) -> void:
 			dash_timer.start()
 		
 		if Input.is_action_just_pressed("ui_ctrl"):
+			sprite.play("blink")
 			var x = -100
 			while x <= 100:
 				var puddle = puddle_scene.instantiate() #spawns bullet
 				puddle.global_position = $PuddleSpawnpoint1.global_position + x #set position to marker2D
 				get_tree().current_scene.add_child(puddle) #link bullet to tree
 				x += 100
+			sprite.play("default")
 		
 	move_and_slide()
 

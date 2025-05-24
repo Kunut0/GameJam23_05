@@ -158,8 +158,6 @@ func _on_timer_timeout() -> void:
 
 func _on_lichtkegel_body_entered(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
-		print("wat")
-		enemy_sight = true
 		enemy_sight = true
 		flashlight.connect(body.stun)
 

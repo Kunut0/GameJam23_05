@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt4k13wafgyf8"]
+
+[ext_resource type="Script" path="res://Script/start.gd" id="1_u3o8i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7da1"]
+region = Rect2(10.1115, 76.2512, 124.43, 41.6945)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1b6p"]
+region = Rect2(11.6959, 170.526, 124.029, 40.553)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_u3o8i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(958.522, 544.266)
+scale = Vector2(1.0005, 1.00234)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+
+[node name="BackgroundTitleScreen" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-0.521835, -8.41689)
+scale = Vector2(3.98368, 3.95243)
+
+[node name="start" type="Button" parent="."]
+offset_left = 48.0
+offset_top = 1688.0
+offset_right = 329.0
+offset_bottom = 1789.0
+icon = SubResource("AtlasTexture_b7da1")
+expand_icon = true
+
+[node name="credits" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 844.0
+offset_right = 305.0
+offset_bottom = 945.0
+icon = SubResource("AtlasTexture_b7da1")
+expand_icon = true
+
+[node name="quit" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 954.0
+offset_right = 305.0
+offset_bottom = 1055.0
+icon = SubResource("AtlasTexture_m1b6p")
+expand_icon = true
+
+[node name="ButtonsTitleScreen" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(707, 696)
+scale = Vector2(3.075, 2.80741)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_top = 132.0
+offset_right = 1920.0
+offset_bottom = 366.0
+bbcode_enabled = true
+text = "[font_size=128][center]Hex-press"
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
