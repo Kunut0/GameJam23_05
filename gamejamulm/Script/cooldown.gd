@@ -4,5 +4,6 @@ var on_cooldown = {
 	"flashlight": [false, 5],
 }
 
-func reset_cooldown(cooldown_name, cooldown_timer):
-	pass
+func _process(delta: float) -> void:
+	if on_cooldown["flashlight"][0] == true:
+		print("ok")
