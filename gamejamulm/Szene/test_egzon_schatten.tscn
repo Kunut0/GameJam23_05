@@ -54,4 +54,11 @@ wait_time = 0.1
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_8ym07")
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PackedVector2Array(-4, 3, 5, 1, -1, -1)
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

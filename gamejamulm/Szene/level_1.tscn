@@ -99,3 +99,8 @@ position = Vector2(194, -12)
 
 [node name="Spieler1_egzon_test" parent="Player" instance=ExtResource("2_qgnh8")]
 position = Vector2(-120, -14)
+
+[node name="Spawnpoints" type="Node" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Spawnpoints" groups=["respawn_point"]]
+position = Vector2(46, -15)
