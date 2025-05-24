@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://bucvbe5gj7e0l"]
 
 [ext_resource type="Script" path="res://Script/AnxietyShadow.gd" id="1_c86et"]
-[ext_resource type="Texture2D" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_mlvtf"]
-[ext_resource type="Texture2D" path="res://Assets/anxiety/anxiety_move_frame_2.png" id="3_aiulf"]
-[ext_resource type="Texture2D" path="res://Assets/anxiety/anxiety_move_frame_3.png" id="4_11pgx"]
-[ext_resource type="Texture2D" path="res://Assets/anxiety/anxiety_scream_frame_1.png" id="5_oehla"]
+[ext_resource type="Texture2D" uid="uid://70kmouvfm5h" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_mlvtf"]
+[ext_resource type="Texture2D" uid="uid://bfxcjjor6sc82" path="res://Assets/anxiety/anxiety_move_frame_2.png" id="3_aiulf"]
+[ext_resource type="Texture2D" uid="uid://bu41omkcyrehf" path="res://Assets/anxiety/anxiety_move_frame_3.png" id="4_11pgx"]
+[ext_resource type="Texture2D" uid="uid://crchj8dn4xkg6" path="res://Assets/anxiety/anxiety_scream_frame_1.png" id="5_oehla"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ygwlx"]
 atlas = ExtResource("2_mlvtf")
@@ -36,8 +36,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc8bb"]
-radius = 11.0
-height = 30.0
+radius = 15.0
+height = 42.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8qwec"]
 radius = 131.137
@@ -46,13 +46,13 @@ radius = 131.137
 script = ExtResource("1_c86et")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, -15)
+position = Vector2(1, -21)
 scale = Vector2(0.138, 0.138)
 sprite_frames = SubResource("SpriteFrames_pdy03")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -15)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_sc8bb")
 
@@ -61,12 +61,13 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -12)
+visible = false
+position = Vector2(0, -16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_sc8bb")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -11)
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -76,7 +77,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -12)
+visible = false
+position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_8qwec")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
