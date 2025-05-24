@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var sprite = $AnimatedSprite2D
+@onready var sprite = $PlaceholderSprite
 @onready var camera = $Camera2D
 @onready var dash_timer = $DashTimer
 @onready var dash_collision = $DashCollision
@@ -20,9 +20,6 @@ var dash_allowed = true
 var shadow_ref
 var respawn_ref
 
-func _ready() -> void:
-	shadow_ref = get_tree().get_first_node_in_group("shadow")
-
 func _process(delta: float) -> void:
 	
 	#generates gravity for player
@@ -30,21 +27,13 @@ func _process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	#gets direction imput
-	direction = Input.get_axis("ui_a", "ui_d")
+	direction =  Input.get_axis("ui_a", "ui_d")
 	
 	#checks direction to flip sprite
 	if direction < 0:
-		self.scale.y = -1
-		self.rotation_degrees = 180
-		
-
-		
-		sprite.play("walk")
-	elif direction > 0:
-		self.scale.y = 1
-		self.rotation_degrees = 0
-		
-		sprite.play("walk")
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 	
 	#generates character movement
 	if direction:
@@ -54,7 +43,7 @@ func _process(delta: float) -> void:
 			velocity.x = speed * direction
 	else:
 		if dashing:
-			velocity.x = dash_speed * direction
+			velocity.x = dash_speed * 1
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 	
@@ -77,7 +66,8 @@ func _process(delta: float) -> void:
 		flashlight.emit()
 	
 	#Kamera Lerping
-	var pos_diff = global_position - shadow_ref.global_position
+	shadow_ref = get_tree().get_first_node_in_group("shadow")
+	var pos_diff = self.global_position - shadow_ref.global_position
 	var camera_pos: float
 	if  pos_diff.x < -200:
 		camera_pos = 100

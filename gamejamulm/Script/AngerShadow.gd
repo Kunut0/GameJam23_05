@@ -68,7 +68,7 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 
 func stun():
 	stunned = true
-	await get_tree().create_timer(stun_time).timeout
+	await get_tree().create_timer(stun_time)
 	stunned = false
 
 func spawn():
