@@ -1,8 +1,5 @@
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
 =======
-=======
->>>>>>> Stashed changes
 
 #extends CharacterBody2D
 #
@@ -74,9 +71,6 @@
 #	global_position = shadow_res
 #
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 >>>>>>> Stashed changes
 extends CharacterBody2D
 
