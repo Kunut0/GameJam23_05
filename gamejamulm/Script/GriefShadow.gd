@@ -18,6 +18,8 @@ var dash_allowed = true
 var stunned = false
 var stun_time
 
+var puddle_allowed = true
+
 func _ready() -> void:
 	stun_time = 0.5
 	
@@ -37,9 +39,9 @@ func _process(delta: float) -> void:
 		
 		#checks direction to flip sprite
 		if direction < 0:
-			sprite.flip_h = true
-		else:
 			sprite.flip_h = false
+		elif direction > 0:
+			sprite.flip_h = true
 		
 		#generates character movement
 		if direction:
@@ -66,15 +68,19 @@ func _process(delta: float) -> void:
 			dash_allowed = false
 			dash_timer.start()
 		
-		if Input.is_action_just_pressed("ui_ctrl"):
+		if Input.is_action_just_pressed("ui_ctrl") and puddle_allowed:
+			puddle_allowed = false
 			sprite.play("blink")
 			var x = -100
 			while x <= 100:
 				var puddle = puddle_scene.instantiate() #spawns bullet
-				puddle.global_position = $PuddleSpawnpoint1.global_position + x #set position to marker2D
+				puddle.global_position = $PuddleSpawnpoint1.global_position + Vector2(x,0) #set position to marker2D
 				get_tree().current_scene.add_child(puddle) #link bullet to tree
 				x += 100
+			await sprite.animation_finished
 			sprite.play("default")
+			await get_tree().create_timer(1).timeout
+			puddle_allowed = true
 		
 	move_and_slide()
 
