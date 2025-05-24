@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=4 uid="uid://dgkocdbb16i1r"]
 
 [ext_resource type="Texture2D" uid="uid://c48nlate4bat" path="res://Assets/terrain.png" id="1_xhxs6"]
-[ext_resource type="PackedScene" uid="uid://bsk73tva4v1ti" path="res://Szene/spieler_1_egzon_test.tscn" id="2_qgnh8"]
-[ext_resource type="PackedScene" uid="uid://rv1rkk2m48ww" path="res://Szene/test_egzon_schatten.tscn" id="3_wo4nv"]
+[ext_resource type="PackedScene" uid="uid://dfvfe30dr8e7i" path="res://Szene/GriefShadow.tscn" id="3_5w64g"]
+[ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="3_hnaem"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8vf2t"]
 texture = ExtResource("1_xhxs6")
@@ -81,7 +81,8 @@ texture = ExtResource("1_xhxs6")
 7:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_5wvic"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 7
+physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_8vf2t")
 
 [node name="Level_1" type="Node2D"]
@@ -94,11 +95,10 @@ tile_set = SubResource("TileSet_5wvic")
 
 [node name="Player" type="Node" parent="."]
 
-[node name="shadow" parent="Player" instance=ExtResource("3_wo4nv")]
-position = Vector2(194, -12)
+[node name="CharacterBody2D" parent="Player" instance=ExtResource("3_5w64g")]
+position = Vector2(89, -54)
 
-[node name="Spieler1_egzon_test" parent="Player" instance=ExtResource("2_qgnh8")]
-position = Vector2(-120, -14)
+[node name="CharacterBody2D2" parent="Player" instance=ExtResource("3_hnaem")]
 
 [node name="Spawnpoints" type="Node" parent="."]
 

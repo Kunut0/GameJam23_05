@@ -64,8 +64,10 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("ui_ctrl"):
 			sprite.play("scream")
-			await get_tree().create_timer(0.5).timeout
+			sprite.scale += Vector2(0.05, 0.05)
+			await get_tree().create_timer(0.7).timeout
 			scream.emit()
+			sprite.scale = Vector2(0.138, 0.138)
 			sprite.play("default")
 		
 	move_and_slide()

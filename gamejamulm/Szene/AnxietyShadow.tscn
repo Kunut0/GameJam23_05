@@ -53,6 +53,7 @@ script = ExtResource("1_c86et")
 position = Vector2(1, -21)
 scale = Vector2(0.138, 0.138)
 sprite_frames = SubResource("SpriteFrames_pdy03")
+animation = &"scream"
 autoplay = "default"
 
 [node name="Hurtbox" type="Area2D" parent="."]
