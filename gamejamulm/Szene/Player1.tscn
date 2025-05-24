@@ -138,16 +138,19 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player1"]]
+position = Vector2(0, 4)
+scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_p1qkr")
 
 [node name="DashCollision" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -3)
 polygon = PackedVector2Array(-19, -25, 38, -12, 35, -2, -36, -1)
 disabled = true
 
 [node name="NormalCollision" type="CollisionPolygon2D" parent="."]
-position = Vector2(-8.26875, -19.7313)
+position = Vector2(-8.26875, -22.7313)
 scale = Vector2(1.98438, 5.8125)
 polygon = PackedVector2Array(11.222, -7.1, 11.726, 3.22258, -3.89606, 3.22258, -4.4, -7.27204)
 
