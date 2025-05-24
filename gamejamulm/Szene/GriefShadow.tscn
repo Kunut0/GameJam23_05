@@ -66,7 +66,7 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
-scale = Vector2(0.375, 0.375)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_0qffg")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

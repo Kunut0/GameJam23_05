@@ -141,7 +141,7 @@ func _process(delta: float) -> void:
 	elif velocity.y < 0 and jumping == false:
 		sprite.play("jump")
 		jumping = true
-	
+
 
 #respawn
 func respawn():
