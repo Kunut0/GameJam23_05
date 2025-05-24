@@ -83,8 +83,16 @@ position_smoothing_speed = 1.0
 [node name="Lichtkegel" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lichtkegel"]
-position = Vector2(11, -59)
-polygon = PackedVector2Array(88, 21, 64, 58, 1, 1)
+position = Vector2(12, -56.2642)
+scale = Vector2(1, 0.982955)
+polygon = PackedVector2Array(109, 56, 47, 56, 1, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="Lichtkegel/CollisionPolygon2D"]
+z_index = 4
+position = Vector2(1.19209e-07, -0.00404602)
+scale = Vector2(1, 1.00405)
+color = Color(1, 1, 1, 0.509804)
+polygon = PackedVector2Array(1, 1, 46, 56, 108, 56, 2, 1)
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.1
