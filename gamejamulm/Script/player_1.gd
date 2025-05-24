@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var dash_collision = $DashCollision
 @onready var default_collision = $NormalCollision
 
+signal flashlight
+
 # noch nicht getestet
 var jump_force = -400
 var direction
@@ -59,6 +61,9 @@ func _process(delta: float) -> void:
 	
 	move_and_slide()
 	
+	if Input.is_action_just_pressed("ui_select"):
+		await get_tree().create_timer(0.5).timeout
+		flashlight.emit()
 	
 	#Kamera Lerping
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
@@ -74,7 +79,7 @@ func _process(delta: float) -> void:
 
 #respawn
 func respawn():
-	self.global_position = respawn_ref.global_position
+	global_position = respawn_ref.global_position
 	shadow_ref.spawn()
 
 #dash timer
@@ -84,3 +89,12 @@ func _on_timer_timeout() -> void:
 	dash_collision.disabled = true
 	await get_tree().create_timer(0.1).timeout
 	dash_allowed = true
+
+
+func _on_lichtkegel_body_entered(body: Node2D) -> void:
+	if body.is_in_group("shadow"):
+		flashlight.connect(body.stun)
+
+func _on_lichtkegel_body_exited(body: Node2D) -> void:
+	if body.is_in_group("shadow"):
+		flashlight.disconnect(body.stun)
