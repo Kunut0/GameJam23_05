@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfvfe30dr8e7i"]
+
+[ext_resource type="Script" path="res://Script/GriefShadow.gd" id="1_0qffg"]
+[ext_resource type="Texture2D" uid="uid://cxhrnrsi061xq" path="res://icon.svg" id="2_5s0eh"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
+script = ExtResource("1_0qffg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, 3, 5, 1, -1, -1)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PackedVector2Array(-4, 3, 5, 1, -1, -1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.500002, 0.5)
+scale = Vector2(0.164063, 0.164062)
+texture = ExtResource("2_5s0eh")
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="PuddleSpawnpoint1" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
