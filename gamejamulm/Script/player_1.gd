@@ -20,6 +20,9 @@ var dash_allowed = true
 var shadow_ref
 var respawn_ref
 
+func _ready() -> void:
+	shadow_ref = get_tree().get_first_node_in_group("shadow")
+
 func _process(delta: float) -> void:
 	
 	#generates gravity for player
@@ -66,8 +69,7 @@ func _process(delta: float) -> void:
 		flashlight.emit()
 	
 	#Kamera Lerping
-	shadow_ref = get_tree().get_first_node_in_group("shadow")
-	var pos_diff = self.global_position - shadow_ref.global_position
+	var pos_diff = global_position - shadow_ref.global_position
 	var camera_pos: float
 	if  pos_diff.x < -200:
 		camera_pos = 100

@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsk73tva4v1ti"]
+
+[ext_resource type="Script" path="res://Script/player_1.gd" id="1_aa1vi"]
+[ext_resource type="Texture2D" uid="uid://ciuhamyyh2rco" path="res://Assets/char_run_bow.png" id="2_6engu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g51pn"]
+atlas = ExtResource("2_6engu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8536"]
+atlas = ExtResource("2_6engu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3omi2"]
+atlas = ExtResource("2_6engu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdxjo"]
+atlas = ExtResource("2_6engu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l3cbk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g51pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8536")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3omi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdxjo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Spieler1_egzon_test" type="CharacterBody2D" groups=["player1"]]
+script = ExtResource("1_aa1vi")
+
+[node name="DashCollision" type="CollisionPolygon2D" parent="."]
+position = Vector2(-2, -3)
+polygon = PackedVector2Array(-9, -25, 5, -25, 4, 3, -9, 3)
+disabled = true
+
+[node name="NormalCollision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -5, 6, 1, -2, 2)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+
+[node name="Lichtkegel" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lichtkegel"]
+polygon = PackedVector2Array(0, -5, 6, 1, -2, 2)
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="PlaceholderSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_l3cbk")
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_timer_timeout"]
