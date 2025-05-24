@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=4 uid="uid://vbvarpiq0yf1"]
+[gd_scene load_steps=14 format=4 uid="uid://vbvarpiq0yf1"]
 
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_w0pvb"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="2_bq1tl"]
 [ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="3_pp0du"]
 [ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="4_47rsi"]
 [ext_resource type="PackedScene" uid="uid://bucvbe5gj7e0l" path="res://Szene/AnxietyShadow.tscn" id="5_jmhg7"]
+[ext_resource type="Texture2D" uid="uid://13umutuei6fv" path="res://Assets/background/background_water_1.png" id="6_j2vs6"]
+[ext_resource type="Texture2D" uid="uid://drpkfsvsabt22" path="res://Assets/background/background_water_2.png" id="7_r65jg"]
+[ext_resource type="Texture2D" uid="uid://c7v16wveiervi" path="res://Assets/background/background_water_3.png" id="8_bfp6s"]
+[ext_resource type="Texture2D" uid="uid://c6jyiuf2eo0r8" path="res://Assets/background/background_water_4.png" id="9_3kewj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ixq41"]
 texture = ExtResource("2_bq1tl")
@@ -114,6 +118,26 @@ physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_ixq41")
 sources/1 = SubResource("TileSetAtlasSource_5y4jo")
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_b237y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_j2vs6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_r65jg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bfp6s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3kewj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="frederick_test_scene" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_w0pvb")]
@@ -130,5 +154,13 @@ position = Vector2(1063, 190)
 position = Vector2(1039, 176)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2(-2000, 0)
+scroll_limit_end = Vector2(4000, 0)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1700, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
+sprite_frames = SubResource("SpriteFrames_b237y")
+autoplay = "default"
+frame_progress = 0.0681746
