@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://dtmnqp3oqf2ce"]
 
 [ext_resource type="Script" path="res://Szene/firetrail.gd" id="1_0jaj2"]
-[ext_resource type="Texture2D" uid="uid://e8pke53058um" path="res://Assets/anger/fireball.png" id="1_hurmr"]
+[ext_resource type="Texture2D" uid="uid://c63b7figge33i" path="res://Assets/anger/fireball_2.png" id="1_8curs"]
 
 [sub_resource type="Curve" id="Curve_s3ajc"]
-_data = [Vector2(0, 0.637363), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.0217391, 0.714286), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Area2D" type="Area2D"]
@@ -13,8 +13,9 @@ point_count = 2
 top_level = true
 z_index = -1
 points = PackedVector2Array(114, 29, 52.3563, 13.3187, 0, 0)
+width = 30.0
 width_curve = SubResource("Curve_s3ajc")
-texture = ExtResource("1_hurmr")
+texture = ExtResource("1_8curs")
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2
