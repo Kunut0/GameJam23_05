@@ -1,14 +1,36 @@
-[gd_scene load_steps=19 format=3 uid="uid://c482ab8jeb5l1"]
+[gd_scene load_steps=31 format=3 uid="uid://c482ab8jeb5l1"]
 
 [ext_resource type="Script" path="res://Script/player_1.gd" id="1_p1qkr"]
+[ext_resource type="Texture2D" uid="uid://ri4iy6re6m08" path="res://Assets/Player/silde_anim_1.png" id="2_bffft"]
 [ext_resource type="Texture2D" uid="uid://b8idm7ewnp2yg" path="res://Assets/Player/walk_anim_1.png" id="2_ohxby"]
 [ext_resource type="Texture2D" uid="uid://b50qa0s2052oi" path="res://Assets/Player/idle_anim_1.png" id="2_x6lc8"]
 [ext_resource type="Texture2D" uid="uid://6uo4848y32af" path="res://Assets/Player/idle_anim_2.png" id="3_3a25a"]
+[ext_resource type="Texture2D" uid="uid://cbxf3pvurnv1s" path="res://Assets/Player/silde_anim_2.png" id="3_aicaj"]
 [ext_resource type="Texture2D" uid="uid://ot3wyjj3jy6o" path="res://Assets/Player/walk_anim_2.png" id="3_c0usi"]
 [ext_resource type="Texture2D" uid="uid://c7rfes3rufed" path="res://Assets/Player/idle_anim_3.png" id="4_dqu8r"]
 [ext_resource type="Texture2D" uid="uid://cel1db6wcixak" path="res://Assets/Player/walk_anim_3.png" id="4_gfseg"]
+[ext_resource type="Texture2D" uid="uid://bhteqsbxkm761" path="res://Assets/Player/silde_anim_3.png" id="4_vlr55"]
+[ext_resource type="Texture2D" uid="uid://bwx64ju21h5l" path="res://Assets/Player/jump_anim_1.png" id="5_3gwbb"]
 [ext_resource type="Texture2D" uid="uid://fwijyfvon6tr" path="res://Assets/Player/walk_anim_4.png" id="5_27nfv"]
+[ext_resource type="Texture2D" uid="uid://c0txjnkbfj46v" path="res://Assets/Player/silde_anim_4.png" id="5_dbdvu"]
+[ext_resource type="Texture2D" uid="uid://dfc1rdsdjx0c4" path="res://Assets/Player/jump_anim_2.png" id="6_3o0kx"]
 [ext_resource type="Texture2D" uid="uid://dp7i51svh6uta" path="res://Assets/Player/walk_anim_5.png" id="6_53f7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kegoh"]
+atlas = ExtResource("2_bffft")
+region = Rect2(0, 0, 702, 357)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri00i"]
+atlas = ExtResource("3_aicaj")
+region = Rect2(0, 0, 702, 357)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyr5b"]
+atlas = ExtResource("4_vlr55")
+region = Rect2(0, 0, 702, 357)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjwff"]
+atlas = ExtResource("5_dbdvu")
+region = Rect2(0, 0, 702, 357)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q1nb4"]
 atlas = ExtResource("2_x6lc8")
@@ -20,6 +42,14 @@ region = Rect2(0, 0, 455, 526)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02qex"]
 atlas = ExtResource("4_dqu8r")
+region = Rect2(0, 0, 455, 526)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqet7"]
+atlas = ExtResource("5_3gwbb")
+region = Rect2(0, 0, 455, 526)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6ran"]
+atlas = ExtResource("6_3o0kx")
 region = Rect2(0, 0, 455, 526)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m3o2l"]
@@ -46,6 +76,23 @@ region = Rect2(0, 0, 455, 526)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_kegoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri00i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyr5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjwff")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q1nb4")
 }, {
 "duration": 1.0,
@@ -57,6 +104,17 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqet7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6ran")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -85,7 +143,7 @@ collision_mask = 2
 script = ExtResource("1_p1qkr")
 
 [node name="DashCollision" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-15, -22, 15, -21, 14, -1, -15, -1)
+polygon = PackedVector2Array(-19, -25, 38, -12, 35, -2, -36, -1)
 disabled = true
 
 [node name="NormalCollision" type="CollisionPolygon2D" parent="."]
@@ -112,15 +170,14 @@ color = Color(1, 1, 1, 0.509804)
 polygon = PackedVector2Array(1, 1, 46, 56, 108, 56, 2, 1)
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -35)
 scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_323vs")
+animation = &"jump"
 autoplay = "default"
-frame = 2
-frame_progress = 0.312499
 
 [connection signal="body_entered" from="Lichtkegel" to="." method="_on_lichtkegel_body_entered"]
 [connection signal="body_exited" from="Lichtkegel" to="." method="_on_lichtkegel_body_exited"]
