@@ -128,3 +128,7 @@ position = Vector2(1063, 190)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("5_jmhg7")]
 position = Vector2(1039, 176)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
