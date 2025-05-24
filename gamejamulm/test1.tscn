@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dar888lrhjjcf"]
+
+[ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_764ti"]
+[ext_resource type="PackedScene" uid="uid://cpu6frat1qktu" path="res://Szene/AngerShadow.tscn" id="2_b5h7q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axix6"]
+size = Vector2(1051, 327)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(258.5, 164.5)
+shape = SubResource("RectangleShape2D_axix6")
+
+[node name="CharacterBody2D" parent="StaticBody2D" instance=ExtResource("1_764ti")]
+position = Vector2(17, -30)
+
+[node name="CharacterBody2D2" parent="StaticBody2D" instance=ExtResource("2_b5h7q")]
+position = Vector2(396, -31)

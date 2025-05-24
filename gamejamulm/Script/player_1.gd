@@ -2,13 +2,20 @@ extends CharacterBody2D
 
 @onready var sprite = $PlaceholderSprite
 @onready var camera = $Camera2D
+@onready var dash_timer = $DashTimer
+@onready var dash_collision = $DashCollision
+@onready var default_collision = $NormalCollision
 
 # noch nicht getestet
-var jump_force = 400
+var jump_force = -400
 var direction
 var speed = 400
-var shadow_ref
 
+var dash_speed = 1500
+var dashing = false
+var dash_allowed = true
+
+var shadow_ref
 var respawn_ref
 
 func _process(delta: float) -> void:
@@ -28,39 +35,52 @@ func _process(delta: float) -> void:
 	
 	#generates character movement
 	if direction:
-		velocity.x = speed * direction
+		if dashing:
+			velocity.x = dash_speed * direction
+		else:
+			velocity.x = speed * direction
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		if dashing:
+			velocity.x = dash_speed * 1
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
 	
 	#makes player jump when on floor
 	if Input.is_action_just_pressed("ui_w") and is_on_floor():
 		velocity.y = jump_force
 	
-	if Input.is_action_just_pressed("ui_s"):
-		pass
+	#slide
+	if Input.is_action_just_pressed("ui_s") and is_on_floor() and dash_allowed:
+		dashing = true
+		dash_allowed = false
+		dash_collision.disabled = false
+		default_collision.disabled = true
+		dash_timer.start()
 	
 	move_and_slide()
 	
 	
-	#Kamera Lerping not tested yet
+	#Kamera Lerping
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
 	var pos_diff = self.global_position - shadow_ref.global_position
-	var camera_pos
-	if  pos_diff < -200:
+	var camera_pos: float
+	if  pos_diff.x < -200:
 		camera_pos = 100
-	elif pos_diff > 200:
+	elif pos_diff.x > 200:
 		camera_pos = -100
 	else:
-		camera_pos = pos_diff * (-0.5)
-	camera.position = lerp(camera.position, pos_diff, 0.1)
+		camera_pos = pos_diff.x * (-0.5)
+	camera.position.x = lerp(camera.position.x, camera_pos, 0.1)
 
 #respawn
 func respawn():
 	self.global_position = respawn_ref.global_position
-	var respawn_point_array = get_tree().get_nodes_in_group("respawn_point")
-	var shadow_res = 0
-	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
-		if respawn_point_array[i].global_position - global_position < 0:
-			if shadow_res > respawn_point_array[i].global_position - global_position or shadow_res == 0:
-				shadow_res = respawn_point_array[i].global_position
-	shadow_ref.global_position = shadow_res
+	shadow_ref.spawn()
+
+#dash timer
+func _on_timer_timeout() -> void:
+	dashing = false
+	default_collision.disabled = false
+	dash_collision.disabled = true
+	await get_tree().create_timer(0.1).timeout
+	dash_allowed = true

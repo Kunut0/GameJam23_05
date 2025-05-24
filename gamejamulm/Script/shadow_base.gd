@@ -3,10 +3,16 @@ extends CharacterBody2D
 class_name ShadowBase
 
 @onready var sprite
+@onready var dash_timer = $DashTimer
 
 var jump_force = 400
 var direction
 var speed = 400
+
+var dash_speed = 1500
+var dashing = false
+var dash_allowed = true
+
 
 func _process(delta: float) -> void:
 	
@@ -25,12 +31,34 @@ func _process(delta: float) -> void:
 	
 	#generates character movement
 	if direction:
-		velocity.x = speed * direction
+		if dashing:
+			velocity.x = dash_speed * direction
+		else:
+			velocity.x = speed * direction
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		if dashing:
+			velocity.x = dash_speed * 1
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
 	
 	#makes player jump when on floor
 	if Input.is_action_just_pressed("ui_up") and is_on_floor():
 		velocity.y = jump_force
 	
+	if Input.is_action_just_pressed("ui_down") and is_on_floor() and dash_allowed:
+		dashing = true
+		dash_allowed = false
+		dash_timer.start()
+	
 	move_and_slide()
+
+
+func spawn():
+	var respawn_point_array = get_tree().get_nodes_in_group("respawn_point")
+	var player_ref = get_tree().get_nodes_in_group("player1")
+	var shadow_res = 0
+	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
+		if respawn_point_array[i].global_position - player_ref.global_position < 0:
+			if shadow_res > respawn_point_array[i].global_position - player_ref.global_position or shadow_res == 0:
+				shadow_res = respawn_point_array[i].global_position
+	global_position = shadow_res

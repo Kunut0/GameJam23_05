@@ -6,5 +6,7 @@ func _ready() -> void:
 	anger.speed = 300
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_up"):
-		pass
+	pass
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	anger.spawn()
