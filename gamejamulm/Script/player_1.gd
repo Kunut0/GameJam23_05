@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var dash_timer = $DashTimer
 @onready var dash_collision = $DashCollision
 @onready var default_collision = $NormalCollision
+@onready var lichtkegel: Area2D = $Lichtkegel
 
 signal flashlight
 
@@ -20,8 +21,14 @@ var dash_allowed = true
 var shadow_ref
 var respawn_ref
 
+var light_timer
+var lichtkegel_sichtbar: bool = false
+
 func _ready() -> void:
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
+	
+	lichtkegel.hide()
+	lichtkegel.monitoring = false
 
 func _process(delta: float) -> void:
 	
@@ -36,15 +43,13 @@ func _process(delta: float) -> void:
 	if direction < 0:
 		self.scale.y = -1
 		self.rotation_degrees = 180
-		
-
-		
 		sprite.play("walk")
 	elif direction > 0:
 		self.scale.y = 1
 		self.rotation_degrees = 0
-		
 		sprite.play("walk")
+	elif direction == 0:
+		sprite.play("default")
 	
 	#generates character movement
 	if direction:
@@ -73,8 +78,18 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("ui_select"):
-		await get_tree().create_timer(0.5).timeout
-		flashlight.emit()
+		if lichtkegel_sichtbar == false:
+			lichtkegel.show()
+			lichtkegel.monitoring = true
+			lichtkegel_sichtbar = true
+	
+	elif Input.is_action_just_released("ui_select"):
+		if lichtkegel_sichtbar == true:
+			lichtkegel.hide()
+			lichtkegel.monitoring = false
+			lichtkegel_sichtbar = false
+			await get_tree().create_timer(0.5).timeout
+			flashlight.emit()
 	
 	#Kamera Lerping
 	var pos_diff = global_position - shadow_ref.global_position
@@ -103,7 +118,9 @@ func _on_timer_timeout() -> void:
 
 func _on_lichtkegel_body_entered(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
+		print("wat")
 		flashlight.connect(body.stun)
+
 
 func _on_lichtkegel_body_exited(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
