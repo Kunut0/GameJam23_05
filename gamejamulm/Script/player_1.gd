@@ -10,11 +10,11 @@ extends CharacterBody2D
 signal flashlight
 
 # noch nicht getestet
-var jump_force = -1000
+var jump_force = -2000
 var direction
-var speed = 450
+var speed = 900
 
-var dash_speed = 1000
+var dash_speed = 2000
 var dashing = false
 
 var shadow_ref
@@ -27,6 +27,9 @@ var lichtkegel_sichtbar: bool = false
 
 var enemy_sight: bool = false
 
+var stunned = false
+var stun_time = 0.25
+
 func _ready() -> void:
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
 	
@@ -37,55 +40,55 @@ func _process(delta: float) -> void:
 	#generates gravity for player
 	if not is_on_floor():
 		if velocity.y > 0:
-			velocity += get_gravity() * delta * 4
+			velocity += get_gravity() * delta * 8
 		else:
-			velocity += get_gravity() * delta * 4.375
+			velocity += get_gravity() * delta * 8.75
 		
-	
-	#gets direction imput
-	direction = Input.get_axis("ui_a", "ui_d")
-	
-	#checks direction to flip sprite
-	if direction < 0:
-		self.scale.y = -1
-		self.rotation_degrees = 180
-	elif direction > 0:
-		self.scale.y = 1
-		self.rotation_degrees = 0
-	
-	#generates character movement
-	if direction:
-		if dashing:
-			velocity.x = dash_speed * direction
+	if stunned == false:
+		#gets direction imput
+		direction = Input.get_axis("ui_a", "ui_d")
+		
+		#checks direction to flip sprite
+		if direction < 0:
+			self.scale.y = -2
+			self.rotation_degrees = 180
+		elif direction > 0:
+			self.scale.y = 2
+			self.rotation_degrees = 0
+		
+		#generates character movement
+		if direction:
+			if dashing:
+				velocity.x = dash_speed * direction
+			else:
+				velocity.x = speed * direction
 		else:
-			velocity.x = speed * direction
-	else:
-		if dashing:
-			velocity.x = dash_speed * direction
-		else:
-			velocity.x = move_toward(velocity.x, 0, speed)
-	
-	#makes player jump when on floor
-	if Input.is_action_just_pressed("ui_w") and is_on_floor():
-		velocity.y = jump_force
-		sprite.play("jump")
-	
-	#slide
-	if Input.is_action_just_pressed("ui_s"):
-		if is_on_floor() and Cooldown.on_cooldown["dashing"][0] == false:
-			Cooldown.on_cooldown["dashing"][0] = true
-			dashing = true
-			dash_collision.disabled = false
-			default_collision.disabled = true
-			sprite.offset = Vector2(0, 160)
-			dash_timer.start()
-			await get_tree().create_timer(0.1).timeout
-			sprite.offset = Vector2(0, 0)
-		elif not is_on_floor():
-			velocity += get_gravity() * delta * 200
+			if dashing:
+				velocity.x = dash_speed * direction
+			else:
+				velocity.x = move_toward(velocity.x, 0, speed)
+		
+		#makes player jump when on floor
+		if Input.is_action_just_pressed("ui_w") and is_on_floor():
+			velocity.y = jump_force
+			sprite.play("jump")
+		
+		#slide
+		if Input.is_action_just_pressed("ui_s"):
+			if is_on_floor() and Cooldown.on_cooldown["dashing"][0] == false:
+				Cooldown.on_cooldown["dashing"][0] = true
+				dashing = true
+				dash_collision.disabled = false
+				default_collision.disabled = true
+				sprite.offset = Vector2(0, 160)
+				dash_timer.start()
+				await get_tree().create_timer(0.1).timeout
+				sprite.offset = Vector2(0, 0)
+			elif not is_on_floor():
+				velocity += get_gravity() * delta * 400
 	
 	move_and_slide()
-	if Input.is_action_pressed("ui_select") and Cooldown.on_cooldown["flashlight"][0] == false:
+	if Input.is_action_pressed("ui_select") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false:
 		if lichtkegel_sichtbar == false:
 			lichtkegel.show()
 			lichtkegel.monitoring = true
@@ -125,7 +128,7 @@ func _process(delta: float) -> void:
 		camera_pos = -100
 	else:
 		camera_pos = pos_diff.x * (-0.5)
-	camera.position.x = lerp(camera.position.x, camera_pos, 0.1)
+	camera.position.x = lerp(camera.position.x, camera_pos, 0.2)
 	
 	#animations
 	if is_on_floor():
@@ -166,3 +169,12 @@ func _on_lichtkegel_body_exited(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
 		enemy_sight = false
 		flashlight.disconnect(body.stun)
+
+
+func stun():
+	stunned = true
+	await get_tree().create_timer(stun_time).timeout
+	stunned = false
+	lichtkegel.hide()
+	lichtkegel.monitoring = false
+	lichtkegel_sichtbar = false
