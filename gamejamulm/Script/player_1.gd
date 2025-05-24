@@ -24,9 +24,13 @@ var respawn_ref
 var light_timer
 var lichtkegel_sichtbar: bool = false
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 var enemy_sight: bool = false
 >>>>>>> Max-Development
+=======
+var enemy_sight: bool = false
+>>>>>>> Egzon_neu
 
 func _ready() -> void:
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
@@ -87,10 +91,15 @@ func _process(delta: float) -> void:
 			lichtkegel.monitoring = true
 			lichtkegel_sichtbar = true
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			
 	
 >>>>>>> Max-Development
+=======
+			
+	
+>>>>>>> Egzon_neu
 	
 	elif Input.is_action_just_released("ui_select"):
 		if lichtkegel_sichtbar == true:
@@ -109,6 +118,13 @@ func _process(delta: float) -> void:
 	else:
 		light_timer = 0
 >>>>>>> Max-Development
+	
+	if lichtkegel_sichtbar and enemy_sight:
+		light_timer += 1*delta
+		if light_timer > 1:
+			flashlight.emit()
+	else:
+		light_timer = 0
 	
 	#Kamera Lerping
 	var pos_diff = global_position - shadow_ref.global_position
@@ -138,10 +154,14 @@ func _on_timer_timeout() -> void:
 func _on_lichtkegel_body_entered(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
 <<<<<<< HEAD
+<<<<<<< HEAD
 		print("wat")
 =======
 		enemy_sight = true
 >>>>>>> Max-Development
+=======
+		enemy_sight = true
+>>>>>>> Egzon_neu
 		flashlight.connect(body.stun)
 
 
