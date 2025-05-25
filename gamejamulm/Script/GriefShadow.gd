@@ -9,7 +9,7 @@ var puddle_scene = preload("res://Szene/puddle.tscn")
 
 var jump_force = -1600
 var direction
-var speed = 550
+var speed = 500
 
 var dash_speed = 1200
 var dashing = false

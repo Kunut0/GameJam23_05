@@ -8,11 +8,11 @@ extends CharacterBody2D
 
 signal scream
 
-var jump_force = -2000
+var jump_force = -1800
 var direction
-var speed = 900
+var speed = 750
 
-var dash_speed = 2000
+var dash_speed = 1800
 var dashing = false
 var dash_allowed = true
 

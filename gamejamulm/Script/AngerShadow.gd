@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 var jump_force = -1200
 var direction
-var speed = 800
+var speed = 700
 
 var dash_speed = 1500
 var dashing = false

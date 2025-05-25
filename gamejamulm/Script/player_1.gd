@@ -12,9 +12,9 @@ signal flashlight
 # noch nicht getestet
 var jump_force = -2200
 var direction
-var speed = 1100
+var speed = 1000
 
-var dash_speed = 2000
+var dash_speed = 1800
 var dashing = false
 
 var shadow_ref
