@@ -4,10 +4,12 @@ var level #= preload("res://Level select.tscn")
 var credits = preload("res://Szene/credits.tscn")
 @onready var animation: AnimationPlayer = $AnimationPlayer
 
+
 #func _ready() -> void:
 #	BG_MUSIC._play_menu_music()
 
 func _on_start_pressed() -> void:
+	print("wat")
 	animation.play("fade_in")
 	await get_tree().create_timer(0.5).timeout
 	$AnimatedSprite2D.hide()

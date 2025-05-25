@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bt4k13wafgyf8"]
+[gd_scene load_steps=24 format=4 uid="uid://bt4k13wafgyf8"]
 
 [ext_resource type="Script" path="res://Script/start.gd" id="1_u3o8i"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="3_h3tpy"]
@@ -9,7 +9,63 @@
 [ext_resource type="Texture2D" uid="uid://mwgkdyx850jb" path="res://Assets/background/intro_4.png" id="8_0lyk8"]
 [ext_resource type="Texture2D" uid="uid://dgxsn6k472cmu" path="res://Assets/background/intro_5.png" id="9_2y02o"]
 [ext_resource type="Texture2D" uid="uid://lmfejkqa8hi6" path="res://Assets/background/intro_6.png" id="10_shbu3"]
+[ext_resource type="Texture2D" uid="uid://bc4xidie02xcy" path="res://Assets/background/intro_breaking.png" id="11_uc76k"]
 [ext_resource type="Texture2D" uid="uid://c1bqhnv4y4ih3" path="res://Assets/background/intro_7.png" id="11_xthcf"]
+[ext_resource type="Texture2D" uid="uid://21wmvexuyjht" path="res://Assets/background/intro_broken.png" id="12_e6p4v"]
+
+[sub_resource type="Animation" id="Animation_5j2oi"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1j4dp"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n1h47"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f2xvy"]
+_data = {
+"RESET": SubResource("Animation_n1h47"),
+"fade_in": SubResource("Animation_5j2oi"),
+"fade_out": SubResource("Animation_1j4dp")
+}
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jmnnb"]
 
@@ -159,10 +215,23 @@ animations = [{
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_u3o8i")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f2xvy")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 1
+offset_left = -174.0
+offset_top = -103.0
+offset_right = 2250.0
+offset_bottom = 1341.0
+color = Color(0, 0, 0, 0)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.129658, 0.224131, 0.290896, 1)
-position = Vector2(957.25, 544.75)
-scale = Vector2(1915.5, 1090.5)
+position = Vector2(1006.25, 544.75)
+scale = Vector2(2013.5, 1090.5)
 texture = SubResource("CanvasTexture_jmnnb")
 
 [node name="credits" type="Button" parent="."]
@@ -217,6 +286,18 @@ offset_right = 1524.0
 offset_bottom = 745.0
 bbcode_enabled = true
 text = "[font_size=128][center]Katharsis"
+
+[node name="Breaking" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(322, 637)
+scale = Vector2(0.81, 0.81)
+texture = ExtResource("11_uc76k")
+
+[node name="Broken" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(322, 637)
+scale = Vector2(0.81, 0.81)
+texture = ExtResource("12_e6p4v")
 
 [connection signal="pressed" from="credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
