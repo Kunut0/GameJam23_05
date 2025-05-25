@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dfjxex0vcitcl"]
+[gd_scene load_steps=19 format=4 uid="uid://dfjxex0vcitcl"]
 
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_ag0b4"]
 [ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="1_jqx3w"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="9_a77ob"]
 [ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="10_ekrlj"]
 [ext_resource type="PackedScene" uid="uid://4c83ki6newmv" path="res://label.tscn" id="12_bqhvk"]
+[ext_resource type="AudioStream" uid="uid://bwf5j3i8s42sb" path="res://Assets/Musik/anger_music.mp3" id="14_b1tib"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dwdmb"]
 texture = ExtResource("3_liy11")
@@ -258,6 +259,10 @@ position = Vector2(10138, -168)
 position = Vector2(11205, 61)
 
 [node name="Label" parent="." instance=ExtResource("12_bqhvk")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_b1tib")
+autoplay = true
 
 [editable path="RespawnPoint"]
 [editable path="RespawnPoint2"]
