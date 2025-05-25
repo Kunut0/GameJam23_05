@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://ct7purg6fewkn"]
+[gd_scene load_steps=25 format=4 uid="uid://ct7purg6fewkn"]
 
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="1_i3hn3"]
 [ext_resource type="Shader" path="res://shaders/level_anxiety.gdshader" id="1_u1ruv"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="11_8r8x6"]
 [ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="14_a3ab5"]
 [ext_resource type="PackedScene" uid="uid://4c83ki6newmv" path="res://label.tscn" id="16_gc03l"]
+[ext_resource type="AudioStream" uid="uid://2rx370c16mfd" path="res://Assets/Musik/anxiety_music.mp3" id="17_05xpj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uddrp"]
 shader = ExtResource("1_u1ruv")
@@ -285,6 +286,10 @@ position = Vector2(8702, -328)
 newScene = "res://Szene/frederick_test_scene.tscn"
 
 [node name="Label" parent="." instance=ExtResource("16_gc03l")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_05xpj")
+autoplay = true
 
 [editable path="player_respawn/RespawnPoint"]
 [editable path="player_respawn/RespawnPoint2"]
