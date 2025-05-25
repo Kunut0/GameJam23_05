@@ -144,7 +144,8 @@ func _process(delta: float) -> void:
 
 #respawn
 func respawn():
-	print("ups")
+	for i in get_tree().get_nodes_in_group("shadow_prop"):
+		i.queue_free()
 	global_position = respawn_ref
 	shadow_ref.spawn()
 

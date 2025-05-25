@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cas8kjl2laoh0"]
+[gd_scene load_steps=3 format=3 uid="uid://cas8kjl2laoh0"]
+
+[ext_resource type="Script" path="res://Script/firetrail_collision.gd" id="1_h61xh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_83m1y"]
 size = Vector2(60, 60)
 
-[node name="CollisionShape2D" type="CollisionShape2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" groups=["shadow_prop"]]
 shape = SubResource("RectangleShape2D_83m1y")
+script = ExtResource("1_h61xh")

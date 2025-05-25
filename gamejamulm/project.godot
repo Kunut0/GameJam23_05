@@ -30,6 +30,7 @@ window/stretch/mode="canvas_items"
 shadow=""
 player1=""
 respawn_point=""
+shadow_prop=""
 
 [input]
 
