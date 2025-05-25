@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=4 uid="uid://ct7purg6fewkn"]
+[gd_scene load_steps=21 format=4 uid="uid://ct7purg6fewkn"]
 
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="1_i3hn3"]
 [ext_resource type="Shader" path="res://shaders/level_anxiety.gdshader" id="1_u1ruv"]
+[ext_resource type="Script" path="res://Script/level_anxiety.gd" id="1_x71fb"]
 [ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="2_n646c"]
 [ext_resource type="Texture2D" uid="uid://cyogdv4of2pp5" path="res://Assets/background/poison_cloud_2.png" id="3_8heci"]
 [ext_resource type="Texture2D" uid="uid://bttxgkhn62rjn" path="res://Assets/background/anxiety_arena.png" id="3_xu0fb"]
@@ -12,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bucvbe5gj7e0l" path="res://Szene/AnxietyShadow.tscn" id="9_qchqh"]
 [ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="10_nk5l4"]
 [ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="11_8r8x6"]
+[ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="14_a3ab5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uddrp"]
 shader = ExtResource("1_u1ruv")
@@ -131,6 +133,7 @@ size = Vector2(28.4059, 138.429)
 size = Vector2(281.81, 232.203)
 
 [node name="level_anxiety" type="Node2D"]
+script = ExtResource("1_x71fb")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 material = SubResource("ShaderMaterial_uddrp")
@@ -254,6 +257,10 @@ position = Vector2(7752, 84)
 
 [node name="shadow_respawn_point12" parent="shadow_respawn" instance=ExtResource("11_8r8x6")]
 position = Vector2(8148, -167)
+
+[node name="Scenechange" parent="." instance=ExtResource("14_a3ab5")]
+position = Vector2(8702, -328)
+newScene = "res://Szene/frederick_test_scene.tscn"
 
 [editable path="player_respawn/RespawnPoint"]
 [editable path="player_respawn/RespawnPoint2"]
