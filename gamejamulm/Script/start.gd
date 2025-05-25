@@ -1,7 +1,7 @@
 extends Node2D
 
 var level #= preload("res://Level select.tscn")
-var credits #= preload("res://Scenes/credits.tscn")
+var credits = preload("res://Szene/credits.tscn")
 
 #func _ready() -> void:
 #	BG_MUSIC._play_menu_music()

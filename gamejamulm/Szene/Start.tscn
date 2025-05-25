@@ -11,31 +11,26 @@ region = Rect2(11.6959, 170.526, 124.029, 40.553)
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_u3o8i")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(958.522, 544.266)
-scale = Vector2(1.0005, 1.00234)
-
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
-
-[node name="BackgroundTitleScreen" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(-0.521835, -8.41689)
-scale = Vector2(3.98368, 3.95243)
-
-[node name="start" type="Button" parent="."]
-offset_left = 48.0
-offset_top = 1688.0
-offset_right = 329.0
-offset_bottom = 1789.0
-icon = SubResource("AtlasTexture_b7da1")
-expand_icon = true
-
 [node name="credits" type="Button" parent="."]
 offset_left = 24.0
 offset_top = 844.0
 offset_right = 305.0
 offset_bottom = 945.0
+theme_override_font_sizes/font_size = 32
+text = "Credits"
 icon = SubResource("AtlasTexture_b7da1")
+icon_alignment = 1
+expand_icon = true
+
+[node name="start" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 731.0
+offset_right = 305.0
+offset_bottom = 832.0
+theme_override_font_sizes/font_size = 32
+text = "Start"
+icon = SubResource("AtlasTexture_b7da1")
+icon_alignment = 1
 expand_icon = true
 
 [node name="quit" type="Button" parent="."]
@@ -43,21 +38,19 @@ offset_left = 24.0
 offset_top = 954.0
 offset_right = 305.0
 offset_bottom = 1055.0
+theme_override_font_sizes/font_size = 32
+text = "Quit"
 icon = SubResource("AtlasTexture_m1b6p")
+icon_alignment = 1
 expand_icon = true
-
-[node name="ButtonsTitleScreen" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(707, 696)
-scale = Vector2(3.075, 2.80741)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_top = 132.0
 offset_right = 1920.0
 offset_bottom = 366.0
 bbcode_enabled = true
-text = "[font_size=128][center]Hex-press"
+text = "[font_size=128][center]Katharsis"
 
-[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
