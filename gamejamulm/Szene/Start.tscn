@@ -19,7 +19,7 @@ region = Rect2(10.1115, 76.2512, 124.43, 41.6945)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1b6p"]
 region = Rect2(11.6959, 170.526, 124.029, 40.553)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2dlj"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m36ir"]
 texture = ExtResource("3_h3tpy")
 texture_region_size = Vector2i(50, 50)
 5:2/0 = 0
@@ -47,7 +47,7 @@ texture_region_size = Vector2i(50, 50)
 9:3/0 = 0
 9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-25, 25, -25, -25, 25, -25, 9.19239, -19.0919, -7.77817, -10.253, -19, 7.5)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2d3xd"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0sexg"]
 texture = ExtResource("4_g6467")
 texture_region_size = Vector2i(50, 50)
 2:5/0 = 0
@@ -124,8 +124,8 @@ texture_region_size = Vector2i(50, 50)
 tile_size = Vector2i(50, 50)
 physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 7
-sources/0 = SubResource("TileSetAtlasSource_l2dlj")
-sources/1 = SubResource("TileSetAtlasSource_2d3xd")
+sources/0 = SubResource("TileSetAtlasSource_m36ir")
+sources/1 = SubResource("TileSetAtlasSource_0sexg")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gnvm0"]
 animations = [{
@@ -211,9 +211,9 @@ frame = 6
 frame_progress = 0.394781
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 37.0
+offset_left = 522.0
 offset_top = 511.0
-offset_right = 1957.0
+offset_right = 1524.0
 offset_bottom = 745.0
 bbcode_enabled = true
 text = "[font_size=128][center]Katharsis"

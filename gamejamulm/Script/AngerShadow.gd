@@ -17,6 +17,8 @@ var dash_allowed = true
 var stunned = false
 var stun_time
 
+var fire_allowed = true
+
 var trail: Trail
 
 func _ready() -> void:
@@ -64,11 +66,14 @@ func _process(delta: float) -> void:
 			elif not is_on_floor():
 				velocity += get_gravity() * delta * 200
 		
-		if Input.is_action_just_pressed("ui_ctrl"):
+		if Input.is_action_just_pressed("ui_ctrl") and fire_allowed:
+			fire_allowed = false
 			$Ability.play()
 			firetrail.get_child(0).adding = true
 			await get_tree().create_timer(0.7).timeout
 			firetrail.get_child(0).adding = false
+			await get_tree().create_timer(3.5).timeout
+			fire_allowed = true
 		
 	move_and_slide()
 
@@ -83,9 +88,11 @@ func stun():
 	stunned = true
 	hurt.monitoring = false
 	$Stun.visible = true
+	$AnimatedSprite2D.modulate = Color("6d6d6d")
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
 	hurt.monitoring = true
+	$AnimatedSprite2D.modulate = Color("ffffff")
 	$Stun.visible = false
 
 func spawn():

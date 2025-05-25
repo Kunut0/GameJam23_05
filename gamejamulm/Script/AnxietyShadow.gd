@@ -19,6 +19,8 @@ var dash_allowed = true
 var stunned = false
 var stun_time
 
+var scream_allowed
+
 func _ready() -> void:
 	stun_time = 2
 
@@ -61,8 +63,8 @@ func _process(delta: float) -> void:
 			elif not is_on_floor():
 				velocity += get_gravity() * delta * 300
 		
-		if Input.is_action_just_pressed("ui_ctrl"):
-			
+		if Input.is_action_just_pressed("ui_ctrl") and scream_allowed:
+			scream_allowed = false
 			sprite.scale += Vector2(0.05, 0.05)
 			scream_sprite.self_modulate.a = 0.5
 			scream_sprite.show()
@@ -75,6 +77,8 @@ func _process(delta: float) -> void:
 			await get_tree().create_timer(0.125).timeout
 			scream_sprite.hide()
 			sprite.play("default")
+			await get_tree().create_timer(3).timeout
+			scream_allowed = true
 		
 	move_and_slide()
 
@@ -89,9 +93,11 @@ func stun():
 	stunned = true
 	hurt.monitoring = false
 	$Stun.visible = true
+	$AnimatedSprite2D.modulate = Color("6d6d6d")
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
 	hurt.monitoring = true
+	$AnimatedSprite2D.modulate = Color("ffffff")
 	$Stun.visible = false
 
 func spawn():
