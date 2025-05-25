@@ -146,6 +146,7 @@ size = Vector2(28.4059, 138.429)
 size = Vector2(281.81, 232.203)
 
 [node name="level_anxiety" type="Node2D"]
+position = Vector2(0, -1)
 script = ExtResource("1_x71fb")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
