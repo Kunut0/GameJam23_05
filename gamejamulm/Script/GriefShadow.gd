@@ -20,6 +20,8 @@ var stun_time
 
 var puddle_allowed = true
 
+var coyote = 0
+
 func _ready() -> void:
 	stun_time = 1.5
 	
@@ -28,10 +30,14 @@ func _process(delta: float) -> void:
 	
 	#generates gravity for player
 	if not is_on_floor():
+		coyote += delta
 		if velocity.y > 0:
 			velocity += get_gravity() * delta * 8
 		else:
 			velocity += get_gravity() * delta * 8.75
+	
+	if is_on_floor():
+		coyote = 0
 	
 	if stunned == false:
 		#gets direction imput
@@ -60,7 +66,7 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
 		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_up") and is_on_floor():
+		if Input.is_action_just_pressed("ui_up") and coyote < 0.1:
 			velocity.y = jump_force
 			$Jump.play()
 		

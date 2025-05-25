@@ -6,9 +6,9 @@ extends CharacterBody2D
 @onready var firetrail = $Line2D
 @onready var hurt = $Hurtbox
 
-var jump_force = -1200
+var jump_force = -1600
 var direction
-var speed = 700
+var speed = 800
 
 var dash_speed = 1500
 var dashing = false
@@ -20,6 +20,7 @@ var stun_time
 var fire_allowed = true
 
 var trail: Trail
+var coyote = 0
 
 func _ready() -> void:
 	stun_time = 1
@@ -29,6 +30,10 @@ func _process(delta: float) -> void:
 	#generates gravity for player
 	if not is_on_floor():
 		velocity += get_gravity() * delta * 4
+		coyote += delta
+	
+	if is_on_floor():
+		coyote = 0
 	
 	if stunned == false:
 		#gets direction imput
@@ -53,7 +58,7 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
 		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_up") and is_on_floor():
+		if Input.is_action_just_pressed("ui_up") and coyote < 0.1:
 			velocity.y = jump_force
 			$Jump.play()
 		

@@ -30,6 +30,8 @@ var enemy_sight: bool = false
 var stunned = false
 var stun_time = 0.5
 
+var coyote = 0
+
 func _ready() -> void:
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
 	respawn_ref = get_tree().get_first_node_in_group("first").global_position
@@ -41,11 +43,15 @@ func _process(delta: float) -> void:
 	
 	#generates gravity for player
 	if not is_on_floor():
+		coyote += delta
 		if velocity.y > 0:
 			velocity += get_gravity() * delta * 8
 		else:
 			velocity += get_gravity() * delta * 8.75
-		
+	
+	if is_on_floor():
+		coyote = 0
+	
 	if stunned == false:
 		#gets direction imput
 		direction = Input.get_axis("ui_a", "ui_d")
@@ -71,7 +77,7 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
 		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_w") and is_on_floor():
+		if Input.is_action_just_pressed("ui_w") and coyote < 0.1:
 			velocity.y = jump_force
 			sprite.play("jump")
 			$Jump.play()
