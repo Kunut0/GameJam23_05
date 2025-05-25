@@ -20,12 +20,12 @@ func _process(delta: float) -> void:
 		curve.add_point(pos)
 		var c = collision.instantiate()
 		c.global_position = pos
-		$"..".add_child(c)
+		get_parent().add_child(c)
 		i += 1
 	else:
 		i = 0
 		if curve.point_count > 0:
-			for i in $"..".get_children():
+			for i in get_parent().get_children():
 				if i.global_position == curve.get_point_position(0):
 					i.queue_free()
 			curve.remove_point(0)

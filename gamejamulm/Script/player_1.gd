@@ -10,9 +10,9 @@ extends CharacterBody2D
 signal flashlight
 
 # noch nicht getestet
-var jump_force = -2000
+var jump_force = -2200
 var direction
-var speed = 900
+var speed = 1100
 
 var dash_speed = 2000
 var dashing = false
@@ -22,7 +22,7 @@ var respawn_ref
 
 var jumping = false
 
-var light_timer
+var light_timer = 0
 var lichtkegel_sichtbar: bool = false
 
 var enemy_sight: bool = false
@@ -103,7 +103,7 @@ func _process(delta: float) -> void:
 	
 	if lichtkegel_sichtbar and enemy_sight:
 		light_timer += 1*delta
-		if light_timer > 0.5:
+		if light_timer > 0.25:
 			lichtkegel.modulate = Color("ffff00")
 			flashlight.emit()
 			lichtkegel.monitoring = false
@@ -112,7 +112,7 @@ func _process(delta: float) -> void:
 			lichtkegel.hide()
 			Cooldown.on_cooldown["flashlight"][0] = true
 	elif light_timer > 0:
-		light_timer -= 1*delta
+		light_timer -= 0.5*delta
 	else:
 		light_timer = 0
 	
@@ -120,12 +120,13 @@ func _process(delta: float) -> void:
 	var pos_diff = global_position - shadow_ref.global_position
 	var camera_pos: float
 	if  pos_diff.x < -200:
-		camera_pos = 100
+		camera_pos = global_position.x + 100
 	elif pos_diff.x > 200:
-		camera_pos = -100
+		camera_pos = global_position.x - 100
 	else:
-		camera_pos = pos_diff.x * (-0.5)
-	camera.position.x = lerp(camera.position.x, camera_pos, 0.01)
+		camera_pos = global_position.x + (pos_diff.x * (-0.5))
+	camera.global_position.x = lerp(camera.global_position.x, camera_pos, 0.01)
+	camera.global_position.y = -200
 	
 	#animations
 	if is_on_floor():
@@ -143,7 +144,8 @@ func _process(delta: float) -> void:
 
 #respawn
 func respawn():
-	global_position = respawn_ref.global_position
+	print("ups")
+	global_position = respawn_ref
 	shadow_ref.spawn()
 
 #dash timer

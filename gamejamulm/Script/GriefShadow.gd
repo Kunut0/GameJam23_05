@@ -9,7 +9,7 @@ var puddle_scene = preload("res://Szene/puddle.tscn")
 
 var jump_force = -1600
 var direction
-var speed = 700
+var speed = 600
 
 var dash_speed = 1200
 var dashing = false
@@ -21,7 +21,7 @@ var stun_time
 var puddle_allowed = true
 
 func _ready() -> void:
-	stun_time = 0.7
+	stun_time = 1.5
 	
 
 func _process(delta: float) -> void:
@@ -84,6 +84,8 @@ func _process(delta: float) -> void:
 			sprite.play("default")
 			await get_tree().create_timer(1).timeout
 			puddle_allowed = true
+	else:
+		velocity.x = 0
 		
 	move_and_slide()
 
@@ -93,6 +95,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	spawn()
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
+	print("hit")
 	if body.is_in_group("player1"):
 		body.respawn()
 

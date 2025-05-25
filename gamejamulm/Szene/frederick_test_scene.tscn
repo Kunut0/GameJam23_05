@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_w0pvb"]
 [ext_resource type="Shader" path="res://shaders/tilemap_blue.gdshader" id="2_6d3ix"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="2_bq1tl"]
+[ext_resource type="PackedScene" uid="uid://cpu6frat1qktu" path="res://Szene/AngerShadow.tscn" id="2_ogdsb"]
 [ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="3_pp0du"]
 [ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="4_47rsi"]
 [ext_resource type="Texture2D" uid="uid://d1d5s6cnru8ef" path="res://Assets/background/Grief_stage.png" id="5_n5xwt"]
@@ -18,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://civ4nlpljix2c" path="res://Assets/background/rain_6.png" id="15_bdj5d"]
 [ext_resource type="Texture2D" uid="uid://cg7qgafk5l6uy" path="res://Assets/background/rain_7.png" id="16_vow18"]
 [ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="17_84u7d"]
-[ext_resource type="PackedScene" uid="uid://dfvfe30dr8e7i" path="res://Szene/GriefShadow.tscn" id="17_a8enu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3siov"]
 shader = ExtResource("2_6d3ix")
@@ -183,7 +183,10 @@ animations = [{
 [node name="frederick_test_scene" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_w0pvb")]
-position = Vector2(-175, 153)
+position = Vector2(-285, 154)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("2_ogdsb")]
+position = Vector2(297, 122)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 material = SubResource("ShaderMaterial_3siov")
@@ -249,20 +252,6 @@ autoplay = "default"
 frame = 6
 frame_progress = 0.404333
 
-[node name="RespawnPoint" parent="." instance=ExtResource("17_84u7d")]
-position = Vector2(45, 179)
-scale = Vector2(1.10417, 0.825981)
-
-[node name="RespawnArea" parent="RespawnPoint" index="0"]
-position = Vector2(1.81132, -77.4836)
-scale = Vector2(0.886865, 1.38742)
-
-[node name="CollisionShape2D" parent="RespawnPoint/RespawnArea" index="0"]
-position = Vector2(774.5, -357.375)
-
-[node name="CharacterBody2D2" parent="." instance=ExtResource("17_a8enu")]
-position = Vector2(458, 106)
-
 [node name="shadow_respawn_point" parent="." instance=ExtResource("4_47rsi")]
 position = Vector2(1308, 177)
 
@@ -288,23 +277,43 @@ position = Vector2(5171, 164)
 position = Vector2(6166, 164)
 
 [node name="RespawnPoint2" parent="." instance=ExtResource("17_84u7d")]
-position = Vector2(2276, -37)
+position = Vector2(1366, 163)
 
 [node name="RespawnArea" parent="RespawnPoint2" index="0"]
-position = Vector2(-810, 202)
+position = Vector2(-774, 259)
+scale = Vector2(1.2, 1.24)
 
 [node name="CollisionShape2D" parent="RespawnPoint2/RespawnArea" index="0"]
-position = Vector2(932, -247.75)
+position = Vector2(1137.5, -354.032)
 
 [node name="RespawnPoint3" parent="." instance=ExtResource("17_84u7d")]
-position = Vector2(-222, 113)
-scale = Vector2(0.28, 1.27398)
+position = Vector2(-320, 118)
+scale = Vector2(0.159999, 1.27398)
+
+[node name="RespawnArea" parent="RespawnPoint3" index="0"]
+position = Vector2(68.7502, -158.558)
+
+[node name="CollisionShape2D" parent="RespawnPoint3/RespawnArea" index="0"]
+position = Vector2(1091.97, -1.56987)
 
 [node name="RespawnPoint4" parent="." instance=ExtResource("17_84u7d")]
-position = Vector2(3840, -56)
+position = Vector2(3458, -73)
+scale = Vector2(1.28, 1)
 
 [node name="RespawnPoint5" parent="." instance=ExtResource("17_84u7d")]
 position = Vector2(5436, -72)
 
-[editable path="RespawnPoint"]
+[node name="RespawnPoint" parent="." instance=ExtResource("17_84u7d")]
+position = Vector2(499, 196)
+scale = Vector2(1.10417, 0.825981)
+
+[node name="RespawnArea" parent="RespawnPoint" index="0"]
+position = Vector2(-597.734, 37.5312)
+scale = Vector2(0.886865, 1.38742)
+
+[node name="CollisionShape2D" parent="RespawnPoint/RespawnArea" index="0"]
+position = Vector2(766.914, -203.319)
+
 [editable path="RespawnPoint2"]
+[editable path="RespawnPoint3"]
+[editable path="RespawnPoint"]
