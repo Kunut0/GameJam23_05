@@ -156,7 +156,6 @@ polygon = PackedVector2Array(11.222, -7.1, 11.726, 3.22258, -3.89606, 3.22258, -
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -59)
-zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 
 [node name="Lichtkegel" type="Area2D" parent="."]

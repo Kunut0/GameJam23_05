@@ -63,10 +63,13 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_up") and is_on_floor():
 			velocity.y = jump_force
 		
-		if Input.is_action_just_pressed("ui_down") and is_on_floor() and dash_allowed:
-			dashing = true
-			dash_allowed = false
-			dash_timer.start()
+		if Input.is_action_just_pressed("ui_down"):
+			if is_on_floor() and dash_allowed:
+				dashing = true
+				dash_allowed = false
+				dash_timer.start()
+			elif not is_on_floor():
+				velocity += get_gravity() * delta * 200
 		
 		if Input.is_action_just_pressed("ui_ctrl") and puddle_allowed:
 			puddle_allowed = false
