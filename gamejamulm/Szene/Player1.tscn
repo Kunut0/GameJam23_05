@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c482ab8jeb5l1"]
+[gd_scene load_steps=35 format=3 uid="uid://c482ab8jeb5l1"]
 
 [ext_resource type="Script" path="res://Script/player_1.gd" id="1_p1qkr"]
 [ext_resource type="Texture2D" uid="uid://ri4iy6re6m08" path="res://Assets/Player/silde_anim_1.png" id="2_bffft"]
@@ -15,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://c0txjnkbfj46v" path="res://Assets/Player/silde_anim_4.png" id="5_dbdvu"]
 [ext_resource type="Texture2D" uid="uid://dfc1rdsdjx0c4" path="res://Assets/Player/jump_anim_2.png" id="6_3o0kx"]
 [ext_resource type="Texture2D" uid="uid://dp7i51svh6uta" path="res://Assets/Player/walk_anim_5.png" id="6_53f7o"]
+[ext_resource type="AudioStream" uid="uid://cjkqv3tfff81e" path="res://Assets/Musik/Sounds/flashlight.wav" id="16_60oip"]
+[ext_resource type="AudioStream" uid="uid://bxs7whno87y7n" path="res://Assets/Musik/Sounds/player_1_jump.wav" id="17_fdvv8"]
+[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="18_hn70k"]
+[ext_resource type="AudioStream" uid="uid://bobtvv4psvuw4" path="res://Assets/Musik/Sounds/stun.wav" id="19_ua3lf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kegoh"]
 atlas = ExtResource("2_bffft")
@@ -182,6 +186,19 @@ scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_323vs")
 animation = &"walk"
 autoplay = "default"
+
+[node name="Flashlight" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_60oip")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_fdvv8")
+volume_db = -6.251
+
+[node name="Slide" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_hn70k")
+
+[node name="Stun" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_ua3lf")
 
 [connection signal="body_entered" from="Lichtkegel" to="." method="_on_lichtkegel_body_entered"]
 [connection signal="body_exited" from="Lichtkegel" to="." method="_on_lichtkegel_body_exited"]

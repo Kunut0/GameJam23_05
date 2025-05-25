@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfvfe30dr8e7i"]
+[gd_scene load_steps=16 format=3 uid="uid://dfvfe30dr8e7i"]
 
 [ext_resource type="Script" path="res://Script/GriefShadow.gd" id="1_0qffg"]
 [ext_resource type="Texture2D" uid="uid://cmdfb4y6vwwvg" path="res://Assets/grief/Katharsis_grief_eye_close_frame1.png" id="2_7c25q"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://bcb35pvgu5b8t" path="res://Assets/grief/Katharsis_grief_move_frame4.png" id="8_3tbno"]
 [ext_resource type="Texture2D" uid="uid://wdr8wflgaeyl" path="res://Assets/grief/Katharsis_grief_move_frame_5.png" id="9_amoqw"]
 [ext_resource type="Texture2D" uid="uid://6no5cn8lufai" path="res://Assets/grief/Katharsis_grief_move_frame_6.png" id="10_71ohq"]
+[ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="11_dim2u"]
+[ext_resource type="AudioStream" uid="uid://ccu7seakgrukx" path="res://Assets/Musik/sadness_music.mp3" id="12_o3lxq"]
+[ext_resource type="AudioStream" uid="uid://bkrc2uyiiwug0" path="res://Assets/Musik/Sounds/pfuetze.wav" id="13_nwgfa"]
+[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="14_ql1w3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7jyy7"]
 animations = [{
@@ -97,6 +101,20 @@ wait_time = 0.1
 
 [node name="PuddleSpawnpoint1" type="Marker2D" parent="."]
 position = Vector2(0, -34)
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_dim2u")
+volume_db = 5.115
+
+[node name="Background_Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_o3lxq")
+autoplay = true
+
+[node name="Ability" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_nwgfa")
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ql1w3")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

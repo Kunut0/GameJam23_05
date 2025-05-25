@@ -53,16 +53,19 @@ func _process(delta: float) -> void:
 		#makes player jump when on floor
 		if Input.is_action_just_pressed("ui_up") and is_on_floor():
 			velocity.y = jump_force
+			$Jump.play()
 		
 		if Input.is_action_just_pressed("ui_down"):
 			if is_on_floor() and dash_allowed:
 				dashing = true
 				dash_allowed = false
 				dash_timer.start()
+				$Dash.play()
 			elif not is_on_floor():
 				velocity += get_gravity() * delta * 200
 		
 		if Input.is_action_just_pressed("ui_ctrl"):
+			$Ability.play()
 			firetrail.get_child(0).adding = true
 			await get_tree().create_timer(0.7).timeout
 			firetrail.get_child(0).adding = false

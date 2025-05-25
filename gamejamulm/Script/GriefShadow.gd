@@ -62,9 +62,11 @@ func _process(delta: float) -> void:
 		#makes player jump when on floor
 		if Input.is_action_just_pressed("ui_up") and is_on_floor():
 			velocity.y = jump_force
+			$Jump.play()
 		
 		if Input.is_action_just_pressed("ui_down"):
 			if is_on_floor() and dash_allowed:
+				$Dash.play()
 				dashing = true
 				dash_allowed = false
 				dash_timer.start()
@@ -72,6 +74,7 @@ func _process(delta: float) -> void:
 				velocity += get_gravity() * delta * 200
 		
 		if Input.is_action_just_pressed("ui_ctrl") and puddle_allowed:
+			$Ability.play()
 			puddle_allowed = false
 			sprite.play("blink")
 			var x = -100

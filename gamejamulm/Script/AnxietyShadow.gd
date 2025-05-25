@@ -50,9 +50,11 @@ func _process(delta: float) -> void:
 		#makes player jump when on floor
 		if Input.is_action_just_pressed("ui_up") and is_on_floor():
 			velocity.y = jump_force
+			$Jump.play(1)
 		
 		if Input.is_action_just_pressed("ui_down"):
 			if is_on_floor() and dash_allowed:
+				$Dash.play()
 				dashing = true
 				dash_allowed = false
 				dash_timer.start()
@@ -60,18 +62,19 @@ func _process(delta: float) -> void:
 				velocity += get_gravity() * delta * 300
 		
 		if Input.is_action_just_pressed("ui_ctrl"):
-			sprite.play("scream")
+			
 			sprite.scale += Vector2(0.05, 0.05)
 			scream_sprite.self_modulate.a = 0.5
 			scream_sprite.show()
+			$Ability.play()
 			await get_tree().create_timer(0.7).timeout
 			scream_sprite.self_modulate.a = 1
 			scream.emit()
 			sprite.scale = Vector2(0.138, 0.138)
-			sprite.play("default")
-			
+			sprite.play("scream")
 			await get_tree().create_timer(0.125).timeout
 			scream_sprite.hide()
+			sprite.play("default")
 		
 	move_and_slide()
 
