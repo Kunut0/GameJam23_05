@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bucvbe5gj7e0l"]
+[gd_scene load_steps=12 format=3 uid="uid://bucvbe5gj7e0l"]
 
 [ext_resource type="Script" path="res://Script/AnxietyShadow.gd" id="1_c86et"]
 [ext_resource type="Texture2D" uid="uid://70kmouvfm5h" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_mlvtf"]
 [ext_resource type="Texture2D" uid="uid://bfxcjjor6sc82" path="res://Assets/anxiety/anxiety_move_frame_2.png" id="3_aiulf"]
 [ext_resource type="Texture2D" uid="uid://bu41omkcyrehf" path="res://Assets/anxiety/anxiety_move_frame_3.png" id="4_11pgx"]
 [ext_resource type="Texture2D" uid="uid://crchj8dn4xkg6" path="res://Assets/anxiety/anxiety_scream_frame_1.png" id="5_oehla"]
+[ext_resource type="Texture2D" uid="uid://cdjf7osrooqva" path="res://Assets/anxiety/anxiety_scream_effect.png" id="6_ro8sb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ygwlx"]
 atlas = ExtResource("2_mlvtf")
@@ -77,9 +78,14 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_8qwec")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+visible = false
+position = Vector2(10.6667, -8)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_ro8sb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
