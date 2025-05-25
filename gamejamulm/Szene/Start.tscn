@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=4 uid="uid://bt4k13wafgyf8"]
+[gd_scene load_steps=26 format=4 uid="uid://bt4k13wafgyf8"]
 
 [ext_resource type="Script" path="res://Script/start.gd" id="1_u3o8i"]
+[ext_resource type="FontFile" uid="uid://cn0hc03cdh36c" path="res://Assets/Corporate_HQ.ttf" id="2_ka675"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="3_h3tpy"]
 [ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="4_g6467"]
 [ext_resource type="Texture2D" uid="uid://cqn1jll8e1mhu" path="res://Assets/background/intro_1.png" id="5_wmnrd"]
@@ -12,6 +13,22 @@
 [ext_resource type="Texture2D" uid="uid://bc4xidie02xcy" path="res://Assets/background/intro_breaking.png" id="11_uc76k"]
 [ext_resource type="Texture2D" uid="uid://c1bqhnv4y4ih3" path="res://Assets/background/intro_7.png" id="11_xthcf"]
 [ext_resource type="Texture2D" uid="uid://21wmvexuyjht" path="res://Assets/background/intro_broken.png" id="12_e6p4v"]
+[ext_resource type="Texture2D" uid="uid://cc64r85dl4o8w" path="res://Assets/katharsis_font.png" id="14_6s80m"]
+
+[sub_resource type="Animation" id="Animation_n1h47"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_5j2oi"]
 resource_name = "fade_in"
@@ -43,21 +60,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_n1h47"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f2xvy"]
@@ -239,7 +241,8 @@ offset_left = 1544.0
 offset_top = 571.0
 offset_right = 1825.0
 offset_bottom = 672.0
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("2_ka675")
+theme_override_font_sizes/font_size = 60
 text = "Credits"
 icon = SubResource("AtlasTexture_b7da1")
 icon_alignment = 1
@@ -250,7 +253,8 @@ offset_left = 1544.0
 offset_top = 458.0
 offset_right = 1825.0
 offset_bottom = 559.0
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("2_ka675")
+theme_override_font_sizes/font_size = 60
 text = "Start"
 icon = SubResource("AtlasTexture_b7da1")
 icon_alignment = 1
@@ -261,7 +265,8 @@ offset_left = 1544.0
 offset_top = 681.0
 offset_right = 1825.0
 offset_bottom = 782.0
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("2_ka675")
+theme_override_font_sizes/font_size = 60
 text = "Quit"
 icon = SubResource("AtlasTexture_m1b6p")
 icon_alignment = 1
@@ -279,14 +284,6 @@ autoplay = "default"
 frame = 6
 frame_progress = 0.394781
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 522.0
-offset_top = 511.0
-offset_right = 1524.0
-offset_bottom = 745.0
-bbcode_enabled = true
-text = "[font_size=128][center]Katharsis"
-
 [node name="Breaking" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(322, 637)
@@ -298,6 +295,10 @@ visible = false
 position = Vector2(322, 637)
 scale = Vector2(0.81, 0.81)
 texture = ExtResource("12_e6p4v")
+
+[node name="KatharsisFont" type="Sprite2D" parent="."]
+position = Vector2(1036, 571)
+texture = ExtResource("14_6s80m")
 
 [connection signal="pressed" from="credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]

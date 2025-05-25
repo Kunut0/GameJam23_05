@@ -16,7 +16,7 @@ func _on_start_pressed() -> void:
 	$credits.hide()
 	$start.hide()
 	$quit.hide()
-	$RichTextLabel.hide()
+	$KatharsisFont.hide()
 	animation.play("fade_out")
 	$Breaking.show()
 	await get_tree().create_timer(2).timeout
