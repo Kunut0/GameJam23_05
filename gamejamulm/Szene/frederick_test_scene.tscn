@@ -354,6 +354,7 @@ shape = SubResource("RectangleShape2D_a2byk")
 
 [node name="Scenechange" parent="." instance=ExtResource("20_5jakm")]
 position = Vector2(10207, -415)
+newScene = "res://Szene/level_anger.tscn"
 
 [node name="CollisionShape2D" parent="Scenechange" index="0"]
 position = Vector2(130, 138)

@@ -14,12 +14,12 @@ func _ready() -> void:
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
 	player_ref = get_tree().get_first_node_in_group("player1")
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var pos = shadow_ref.global_position
 	if adding:
 		curve.add_point(pos)
 		var c = collision.instantiate()
-		c.global_position = pos
+		c.global_position = shadow_ref.global_position
 		get_parent().add_child(c)
 		i += 1
 	else:
@@ -29,6 +29,9 @@ func _process(delta: float) -> void:
 				if i.global_position == curve.get_point_position(0):
 					i.queue_free()
 			curve.remove_point(0)
+		else:
+			for i in get_tree().get_nodes_in_group("shadow_prop"):
+				i.queue_free()
 	points = curve.get_baked_points()
 	
 	
