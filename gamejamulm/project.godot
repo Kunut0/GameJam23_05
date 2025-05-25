@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Cooldown="*res://Script/cooldown.gd"
 GlobalTimer="*res://Szene/global_timer.tscn"
+MainMenuMusik="*res://Szene/main_menu_musik.tscn"
 
 [display]
 
