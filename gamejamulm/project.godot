@@ -31,6 +31,7 @@ shadow=""
 player1=""
 respawn_point=""
 shadow_prop=""
+first=""
 
 [input]
 

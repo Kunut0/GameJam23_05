@@ -334,7 +334,7 @@ scale = Vector2(1.2, 1.24)
 position = Vector2(223.333, -167.742)
 shape = SubResource("RectangleShape2D_jf06o")
 
-[node name="RespawnPoint3" parent="Playerrespawns" instance=ExtResource("17_84u7d")]
+[node name="RespawnPoint3" parent="Playerrespawns" groups=["first"] instance=ExtResource("17_84u7d")]
 position = Vector2(-1686, -35)
 scale = Vector2(0.159999, 1.27398)
 

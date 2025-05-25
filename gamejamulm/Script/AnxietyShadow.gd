@@ -19,7 +19,7 @@ var dash_allowed = true
 var stunned = false
 var stun_time
 
-var scream_allowed
+var scream_allowed = true
 
 func _ready() -> void:
 	stun_time = 2
@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 			await get_tree().create_timer(0.125).timeout
 			scream_sprite.hide()
 			sprite.play("default")
-			await get_tree().create_timer(3).timeout
+			await get_tree().create_timer(1).timeout
 			scream_allowed = true
 		
 	move_and_slide()
