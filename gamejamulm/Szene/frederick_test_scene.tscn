@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://vbvarpiq0yf1"]
+[gd_scene load_steps=31 format=4 uid="uid://vbvarpiq0yf1"]
 
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_w0pvb"]
 [ext_resource type="Shader" path="res://shaders/tilemap_blue.gdshader" id="2_6d3ix"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cg7qgafk5l6uy" path="res://Assets/background/rain_7.png" id="16_vow18"]
 [ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="17_84u7d"]
 [ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="20_5jakm"]
+[ext_resource type="PackedScene" uid="uid://4c83ki6newmv" path="res://label.tscn" id="21_hg6n3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3siov"]
 shader = ExtResource("2_6d3ix")
@@ -358,6 +359,8 @@ position = Vector2(10207, -415)
 
 [node name="CollisionShape2D" parent="Scenechange" index="0"]
 position = Vector2(130, 138)
+
+[node name="Label" parent="." instance=ExtResource("21_hg6n3")]
 
 [editable path="Playerrespawns/RespawnPoint2"]
 [editable path="Playerrespawns/RespawnPoint3"]
