@@ -72,10 +72,12 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_w") and is_on_floor():
 			velocity.y = jump_force
 			sprite.play("jump")
+			$Jump.play()
 		
 		#slide
 		if Input.is_action_just_pressed("ui_s"):
 			if is_on_floor() and Cooldown.on_cooldown["dashing"][0] == false:
+				$Slide.play()
 				Cooldown.on_cooldown["dashing"][0] = true
 				dashing = true
 				dash_collision.disabled = false
@@ -90,6 +92,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	if Input.is_action_pressed("ui_select") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false:
 		if lichtkegel_sichtbar == false:
+			$Flashlight.play()
 			lichtkegel.show()
 			lichtkegel.monitoring = true
 			lichtkegel_sichtbar = true
@@ -104,6 +107,7 @@ func _process(delta: float) -> void:
 	if lichtkegel_sichtbar and enemy_sight:
 		light_timer += 1*delta
 		if light_timer > 0.25:
+			$Stun.play()
 			lichtkegel.modulate = Color("ffff00")
 			flashlight.emit()
 			lichtkegel.monitoring = false

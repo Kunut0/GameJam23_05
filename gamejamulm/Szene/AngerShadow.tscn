@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cpu6frat1qktu"]
+[gd_scene load_steps=21 format=3 uid="uid://cpu6frat1qktu"]
 
 [ext_resource type="Script" path="res://Script/AngerShadow.gd" id="1_decky"]
 [ext_resource type="Texture2D" uid="uid://21fqntieakfm" path="res://Assets/anger/rage_frame_1.png" id="2_cdysb"]
@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://cojbf0prtckpi" path="res://Assets/anger/rage18.png" id="10_3ohsg"]
 [ext_resource type="Texture2D" uid="uid://cmuy6hjvn7avp" path="res://Assets/anger/rage20.png" id="11_1ieex"]
 [ext_resource type="Texture2D" uid="uid://bych253eqnovn" path="res://Assets/anger/rage22.png" id="12_nf1ea"]
+[ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="14_n207h"]
+[ext_resource type="AudioStream" uid="uid://bwf5j3i8s42sb" path="res://Assets/Musik/anger_music.mp3" id="15_mnxeu"]
+[ext_resource type="AudioStream" uid="uid://64dq4b4ewe4" path="res://Assets/Musik/Sounds/fire_ability.wav" id="16_a7m3x"]
+[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="17_rcbed"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x4uv4"]
 animations = [{
@@ -88,6 +92,20 @@ shape = SubResource("CircleShape2D_igvfn")
 wait_time = 0.1
 
 [node name="Line2D" parent="." instance=ExtResource("3_jsoal")]
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_n207h")
+volume_db = 5.115
+
+[node name="Background_Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_mnxeu")
+autoplay = true
+
+[node name="Ability" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_a7m3x")
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_rcbed")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
