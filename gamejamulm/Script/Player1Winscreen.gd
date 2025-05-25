@@ -3,10 +3,7 @@ extends Control
 var t
 
 func _ready() -> void:
-	t = get_tree().root.get_children()
-	for i in t:
-		if i.is_in_group("global_timer"):
-			i.queue_free()
+	GlobalTimer.stop()
 	
 	$RichTextLabel.text = "[font_size=112][center]The Shadows were able to prevent the Runner from escaping.[p]"
 

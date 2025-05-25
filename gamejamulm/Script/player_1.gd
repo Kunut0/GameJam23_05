@@ -38,6 +38,7 @@ func _ready() -> void:
 	lichtkegel.monitoring = false
 
 func _process(delta: float) -> void:
+	
 	#generates gravity for player
 	if not is_on_floor():
 		if velocity.y > 0:

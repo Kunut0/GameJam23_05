@@ -164,8 +164,8 @@ script = ExtResource("1_5cwy5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.129658, 0.224131, 0.290896, 1)
-position = Vector2(957.25, 544.75)
-scale = Vector2(1915.5, 1090.5)
+position = Vector2(975.25, 544.75)
+scale = Vector2(1951.5, 1090.5)
 texture = SubResource("CanvasTexture_igjsl")
 
 [node name="KatharsisGriefEyeCloseFrame1" type="Sprite2D" parent="."]

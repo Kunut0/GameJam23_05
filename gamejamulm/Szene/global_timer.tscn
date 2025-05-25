@@ -4,7 +4,6 @@
 
 [node name="Timer" type="Timer" groups=["global_timer"]]
 wait_time = 300.0
-autostart = true
 script = ExtResource("1_fscuj")
 
 [connection signal="timeout" from="." to="." method="_on_timeout"]
