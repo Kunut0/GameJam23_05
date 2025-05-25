@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Script/scenechange.gd" id="1_twx2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nq50p"]
+size = Vector2(140, 526)
 
 [node name="Scenechange" type="Area2D"]
 script = ExtResource("1_twx2p")

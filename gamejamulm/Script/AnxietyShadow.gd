@@ -50,9 +50,11 @@ func _process(delta: float) -> void:
 		#makes player jump when on floor
 		if Input.is_action_just_pressed("ui_up") and is_on_floor():
 			velocity.y = jump_force
+			$Jump.play(1)
 		
 		if Input.is_action_just_pressed("ui_down"):
 			if is_on_floor() and dash_allowed:
+				$Dash.play()
 				dashing = true
 				dash_allowed = false
 				dash_timer.start()
@@ -60,18 +62,19 @@ func _process(delta: float) -> void:
 				velocity += get_gravity() * delta * 300
 		
 		if Input.is_action_just_pressed("ui_ctrl"):
-			sprite.play("scream")
+			
 			sprite.scale += Vector2(0.05, 0.05)
 			scream_sprite.self_modulate.a = 0.5
 			scream_sprite.show()
+			$Ability.play()
 			await get_tree().create_timer(0.7).timeout
 			scream_sprite.self_modulate.a = 1
 			scream.emit()
 			sprite.scale = Vector2(0.138, 0.138)
-			sprite.play("default")
-			
+			sprite.play("scream")
 			await get_tree().create_timer(0.125).timeout
 			scream_sprite.hide()
+			sprite.play("default")
 		
 	move_and_slide()
 
@@ -85,17 +88,19 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 func stun():
 	stunned = true
 	hurt.monitoring = false
+	$Stun.visible = true
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
 	hurt.monitoring = true
+	$Stun.visible = false
 
 func spawn():
 	var respawn_point_array = get_tree().get_nodes_in_group("respawn_point")
 	var player_ref = get_tree().get_first_node_in_group("player1")
 	var shadow_res = Vector2(0,0)
 	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
-		if i.global_position.x - player_ref.global_position.x > 200:
-			if shadow_res.x > i.global_position.x - player_ref.global_position.x or shadow_res.x == 0:
+		if i.global_position.x - player_ref.global_position.x > 500:
+			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
 	global_position = shadow_res
 
