@@ -317,6 +317,9 @@ position = Vector2(7785, -164)
 [node name="shadow_respawn_point17" parent="Node2D" instance=ExtResource("4_47rsi")]
 position = Vector2(8490, -156)
 
+[node name="shadow_respawn_point18" parent="Node2D" instance=ExtResource("4_47rsi")]
+position = Vector2(1800, -47)
+
 [node name="Playerrespawns" type="Node2D" parent="."]
 position = Vector2(1366, 163)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cpu6frat1qktu"]
+[gd_scene load_steps=22 format=3 uid="uid://cpu6frat1qktu"]
 
 [ext_resource type="Script" path="res://Script/AngerShadow.gd" id="1_decky"]
 [ext_resource type="Texture2D" uid="uid://21fqntieakfm" path="res://Assets/anger/rage_frame_1.png" id="2_cdysb"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bwf5j3i8s42sb" path="res://Assets/Musik/anger_music.mp3" id="15_mnxeu"]
 [ext_resource type="AudioStream" uid="uid://64dq4b4ewe4" path="res://Assets/Musik/Sounds/fire_ability.wav" id="16_a7m3x"]
 [ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="17_rcbed"]
+[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="18_0jck0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x4uv4"]
 animations = [{
@@ -106,6 +107,21 @@ stream = ExtResource("16_a7m3x")
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_rcbed")
+
+[node name="Stun" type="Node2D" parent="."]
+visible = false
+scale = Vector2(2.36581, 1.88742)
+
+[node name="StunStars" type="Sprite2D" parent="Stun"]
+position = Vector2(-5.66071, -78.1607)
+scale = Vector2(1.16987, 0.42908)
+texture = ExtResource("18_0jck0")
+
+[node name="StunStars2" type="Sprite2D" parent="Stun"]
+position = Vector2(-7.14286, -57.1429)
+rotation = -3.12715
+scale = Vector2(1.16987, 0.42908)
+texture = ExtResource("18_0jck0")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

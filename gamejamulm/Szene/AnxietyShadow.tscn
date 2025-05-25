@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bucvbe5gj7e0l"]
+[gd_scene load_steps=17 format=3 uid="uid://bucvbe5gj7e0l"]
 
 [ext_resource type="Script" path="res://Script/AnxietyShadow.gd" id="1_c86et"]
 [ext_resource type="Texture2D" uid="uid://70kmouvfm5h" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_mlvtf"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://2rx370c16mfd" path="res://Assets/Musik/anxiety_music.mp3" id="8_6cd55"]
 [ext_resource type="AudioStream" uid="uid://u1gesyfrjh3k" path="res://Assets/Musik/Sounds/scream.wav" id="9_6bl1b"]
 [ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="10_616d6"]
+[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="11_4fg7c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ygwlx"]
 atlas = ExtResource("2_mlvtf")
@@ -110,6 +111,21 @@ volume_db = -6.865
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_616d6")
+
+[node name="Stun" type="Node2D" parent="."]
+visible = false
+scale = Vector2(0.466667, 0.44)
+
+[node name="StunStars" type="Sprite2D" parent="Stun"]
+position = Vector2(-5.66071, -78.1607)
+scale = Vector2(1.16987, 0.42908)
+texture = ExtResource("11_4fg7c")
+
+[node name="StunStars2" type="Sprite2D" parent="Stun"]
+position = Vector2(-7.14286, -57.1429)
+rotation = -3.12715
+scale = Vector2(1.16987, 0.42908)
+texture = ExtResource("11_4fg7c")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
