@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="2_bq1tl"]
 [ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="3_pp0du"]
 [ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="4_47rsi"]
-[ext_resource type="Texture2D" uid="uid://cdah1fxd4ml8s" path="res://Assets/background/image.png" id="6_a53wo"]
+[ext_resource type="Texture2D" uid="uid://d1d5s6cnru8ef" path="res://Assets/background/Grief_stage.png" id="5_n5xwt"]
 [ext_resource type="Texture2D" uid="uid://13umutuei6fv" path="res://Assets/background/background_water_1.png" id="6_j2vs6"]
 [ext_resource type="Texture2D" uid="uid://drpkfsvsabt22" path="res://Assets/background/background_water_2.png" id="7_r65jg"]
 [ext_resource type="Texture2D" uid="uid://c7v16wveiervi" path="res://Assets/background/background_water_3.png" id="8_bfp6s"]
@@ -198,26 +198,27 @@ scroll_limit_end = Vector2(4000, 0)
 motion_scale = Vector2(0, 0.8)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-position = Vector2(608, -115)
-scale = Vector2(3, 3)
-texture = ExtResource("6_a53wo")
+position = Vector2(0, 21.1112)
+scale = Vector2(1.03519, 1.03519)
+texture = ExtResource("5_n5xwt")
+centered = false
+offset = Vector2(0, -600)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
 motion_scale = Vector2(0.7, 1)
 motion_mirroring = Vector2(1700, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
-self_modulate = Color(1, 1, 1, 0.698039)
 sprite_frames = SubResource("SpriteFrames_b237y")
 autoplay = "default"
 frame_progress = 0.950461
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.5, 1)
+motion_scale = Vector2(0.3, 1)
 motion_mirroring = Vector2(875, 602)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(-90.5, -530)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ai2la")
 autoplay = "default"
@@ -225,7 +226,23 @@ frame = 6
 frame_progress = 0.404333
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(1690, 0)
+position = Vector2(1599.5, -530)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ai2la")
+autoplay = "default"
+frame = 6
+frame_progress = 0.404333
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(-90.5, 542)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_ai2la")
+autoplay = "default"
+frame = 6
+frame_progress = 0.404333
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(1599.5, 542)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ai2la")
 autoplay = "default"
