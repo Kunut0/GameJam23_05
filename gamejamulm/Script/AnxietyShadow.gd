@@ -93,9 +93,11 @@ func stun():
 	stunned = true
 	hurt.monitoring = false
 	$Stun.visible = true
+	$AnimatedSprite2D.modulate = Color("6d6d6d")
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
 	hurt.monitoring = true
+	$AnimatedSprite2D.modulate = Color("ffffff")
 	$Stun.visible = false
 
 func spawn():
