@@ -1,5 +1,4 @@
 extends Timer
 
 func _on_timeout() -> void:
-	pass
-	#you lose
+	get_tree().change_scene_to_file("res://Szene/Player2Win.tscn")

@@ -79,7 +79,8 @@ func _process(delta: float) -> void:
 			sprite.play("default")
 			await get_tree().create_timer(1).timeout
 			scream_allowed = true
-		
+	else:
+		velocity.x = 0
 	move_and_slide()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
