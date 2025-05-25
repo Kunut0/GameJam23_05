@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://mrt43bx6q6lj"]
+[gd_scene load_steps=10 format=4 uid="uid://mrt43bx6q6lj"]
 
+[ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="1_743xn"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="1_vgqpf"]
 [ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="2_bus5d"]
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="3_8t6er"]
@@ -115,6 +116,9 @@ sources/0 = SubResource("TileSetAtlasSource_vydea")
 sources/1 = SubResource("TileSetAtlasSource_1ljix")
 
 [node name="tutorial_2" type="Node2D"]
+
+[node name="RespawnPoint" parent="." groups=["first"] instance=ExtResource("1_743xn")]
+position = Vector2(-472, -310)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 1
