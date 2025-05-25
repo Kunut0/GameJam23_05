@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 @onready var dash_timer = $DashTimer
 @onready var hurt = $Hurtbox
+@onready var scream_sprite: Sprite2D = $Area2D/Sprite2D
 
 signal scream
 
@@ -34,12 +35,6 @@ func _process(delta: float) -> void:
 		#gets direction imput
 		direction =  Input.get_axis("ui_left", "ui_right")
 		
-		#checks direction to flip sprite
-#		if direction < 0:
-#			sprite.flip_h = true
-#		else:
-#			sprite.flip_h = false
-		
 		#generates character movement
 		if direction:
 			if dashing:
@@ -67,10 +62,16 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_ctrl"):
 			sprite.play("scream")
 			sprite.scale += Vector2(0.05, 0.05)
+			scream_sprite.self_modulate.a = 0.5
+			scream_sprite.show()
 			await get_tree().create_timer(0.7).timeout
+			scream_sprite.self_modulate.a = 1
 			scream.emit()
 			sprite.scale = Vector2(0.138, 0.138)
 			sprite.play("default")
+			
+			await get_tree().create_timer(0.125).timeout
+			scream_sprite.hide()
 		
 	move_and_slide()
 
