@@ -161,8 +161,8 @@ script = ExtResource("1_63twe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.129658, 0.224131, 0.290896, 1)
-position = Vector2(957.25, 544.75)
-scale = Vector2(1915.5, 1090.5)
+position = Vector2(1031.75, 544.75)
+scale = Vector2(2064.5, 1090.5)
 texture = SubResource("CanvasTexture_mjqj2")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
