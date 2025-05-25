@@ -42,18 +42,18 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc8bb"]
-radius = 16.0
-height = 42.0
+radius = 17.7647
+height = 47.0588
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8qwec"]
 radius = 131.137
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dcgf1"]
-radius = 15.0
+radius = 12.6471
 height = 36.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.7, 1.7)
 script = ExtResource("1_c86et")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

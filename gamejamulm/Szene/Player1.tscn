@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c482ab8jeb5l1"]
+[gd_scene load_steps=36 format=3 uid="uid://c482ab8jeb5l1"]
 
 [ext_resource type="Script" path="res://Script/player_1.gd" id="1_p1qkr"]
 [ext_resource type="Texture2D" uid="uid://ri4iy6re6m08" path="res://Assets/Player/silde_anim_1.png" id="2_bffft"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://bxs7whno87y7n" path="res://Assets/Musik/Sounds/player_1_jump.wav" id="17_fdvv8"]
 [ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="18_hn70k"]
 [ext_resource type="AudioStream" uid="uid://bobtvv4psvuw4" path="res://Assets/Musik/Sounds/stun.wav" id="19_ua3lf"]
+[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="20_72s0b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kegoh"]
 atlas = ExtResource("2_bffft")
@@ -199,6 +200,22 @@ stream = ExtResource("18_hn70k")
 
 [node name="Stun" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_ua3lf")
+
+[node name="Stun2" type="Node2D" parent="."]
+visible = false
+position = Vector2(4.5, -41.5)
+scale = Vector2(0.187029, 0.195133)
+
+[node name="StunStars" type="Sprite2D" parent="Stun2"]
+position = Vector2(-5.66071, -78.1607)
+scale = Vector2(1.16987, 0.42908)
+texture = ExtResource("20_72s0b")
+
+[node name="StunStars2" type="Sprite2D" parent="Stun2"]
+position = Vector2(-7.14286, -57.1429)
+rotation = -3.12715
+scale = Vector2(1.16987, 0.42908)
+texture = ExtResource("20_72s0b")
 
 [connection signal="body_entered" from="Lichtkegel" to="." method="_on_lichtkegel_body_entered"]
 [connection signal="body_exited" from="Lichtkegel" to="." method="_on_lichtkegel_body_exited"]

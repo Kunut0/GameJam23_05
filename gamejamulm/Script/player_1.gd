@@ -28,10 +28,11 @@ var lichtkegel_sichtbar: bool = false
 var enemy_sight: bool = false
 
 var stunned = false
-var stun_time = 0.25
+var stun_time = 0.5
 
 func _ready() -> void:
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
+	respawn_ref = get_tree().get_first_node_in_group("first").global_position
 	
 	lichtkegel.hide()
 	lichtkegel.monitoring = false
@@ -88,6 +89,8 @@ func _process(delta: float) -> void:
 				sprite.offset = Vector2(0, 0)
 			elif not is_on_floor():
 				velocity += get_gravity() * delta * 400
+	else:
+		velocity.x = 0
 	
 	move_and_slide()
 	if Input.is_action_pressed("ui_select") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false:
@@ -175,8 +178,10 @@ func _on_lichtkegel_body_exited(body: Node2D) -> void:
 
 func stun():
 	stunned = true
+	$Stun2.visible = true
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
+	$Stun2.visible = false
 	lichtkegel.hide()
 	lichtkegel.monitoring = false
 	lichtkegel_sichtbar = false
