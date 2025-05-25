@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpaj81u714rk8"]
+
+[ext_resource type="Script" path="res://Script/global_timer.gd" id="1_fscuj"]
+
+[node name="Timer" type="Timer"]
+wait_time = 300.0
+autostart = true
+script = ExtResource("1_fscuj")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]
