@@ -28,7 +28,7 @@ var lichtkegel_sichtbar: bool = false
 var enemy_sight: bool = false
 
 var stunned = false
-var stun_time = 0.25
+var stun_time = 0.5
 
 func _ready() -> void:
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
@@ -175,8 +175,10 @@ func _on_lichtkegel_body_exited(body: Node2D) -> void:
 
 func stun():
 	stunned = true
+	$Stun2.visible = true
 	await get_tree().create_timer(stun_time).timeout
 	stunned = false
+	$Stun2.visible = false
 	lichtkegel.hide()
 	lichtkegel.monitoring = false
 	lichtkegel_sichtbar = false
