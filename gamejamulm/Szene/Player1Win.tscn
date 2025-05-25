@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://bmmxdslmrcjoe"]
+[gd_scene load_steps=10 format=4 uid="uid://bmmxdslmrcjoe"]
 
 [ext_resource type="Script" path="res://Script/Player1Winscreen.gd" id="1_uhrgg"]
 [ext_resource type="Texture2D" uid="uid://bdiftt840so5j" path="res://Assets/background/RAGE_BAVKGROUND.png" id="2_5ubl6"]
 [ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="2_ad2yb"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="3_ttwli"]
+[ext_resource type="FontFile" uid="uid://cn0hc03cdh36c" path="res://Assets/Corporate_HQ.ttf" id="5_0aodx"]
 [ext_resource type="Texture2D" uid="uid://b8idm7ewnp2yg" path="res://Assets/Player/walk_anim_1.png" id="5_py8dr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gu3ey"]
@@ -96,6 +97,7 @@ offset_left = 145.0
 offset_top = 175.0
 offset_right = 1776.0
 offset_bottom = 533.0
+theme_override_fonts/normal_font = ExtResource("5_0aodx")
 bbcode_enabled = true
 
 [node name="WalkAnim1" type="Sprite2D" parent="."]
@@ -109,6 +111,7 @@ offset_left = 1775.0
 offset_top = 1008.0
 offset_right = 1901.0
 offset_bottom = 1062.0
+theme_override_fonts/font = ExtResource("5_0aodx")
 theme_override_font_sizes/font_size = 24
 text = "Main Menu"
 

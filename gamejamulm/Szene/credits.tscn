@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cf2rhuktbih7q"]
+[gd_scene load_steps=17 format=4 uid="uid://cf2rhuktbih7q"]
 
 [ext_resource type="Script" path="res://Script/credits.gd" id="1_63twe"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="2_ud2bh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dgxsn6k472cmu" path="res://Assets/background/intro_5.png" id="8_e6unv"]
 [ext_resource type="Texture2D" uid="uid://lmfejkqa8hi6" path="res://Assets/background/intro_6.png" id="9_g2cyi"]
 [ext_resource type="Texture2D" uid="uid://c1bqhnv4y4ih3" path="res://Assets/background/intro_7.png" id="10_tw85c"]
+[ext_resource type="FontFile" uid="uid://cn0hc03cdh36c" path="res://Assets/Corporate_HQ.ttf" id="11_wldvh"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mjqj2"]
 
@@ -180,6 +181,7 @@ layout_mode = 0
 offset_top = 80.0
 offset_right = 1920.0
 offset_bottom = 1050.0
+theme_override_fonts/normal_font = ExtResource("11_wldvh")
 bbcode_enabled = true
 
 [node name="Button" type="Button" parent="."]

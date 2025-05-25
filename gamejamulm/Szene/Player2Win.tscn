@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://6h4g43t1mwg6"]
+[gd_scene load_steps=20 format=4 uid="uid://6h4g43t1mwg6"]
 
 [ext_resource type="Script" path="res://Script/Player2Win.gd" id="1_5cwy5"]
 [ext_resource type="Texture2D" uid="uid://70kmouvfm5h" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_vrnau"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dgxsn6k472cmu" path="res://Assets/background/intro_5.png" id="8_t7ces"]
 [ext_resource type="Texture2D" uid="uid://lmfejkqa8hi6" path="res://Assets/background/intro_6.png" id="9_6vf2y"]
 [ext_resource type="Texture2D" uid="uid://c1bqhnv4y4ih3" path="res://Assets/background/intro_7.png" id="10_58ihd"]
+[ext_resource type="FontFile" uid="uid://cn0hc03cdh36c" path="res://Assets/Corporate_HQ.ttf" id="14_p3jo7"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_igjsl"]
 
@@ -198,7 +199,8 @@ layout_mode = 0
 offset_left = 145.0
 offset_top = 175.0
 offset_right = 1776.0
-offset_bottom = 533.0
+offset_bottom = 654.0
+theme_override_fonts/normal_font = ExtResource("14_p3jo7")
 bbcode_enabled = true
 
 [node name="Button" type="Button" parent="."]
@@ -207,6 +209,7 @@ offset_left = 1775.0
 offset_top = 1008.0
 offset_right = 1901.0
 offset_bottom = 1062.0
+theme_override_fonts/font = ExtResource("14_p3jo7")
 theme_override_font_sizes/font_size = 24
 text = "Main Menu"
 

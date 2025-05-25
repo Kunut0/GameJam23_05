@@ -206,8 +206,6 @@ tile_map_data = PackedByteArray("AADw/wUAAAAFAAIAAADw/wYAAAAFAAIAAADw/wcAAAAFAAI
 tile_set = SubResource("TileSet_14f1e")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_limit_begin = Vector2(-2000, 0)
-scroll_limit_end = Vector2(4000, 0)
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0.8)
@@ -221,7 +219,7 @@ offset = Vector2(0, -600)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.7, 1)
-motion_mirroring = Vector2(1700, 0)
+motion_mirroring = Vector2(3000, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxBackground/ParallaxLayer"]
 sprite_frames = SubResource("SpriteFrames_b237y")
