@@ -1,7 +1,7 @@
 extends Node
 
 var on_cooldown = {
-	"flashlight": [false, 5],#
+	"flashlight": [false, 3],#
 	"dashing": [false, 1]
 }
 

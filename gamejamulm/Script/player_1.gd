@@ -103,18 +103,16 @@ func _process(delta: float) -> void:
 	
 	if lichtkegel_sichtbar and enemy_sight:
 		light_timer += 1*delta
-		if light_timer > 1:
+		if light_timer > 0.5:
+			lichtkegel.modulate = Color("ffff00")
 			flashlight.emit()
-			Cooldown.on_cooldown["flashlight"][0] = true
-	else:
-		light_timer = 0
-	
-	if lichtkegel_sichtbar and enemy_sight:
-		light_timer += 1*delta
-		if light_timer > 1:
-			flashlight.emit()
-			lichtkegel.hide()
 			lichtkegel.monitoring = false
+			await get_tree().create_timer(0.2).timeout
+			lichtkegel.modulate = Color("ffffff")
+			lichtkegel.hide()
+			Cooldown.on_cooldown["flashlight"][0] = true
+	elif light_timer > 0:
+		light_timer -= 1*delta
 	else:
 		light_timer = 0
 	

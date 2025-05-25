@@ -21,7 +21,7 @@ var stun_time
 var puddle_allowed = true
 
 func _ready() -> void:
-	stun_time = 0.5
+	stun_time = 0.7
 	
 
 func _process(delta: float) -> void:
@@ -108,8 +108,8 @@ func spawn():
 	var player_ref = get_tree().get_first_node_in_group("player1")
 	var shadow_res = Vector2(0,0)
 	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
-		if i.global_position.x - player_ref.global_position.x > 200:
-			if shadow_res.x > i.global_position.x - player_ref.global_position.x or shadow_res.x == 0:
+		if i.global_position.x - player_ref.global_position.x > 300:
+			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
 	global_position = shadow_res
 

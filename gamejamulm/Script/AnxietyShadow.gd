@@ -20,7 +20,6 @@ var stun_time
 
 func _ready() -> void:
 	stun_time = 2
-	
 
 func _process(delta: float) -> void:
 	

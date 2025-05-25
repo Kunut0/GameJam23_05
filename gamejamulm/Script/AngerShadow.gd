@@ -20,9 +20,7 @@ var stun_time
 var trail: Trail
 
 func _ready() -> void:
-
 	stun_time = 1
-	
 
 func _process(delta: float) -> void:
 	
@@ -66,7 +64,7 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("ui_ctrl"):
 			firetrail.get_child(0).adding = true
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(0.7).timeout
 			firetrail.get_child(0).adding = false
 		
 	move_and_slide()

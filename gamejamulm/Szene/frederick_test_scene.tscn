@@ -233,10 +233,11 @@ frame = 6
 frame_progress = 0.404333
 
 [node name="RespawnPoint" parent="." instance=ExtResource("17_84u7d")]
-position = Vector2(37, 237)
+position = Vector2(45, 179)
 scale = Vector2(1.10417, 0.825981)
 
 [node name="RespawnArea" parent="RespawnPoint" index="0"]
+position = Vector2(1.81132, -77.4836)
 scale = Vector2(0.886865, 1.38742)
 
 [node name="CollisionShape2D" parent="RespawnPoint/RespawnArea" index="0"]
