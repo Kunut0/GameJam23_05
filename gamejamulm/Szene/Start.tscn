@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bt4k13wafgyf8"]
+[gd_scene load_steps=18 format=4 uid="uid://bt4k13wafgyf8"]
 
 [ext_resource type="Script" path="res://Script/start.gd" id="1_u3o8i"]
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="3_h3tpy"]
@@ -9,61 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://mwgkdyx850jb" path="res://Assets/background/intro_4.png" id="8_0lyk8"]
 [ext_resource type="Texture2D" uid="uid://dgxsn6k472cmu" path="res://Assets/background/intro_5.png" id="9_2y02o"]
 [ext_resource type="Texture2D" uid="uid://lmfejkqa8hi6" path="res://Assets/background/intro_6.png" id="10_shbu3"]
-[ext_resource type="Texture2D" uid="uid://bc4xidie02xcy" path="res://Assets/background/intro_breaking.png" id="11_10gyo"]
 [ext_resource type="Texture2D" uid="uid://c1bqhnv4y4ih3" path="res://Assets/background/intro_7.png" id="11_xthcf"]
-[ext_resource type="Texture2D" uid="uid://21wmvexuyjht" path="res://Assets/background/intro_broken.png" id="12_kiaqx"]
-
-[sub_resource type="Animation" id="Animation_5bwa3"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_xmxon"]
-resource_name = "fade_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_o2lb3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a4pv3"]
-_data = {
-"RESET": SubResource("Animation_o2lb3"),
-"fade_in": SubResource("Animation_5bwa3"),
-"fade_out": SubResource("Animation_xmxon")
-}
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jmnnb"]
 
@@ -73,11 +19,7 @@ region = Rect2(10.1115, 76.2512, 124.43, 41.6945)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1b6p"]
 region = Rect2(11.6959, 170.526, 124.029, 40.553)
 
-<<<<<<< HEAD
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ocjqp"]
-=======
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pqs4t"]
->>>>>>> Egzon_neu_neu
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m36ir"]
 texture = ExtResource("3_h3tpy")
 texture_region_size = Vector2i(50, 50)
 5:2/0 = 0
@@ -105,11 +47,7 @@ texture_region_size = Vector2i(50, 50)
 9:3/0 = 0
 9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-25, 25, -25, -25, 25, -25, 9.19239, -19.0919, -7.77817, -10.253, -19, 7.5)
 
-<<<<<<< HEAD
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w6j8h"]
-=======
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bg6xq"]
->>>>>>> Egzon_neu_neu
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0sexg"]
 texture = ExtResource("4_g6467")
 texture_region_size = Vector2i(50, 50)
 2:5/0 = 0
@@ -186,13 +124,8 @@ texture_region_size = Vector2i(50, 50)
 tile_size = Vector2i(50, 50)
 physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 7
-<<<<<<< HEAD
-sources/0 = SubResource("TileSetAtlasSource_ocjqp")
-sources/1 = SubResource("TileSetAtlasSource_w6j8h")
-=======
-sources/0 = SubResource("TileSetAtlasSource_pqs4t")
-sources/1 = SubResource("TileSetAtlasSource_bg6xq")
->>>>>>> Egzon_neu_neu
+sources/0 = SubResource("TileSetAtlasSource_m36ir")
+sources/1 = SubResource("TileSetAtlasSource_0sexg")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gnvm0"]
 animations = [{
@@ -225,20 +158,6 @@ animations = [{
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_u3o8i")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = 3
-offset_left = 2123.0
-offset_top = -103.0
-offset_right = 2192.0
-offset_bottom = 183.0
-scale = Vector2(-34.1815, 4.90533)
-color = Color(0, 0, 0, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_a4pv3")
-}
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.129658, 0.224131, 0.290896, 1)
@@ -288,8 +207,8 @@ position = Vector2(322, 637)
 scale = Vector2(0.810463, 0.810463)
 sprite_frames = SubResource("SpriteFrames_gnvm0")
 autoplay = "default"
-frame = 2
-frame_progress = 0.408841
+frame = 6
+frame_progress = 0.394781
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 522.0
@@ -298,20 +217,6 @@ offset_right = 1524.0
 offset_bottom = 745.0
 bbcode_enabled = true
 text = "[font_size=128][center]Katharsis"
-
-[node name="Breaking" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(322, 637)
-scale = Vector2(0.81, 0.81)
-texture = ExtResource("11_10gyo")
-
-[node name="Broken" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(322, 637)
-scale = Vector2(0.81, 0.81)
-texture = ExtResource("12_kiaqx")
-
-[node name="Node" type="Node" parent="."]
 
 [connection signal="pressed" from="credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
