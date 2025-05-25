@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 signal scream
 
-var jump_force = -1800
+var jump_force = -2000
 var direction
 var speed = 750
 
