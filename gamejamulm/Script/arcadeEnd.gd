@@ -3,7 +3,7 @@ extends Control
 func _ready() -> void:
 	GlobalTimer.stop()
 	
-	$RichTextLabel.text = "[font_size=112][center]The Runner was able to by pass " + str(GameMode.clearedRoom) + " rooms.[p]"
+	$RichTextLabel.text = "[font_size=112][center]The Runner was able to by pass [code]" + str(GameMode.clearedRooms) + "[/code] rooms.[p]"
 	
 	GameMode.GameMode = "default"
 

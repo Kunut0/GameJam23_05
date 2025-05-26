@@ -126,6 +126,12 @@ rotation = -3.12715
 scale = Vector2(1.16987, 0.42908)
 texture = ExtResource("15_nocxd")
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 100)
+target_position = Vector2(-132.857, 1.42857)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

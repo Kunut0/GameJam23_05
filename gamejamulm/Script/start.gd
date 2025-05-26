@@ -15,6 +15,7 @@ func _on_start_pressed() -> void:
 	$AnimatedSprite2D.hide()
 	$credits.hide()
 	$start.hide()
+	$arcade.hide()
 	$quit.hide()
 	$KatharsisFont.hide()
 	animation.play("fade_out")

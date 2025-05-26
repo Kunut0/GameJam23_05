@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dfjxex0vcitcl"]
+[gd_scene load_steps=22 format=4 uid="uid://dfjxex0vcitcl"]
 
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_ag0b4"]
 [ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="1_jqx3w"]
@@ -129,6 +129,11 @@ sources/1 = SubResource("TileSetAtlasSource_ax5pg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt5nv"]
 size = Vector2(56, 828)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_5783d"]
+vertices = PackedVector2Array(11878.9, 535.297, -953.391, 930.688, -1031.61, -1097.02, 11856.1, -1130.97)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1042, -1107, -963, 941, 11889, 545, 11866, -1141)])
 
 [node name="level_anger" type="Node2D"]
 
@@ -269,6 +274,9 @@ autoplay = true
 
 [node name="Camera2D" parent="." instance=ExtResource("16_sl0i5")]
 position = Vector2(-1225, -786)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_5783d")
 
 [editable path="RespawnPoint"]
 [editable path="RespawnPoint2"]

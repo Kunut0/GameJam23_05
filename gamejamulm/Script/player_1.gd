@@ -15,6 +15,7 @@ var speed = 1000
 
 var dash_speed = 1800
 var dashing = false
+var dash_allowed = true
 
 var shadow_ref
 var respawn_ref
@@ -48,7 +49,7 @@ func _process(delta: float) -> void:
 		else:
 			velocity += get_gravity() * delta * 8.75
 	
-	if is_on_floor():
+	if is_on_floor() or $RayCast2D3.is_colliding() or $RayCast2D2.is_colliding() or $RayCast2D.is_colliding():
 		coyote = 0
 	
 	if stunned == false:
@@ -76,16 +77,16 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
 		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_w") and coyote < 0.1:
+		if Input.is_action_just_pressed("ui_w") and coyote < 0.2:
 			velocity.y = jump_force
 			sprite.play("jump")
 			$Jump.play()
 		
 		#slide
 		if Input.is_action_just_pressed("ui_s"):
-			if is_on_floor() and Cooldown.on_cooldown["dashing"][0] == false:
+			if coyote < 0.2 and dash_allowed == true:
+				dash_allowed = false
 				$Slide.play()
-				Cooldown.on_cooldown["dashing"][0] = true
 				dashing = true
 				dash_collision.disabled = false
 				default_collision.disabled = true
@@ -157,7 +158,8 @@ func _on_timer_timeout() -> void:
 	dashing = false
 	default_collision.disabled = false
 	dash_collision.disabled = true
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
+	dash_allowed = true
 
 
 func _on_lichtkegel_body_entered(body: Node2D) -> void:

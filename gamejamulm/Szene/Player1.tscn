@@ -149,9 +149,24 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_p1qkr")
 
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
+target_position = Vector2(0, 1)
+collision_mask = 4
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(15, -4)
+target_position = Vector2(0, 1)
+collision_mask = 4
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-16, -4)
+target_position = Vector2(0, 1)
+collision_mask = 4
+
 [node name="DashCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -3)
-polygon = PackedVector2Array(-19, -25, 38, -12, 35, -2, -36, -1)
+polygon = PackedVector2Array(-19, -25, 38, -12, 36, -1, -36, -1)
 disabled = true
 
 [node name="NormalCollision" type="CollisionPolygon2D" parent="."]

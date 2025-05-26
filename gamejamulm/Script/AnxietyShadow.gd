@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var dash_timer = $DashTimer
 @onready var hurt = $Hurtbox
 @onready var scream_sprite: Sprite2D = $Area2D/Sprite2D
+@onready var nav = $NavigationAgent2D
 
 signal scream
 
@@ -12,7 +13,7 @@ var jump_force = -2000
 var direction
 var speed = 750
 
-var dash_speed = 1800
+var dash_speed = 1700
 var dashing = false
 var dash_allowed = true
 
@@ -40,8 +41,84 @@ func _process(delta: float) -> void:
 		coyote = 0
 	
 	if stunned == false:
-		#gets direction imput
-		direction =  Input.get_axis("ui_left", "ui_right")
+		if GameMode.GameMode == "default":
+			#gets direction imput
+			direction =  Input.get_axis("ui_left", "ui_right")
+			
+			#makes player jump when on floor
+			if Input.is_action_just_pressed("ui_up") and coyote < 0.1:
+				velocity.y = jump_force
+				$Jump.play(1)
+			
+			if Input.is_action_just_pressed("ui_down"):
+				if is_on_floor() and dash_allowed:
+					$Dash.play()
+					dashing = true
+					dash_allowed = false
+					dash_timer.start()
+				elif not is_on_floor():
+					velocity += get_gravity() * delta * 300
+			
+			if Input.is_action_just_pressed("ui_ctrl") and scream_allowed:
+				scream_allowed = false
+				sprite.scale += Vector2(0.05, 0.05)
+				scream_sprite.self_modulate.a = 0.5
+				scream_sprite.show()
+				$Ability.play()
+				await get_tree().create_timer(0.7).timeout
+				scream_sprite.self_modulate.a = 1
+				scream.emit()
+				sprite.scale = Vector2(0.138, 0.138)
+				sprite.play("scream")
+				await get_tree().create_timer(0.125).timeout
+				scream_sprite.hide()
+				sprite.play("default")
+				await get_tree().create_timer(1).timeout
+				scream_allowed = true
+		
+		
+		elif GameMode.GameMode == "arcade":
+			nav.target_position = get_tree().get_first_node_in_group("player1").global_position
+			var p = nav.get_next_path_position() - global_position
+			p = p.normalized()
+			var d = global_position - get_tree().get_first_node_in_group("player1").global_position
+			
+			if (0.5 < p.y or $RayCast2D.is_colliding()) and coyote < 0.1:
+				velocity.y = jump_force
+				$Jump.play(1)
+			
+			if (d.x < -400 or d.x > 400) and coyote < 0.1 and dash_allowed:
+				dashing = true
+				dash_allowed = false
+				dash_timer.start()
+				$Dash.play()
+			
+			if d.x > 0 or d.x < -500:
+				direction = -1
+				$RayCast2D.scale.y = 1
+			elif d.x < 0:
+				direction = 1
+				$RayCast2D.scale.y = -1
+			else:
+				direction = 0
+			
+			if scream_allowed:
+				scream_allowed = false
+				sprite.scale += Vector2(0.05, 0.05)
+				scream_sprite.self_modulate.a = 0.5
+				scream_sprite.show()
+				$Ability.play()
+				await get_tree().create_timer(0.7).timeout
+				scream_sprite.self_modulate.a = 1
+				scream.emit()
+				sprite.scale = Vector2(0.138, 0.138)
+				sprite.play("scream")
+				await get_tree().create_timer(0.125).timeout
+				scream_sprite.hide()
+				sprite.play("default")
+				await get_tree().create_timer(1).timeout
+				scream_allowed = true
+		
 		
 		#generates character movement
 		if direction:
@@ -55,36 +132,6 @@ func _process(delta: float) -> void:
 			else:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
-		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_up") and coyote < 0.1:
-			velocity.y = jump_force
-			$Jump.play(1)
-		
-		if Input.is_action_just_pressed("ui_down"):
-			if is_on_floor() and dash_allowed:
-				$Dash.play()
-				dashing = true
-				dash_allowed = false
-				dash_timer.start()
-			elif not is_on_floor():
-				velocity += get_gravity() * delta * 300
-		
-		if Input.is_action_just_pressed("ui_ctrl") and scream_allowed:
-			scream_allowed = false
-			sprite.scale += Vector2(0.05, 0.05)
-			scream_sprite.self_modulate.a = 0.5
-			scream_sprite.show()
-			$Ability.play()
-			await get_tree().create_timer(0.7).timeout
-			scream_sprite.self_modulate.a = 1
-			scream.emit()
-			sprite.scale = Vector2(0.138, 0.138)
-			sprite.play("scream")
-			await get_tree().create_timer(0.125).timeout
-			scream_sprite.hide()
-			sprite.play("default")
-			await get_tree().create_timer(1).timeout
-			scream_allowed = true
 	else:
 		velocity.x = 0
 	move_and_slide()

@@ -5,10 +5,11 @@ extends CharacterBody2D
 @onready var dash_timer = $DashTimer
 @onready var firetrail = $Line2D
 @onready var hurt = $Hurtbox
+@onready var nav = $NavigationAgent2D
 
 var jump_force = -1600
 var direction
-var speed = 800
+var speed = 750
 
 var dash_speed = 1500
 var dashing = false
@@ -36,15 +37,76 @@ func _process(delta: float) -> void:
 		coyote = 0
 	
 	if stunned == false:
-		#gets direction imput
-		direction =  Input.get_axis("ui_left", "ui_right")
-		
-		#checks direction to flip sprite
-#		if direction < 0:
-#			sprite.flip_h = true
-#		else:
-#			sprite.flip_h = false
-		
+		if GameMode.GameMode == "default":
+			#gets direction imput
+			direction =  Input.get_axis("ui_left", "ui_right")
+			
+			#checks direction to flip sprite
+#			if direction < 0:
+#				sprite.flip_h = true
+#			else:
+#				sprite.flip_h = false
+			
+			#makes player jump when on floor
+			if Input.is_action_just_pressed("ui_up") and coyote < 0.1:
+				velocity.y = jump_force
+				$Jump.play()
+			
+			if Input.is_action_just_pressed("ui_down"):
+				if is_on_floor() and dash_allowed:
+					dashing = true
+					dash_allowed = false
+					dash_timer.start()
+					$Dash.play()
+				elif not is_on_floor():
+					velocity += get_gravity() * delta * 200
+			
+			if Input.is_action_just_pressed("ui_ctrl") and fire_allowed:
+				fire_allowed = false
+				$Ability.play()
+				firetrail.get_child(0).adding = true
+				await get_tree().create_timer(0.7).timeout
+				firetrail.get_child(0).adding = false
+				await get_tree().create_timer(3.5).timeout
+				fire_allowed = true
+	
+	
+		elif GameMode.GameMode == "arcade":
+			nav.target_position = get_tree().get_first_node_in_group("player1").global_position
+			var p = nav.get_next_path_position() - global_position
+			p = p.normalized()
+			var d = global_position - get_tree().get_first_node_in_group("player1").global_position
+			
+			if (0.5 < p.y or $RayCast2D.is_colliding()) and coyote < 0.1:
+				velocity.y = jump_force
+				$Jump.play()
+			
+			if (d.x < -200 or d.x > 300) and coyote < 0.1 and dash_allowed:
+				dashing = true
+				dash_allowed = false
+				dash_timer.start()
+				$Dash.play()
+			
+			if d.x > 0 or d.x < -400:
+				direction = -1
+				$RayCast2D.scale.y = 1
+			elif d.x < 0:
+				direction = 1
+				$RayCast2D.scale.y = -1
+			else:
+				direction = 0
+			
+			if fire_allowed:
+				fire_allowed = false
+				$Ability.play()
+				firetrail.get_child(0).adding = true
+				await get_tree().create_timer(0.7).timeout
+				firetrail.get_child(0).adding = false
+				await get_tree().create_timer(3.5).timeout
+				fire_allowed = true
+
+
+
 		#generates character movement
 		if direction:
 			if dashing:
@@ -56,29 +118,6 @@ func _process(delta: float) -> void:
 				velocity.x = dash_speed * -1
 			else:
 				velocity.x = move_toward(velocity.x, 0, speed)
-		
-		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_up") and coyote < 0.1:
-			velocity.y = jump_force
-			$Jump.play()
-		
-		if Input.is_action_just_pressed("ui_down"):
-			if is_on_floor() and dash_allowed:
-				dashing = true
-				dash_allowed = false
-				dash_timer.start()
-				$Dash.play()
-			elif not is_on_floor():
-				velocity += get_gravity() * delta * 200
-		
-		if Input.is_action_just_pressed("ui_ctrl") and fire_allowed:
-			fire_allowed = false
-			$Ability.play()
-			firetrail.get_child(0).adding = true
-			await get_tree().create_timer(0.7).timeout
-			firetrail.get_child(0).adding = false
-			await get_tree().create_timer(3.5).timeout
-			fire_allowed = true
 	else:
 		velocity.x = 0
 	move_and_slide()

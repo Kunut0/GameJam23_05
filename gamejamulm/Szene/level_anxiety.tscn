@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://ct7purg6fewkn"]
+[gd_scene load_steps=30 format=4 uid="uid://ct7purg6fewkn"]
 
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="1_i3hn3"]
 [ext_resource type="Shader" path="res://shaders/level_anxiety.gdshader" id="1_u1ruv"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://2rx370c16mfd" path="res://Assets/Musik/anxiety_music.mp3" id="17_05xpj"]
 [ext_resource type="PackedScene" uid="uid://dygmjwsd7iq8s" path="res://Szene/timer ui.tscn" id="17_lr3q1"]
 [ext_resource type="PackedScene" uid="uid://bjrev3hvoqk3w" path="res://Szene/Camera.tscn" id="18_civ5s"]
+[ext_resource type="PackedScene" uid="uid://cg3t70b21qkns" path="res://slide_extender.tscn" id="19_r63rj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uddrp"]
 shader = ExtResource("1_u1ruv")
@@ -147,6 +148,17 @@ size = Vector2(28.4059, 138.429)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fc3g"]
 size = Vector2(281.81, 232.203)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pxv17"]
+vertices = PackedVector2Array(9321.57, 820.992, -371.156, 814, -398.844, -870.547, 9229.42, -1403.45)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-409, -880, -381, 824, 9332, 831, 9239, -1414)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npfrq"]
+size = Vector2(338, 57)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tri84"]
+size = Vector2(96, 40)
 
 [node name="level_anxiety" type="Node2D"]
 position = Vector2(0, -1)
@@ -296,6 +308,52 @@ autoplay = true
 position = Vector2(-935, -679)
 position_smoothing_speed = 10.0
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_pxv17")
+
+[node name="Area2D" parent="." instance=ExtResource("19_r63rj")]
+position = Vector2(633, 157)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(90, 18.5)
+shape = SubResource("RectangleShape2D_npfrq")
+
+[node name="Area2D2" parent="." instance=ExtResource("19_r63rj")]
+position = Vector2(1878, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(-3, 10)
+shape = SubResource("RectangleShape2D_tri84")
+
+[node name="Area2D3" parent="." instance=ExtResource("19_r63rj")]
+position = Vector2(2428, -81)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2(-3, 10)
+shape = SubResource("RectangleShape2D_tri84")
+
+[node name="Area2D4" parent="." instance=ExtResource("19_r63rj")]
+position = Vector2(4317, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
+position = Vector2(-17, 10)
+shape = SubResource("RectangleShape2D_tri84")
+
+[node name="Area2D5" parent="." instance=ExtResource("19_r63rj")]
+position = Vector2(7471, 67)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D5"]
+position = Vector2(-21, 10)
+shape = SubResource("RectangleShape2D_tri84")
+
+[node name="Area2D6" parent="." instance=ExtResource("19_r63rj")]
+position = Vector2(6616, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D6"]
+position = Vector2(-26, 10)
+shape = SubResource("RectangleShape2D_tri84")
+
 [editable path="player_respawn/RespawnPoint"]
 [editable path="player_respawn/RespawnPoint2"]
 [editable path="player_respawn/RespawnPoint3"]
+[editable path="Area2D"]

@@ -2,7 +2,7 @@ extends Node
 
 var on_cooldown = {
 	"flashlight": [false, 3],#
-	"dashing": [false, 0.7]
+	"dashing": [false, 0.5]
 }
 
 func _process(delta: float) -> void:

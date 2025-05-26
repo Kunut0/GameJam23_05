@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://vbvarpiq0yf1"]
+[gd_scene load_steps=35 format=4 uid="uid://vbvarpiq0yf1"]
 
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_n06t2"]
 [ext_resource type="PackedScene" uid="uid://dfvfe30dr8e7i" path="res://Szene/GriefShadow.tscn" id="2_0688q"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="19_whdg6"]
 [ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="20_pfyqg"]
 [ext_resource type="AudioStream" uid="uid://ccu7seakgrukx" path="res://Assets/Musik/sadness_music.mp3" id="22_qoxy8"]
+[ext_resource type="PackedScene" uid="uid://cg3t70b21qkns" path="res://slide_extender.tscn" id="23_7c8bp"]
 [ext_resource type="PackedScene" uid="uid://bjrev3hvoqk3w" path="res://Szene/Camera.tscn" id="23_qcuue"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3siov"]
@@ -191,6 +192,14 @@ size = Vector2(441.253, 578.502)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2byk"]
 size = Vector2(80.4688, 715)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_1344u"]
+vertices = PackedVector2Array(11149.3, 363.039, -596.961, 410.953, -592.031, -916.008, 11055.7, -934.977)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-602, -926, -607, 421, 11160, 373, 11065, -945)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf7s8"]
+size = Vector2(113, 121)
 
 [node name="frederick_test_scene" type="Node2D"]
 
@@ -367,7 +376,18 @@ autoplay = true
 [node name="Camera2D" parent="." instance=ExtResource("23_qcuue")]
 position = Vector2(-1085, -704)
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_1344u")
+
+[node name="Area2D" parent="." instance=ExtResource("23_7c8bp")]
+position = Vector2(9022, 123)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(38.5, 35.5)
+shape = SubResource("RectangleShape2D_gf7s8")
+
 [editable path="Playerrespawns/RespawnPoint2"]
 [editable path="Playerrespawns/RespawnPoint3"]
 [editable path="Playerrespawns/RespawnPoint4"]
 [editable path="Scenechange"]
+[editable path="Area2D"]
