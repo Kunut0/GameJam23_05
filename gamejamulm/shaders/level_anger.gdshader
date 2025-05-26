@@ -7,7 +7,7 @@ void vertex() {
 void fragment() {
 	vec4 input_color = texture(TEXTURE, UV);
 
-	
+
 	COLOR = vec4(SCREEN_UV.y-0.7,0.0,0.0, input_color.a);
 }
 

@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dygmjwsd7iq8s"]
+[gd_scene load_steps=7 format=3 uid="uid://dygmjwsd7iq8s"]
 
 [ext_resource type="PackedScene" uid="uid://4c83ki6newmv" path="res://label.tscn" id="1_r43ml"]
+[ext_resource type="Texture2D" uid="uid://b82xrfsmxia2s" path="res://Assets/IMG_2208.png" id="2_ego6b"]
+[ext_resource type="Texture2D" uid="uid://jwsc0n2yai2p" path="res://Assets/IMG_2206.png" id="3_qlv2q"]
+[ext_resource type="Texture2D" uid="uid://c5yma1ohv404o" path="res://Assets/IMG_2207.png" id="4_o0x6f"]
+[ext_resource type="Script" path="res://Script/texture_progress_bar.gd" id="5_f588u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vclp"]
+atlas = ExtResource("4_o0x6f")
+region = Rect2(95, 0, 1466, 322)
 
 [node name="UI" type="CanvasLayer"]
 
@@ -13,6 +21,25 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -484.0
+offset_top = -11.0
+offset_right = 1156.0
+offset_bottom = 311.0
+grow_horizontal = 2
+scale = Vector2(0.560001, 0.440001)
+max_value = 200.0
+value = 200.0
+texture_under = ExtResource("2_ego6b")
+texture_over = ExtResource("3_qlv2q")
+texture_progress = SubResource("AtlasTexture_3vclp")
+texture_progress_offset = Vector2(80, 0)
+script = ExtResource("5_f588u")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 1
@@ -29,6 +56,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Label" parent="Control/MarginContainer" instance=ExtResource("1_r43ml")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
