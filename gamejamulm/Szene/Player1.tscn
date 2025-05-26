@@ -159,10 +159,6 @@ position = Vector2(-8.26875, -22.7313)
 scale = Vector2(1.98438, 5.8125)
 polygon = PackedVector2Array(11.222, -7.1, 11.726, 3.22258, -3.89606, 3.22258, -4.4, -7.27204)
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["cam"]]
-position = Vector2(0, -59)
-position_smoothing_enabled = true
-
 [node name="Lichtkegel" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lichtkegel"]

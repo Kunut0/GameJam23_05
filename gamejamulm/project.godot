@@ -20,11 +20,13 @@ config/icon="res://icon.svg"
 Cooldown="*res://Script/cooldown.gd"
 GlobalTimer="*res://Szene/global_timer.tscn"
 MainMenuMusik="*res://Szene/main_menu_musik.tscn"
+GameMode="*res://Script/GameMode.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [global_group]

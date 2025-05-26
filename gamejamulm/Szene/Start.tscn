@@ -238,9 +238,9 @@ texture = SubResource("CanvasTexture_jmnnb")
 
 [node name="credits" type="Button" parent="."]
 offset_left = 1544.0
-offset_top = 571.0
+offset_top = 587.0
 offset_right = 1825.0
-offset_bottom = 672.0
+offset_bottom = 688.0
 theme_override_fonts/font = ExtResource("2_ka675")
 theme_override_font_sizes/font_size = 60
 text = "Credits"
@@ -250,9 +250,9 @@ expand_icon = true
 
 [node name="start" type="Button" parent="."]
 offset_left = 1544.0
-offset_top = 458.0
+offset_top = 361.0
 offset_right = 1825.0
-offset_bottom = 559.0
+offset_bottom = 462.0
 theme_override_fonts/font = ExtResource("2_ka675")
 theme_override_font_sizes/font_size = 60
 text = "Start"
@@ -260,11 +260,23 @@ icon = SubResource("AtlasTexture_b7da1")
 icon_alignment = 1
 expand_icon = true
 
+[node name="arcade" type="Button" parent="."]
+offset_left = 1544.0
+offset_top = 474.0
+offset_right = 1825.0
+offset_bottom = 575.0
+theme_override_fonts/font = ExtResource("2_ka675")
+theme_override_font_sizes/font_size = 60
+text = "Arcade"
+icon = SubResource("AtlasTexture_b7da1")
+icon_alignment = 1
+expand_icon = true
+
 [node name="quit" type="Button" parent="."]
 offset_left = 1544.0
-offset_top = 681.0
+offset_top = 699.0
 offset_right = 1825.0
-offset_bottom = 782.0
+offset_bottom = 800.0
 theme_override_fonts/font = ExtResource("2_ka675")
 theme_override_font_sizes/font_size = 60
 text = "Quit"
@@ -302,4 +314,5 @@ texture = ExtResource("14_6s80m")
 
 [connection signal="pressed" from="credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="arcade" to="." method="_on_arcade_pressed"]
 [connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

@@ -13,8 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://cfq3sfdgs4hg3" path="res://Assets/background/clouds_3.png" id="8_0j3yw"]
 [ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="9_a77ob"]
 [ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="10_ekrlj"]
-[ext_resource type="PackedScene" uid="uid://4c83ki6newmv" path="res://label.tscn" id="12_bqhvk"]
 [ext_resource type="AudioStream" uid="uid://bwf5j3i8s42sb" path="res://Assets/Musik/anger_music.mp3" id="14_b1tib"]
+[ext_resource type="PackedScene" uid="uid://bjrev3hvoqk3w" path="res://Szene/Camera.tscn" id="16_sl0i5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fmh52"]
 shader = ExtResource("4_llhkw")
@@ -263,11 +263,12 @@ position = Vector2(10138, -168)
 [node name="shadow_respawn_point16" parent="shadow_respawn" instance=ExtResource("10_ekrlj")]
 position = Vector2(11205, 61)
 
-[node name="Label" parent="." instance=ExtResource("12_bqhvk")]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_b1tib")
 autoplay = true
+
+[node name="Camera2D" parent="." instance=ExtResource("16_sl0i5")]
+position = Vector2(-1225, -786)
 
 [editable path="RespawnPoint"]
 [editable path="RespawnPoint2"]

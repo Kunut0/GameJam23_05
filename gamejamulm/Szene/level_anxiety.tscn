@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://ct7purg6fewkn"]
+[gd_scene load_steps=26 format=4 uid="uid://ct7purg6fewkn"]
 
 [ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="1_i3hn3"]
 [ext_resource type="Shader" path="res://shaders/level_anxiety.gdshader" id="1_u1ruv"]
@@ -15,8 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="10_nk5l4"]
 [ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="11_8r8x6"]
 [ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="14_a3ab5"]
-[ext_resource type="PackedScene" uid="uid://4c83ki6newmv" path="res://label.tscn" id="16_gc03l"]
 [ext_resource type="AudioStream" uid="uid://2rx370c16mfd" path="res://Assets/Musik/anxiety_music.mp3" id="17_05xpj"]
+[ext_resource type="PackedScene" uid="uid://dygmjwsd7iq8s" path="res://Szene/timer ui.tscn" id="17_lr3q1"]
+[ext_resource type="PackedScene" uid="uid://bjrev3hvoqk3w" path="res://Szene/Camera.tscn" id="18_civ5s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uddrp"]
 shader = ExtResource("1_u1ruv")
@@ -192,6 +193,8 @@ texture = ExtResource("5_clghr")
 position = Vector2(2470, 16)
 texture = ExtResource("6_o37l3")
 
+[node name="UI" parent="." instance=ExtResource("17_lr3q1")]
+
 [node name="CharacterBody2D" parent="." instance=ExtResource("8_3kce4")]
 position = Vector2(-155, 247)
 
@@ -283,13 +286,15 @@ position = Vector2(8148, -167)
 
 [node name="Scenechange" parent="." instance=ExtResource("14_a3ab5")]
 position = Vector2(8702, -328)
-newScene = "res://Szene/frederick_test_scene.tscn"
-
-[node name="Label" parent="." instance=ExtResource("16_gc03l")]
+newScene = "res://Szene/level_grief.tscn"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_05xpj")
 autoplay = true
+
+[node name="Camera2D" parent="." instance=ExtResource("18_civ5s")]
+position = Vector2(-935, -679)
+position_smoothing_speed = 10.0
 
 [editable path="player_respawn/RespawnPoint"]
 [editable path="player_respawn/RespawnPoint2"]

@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var sprite = $AnimatedSprite2D
-@onready var camera = $Camera2D
 @onready var dash_timer = $DashTimer
 @onready var dash_collision = $DashCollision
 @onready var default_collision = $NormalCollision
@@ -130,17 +129,7 @@ func _process(delta: float) -> void:
 	else:
 		light_timer = 0
 	
-	#Kamera Lerping
-	var pos_diff = global_position - shadow_ref.global_position
-	var camera_pos: float
-	if  pos_diff.x < -200:
-		camera_pos = global_position.x + 100
-	elif pos_diff.x > 200:
-		camera_pos = global_position.x - 100
-	else:
-		camera_pos = global_position.x + (pos_diff.x * (-0.5))
-	camera.global_position.x = lerp(camera.global_position.x, camera_pos, 0.01)
-	camera.global_position.y = -200
+	
 	
 	#animations
 	if is_on_floor():

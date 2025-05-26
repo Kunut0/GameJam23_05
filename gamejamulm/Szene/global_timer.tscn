@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Script/global_timer.gd" id="1_fscuj"]
 
 [node name="Timer" type="Timer" groups=["global_timer"]]
-wait_time = 300.0
+wait_time = 200.0
 script = ExtResource("1_fscuj")
 
 [connection signal="timeout" from="." to="." method="_on_timeout"]

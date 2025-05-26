@@ -1,6 +1,6 @@
 extends Node2D
 
-var level #= preload("res://Level select.tscn")
+var level = ["res://Szene/level_anger.tscn", "res://Szene/level_anxiety.tscn", "res://Szene/level_grief.tscn"]
 var credits = preload("res://Szene/credits.tscn")
 @onready var animation: AnimationPlayer = $AnimationPlayer
 
@@ -31,6 +31,13 @@ func _on_start_pressed() -> void:
 	
 	get_tree().call_deferred("change_scene_to_file", "res://Szene/tutorial.tscn")
 
+func _on_arcade_pressed():
+	GameMode.GameMode = "arcade"
+	GlobalTimer.wait_time = 300
+	GlobalTimer.start()
+	MainMenuMusik.stop()
+	var i = randi_range(0, 2)
+	get_tree().call_deferred("change_scene_to_file", level[i])
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

@@ -1,5 +1,6 @@
 extends Node2D
 
 func _ready() -> void:
-	GlobalTimer.start()
-	MainMenuMusik.stop()
+	if GameMode.GameMode == "default":
+		GlobalTimer.start()
+		MainMenuMusik.stop()

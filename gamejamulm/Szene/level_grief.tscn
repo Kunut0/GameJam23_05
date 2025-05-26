@@ -1,33 +1,33 @@
 [gd_scene load_steps=32 format=4 uid="uid://vbvarpiq0yf1"]
 
-[ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_w0pvb"]
-[ext_resource type="Shader" path="res://shaders/tilemap_blue.gdshader" id="2_6d3ix"]
-[ext_resource type="PackedScene" uid="uid://dfvfe30dr8e7i" path="res://Szene/GriefShadow.tscn" id="2_asfyl"]
-[ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="2_bq1tl"]
-[ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="3_pp0du"]
-[ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="4_47rsi"]
-[ext_resource type="Texture2D" uid="uid://d1d5s6cnru8ef" path="res://Assets/background/Grief_stage.png" id="5_n5xwt"]
-[ext_resource type="Texture2D" uid="uid://13umutuei6fv" path="res://Assets/background/background_water_1.png" id="6_j2vs6"]
-[ext_resource type="Texture2D" uid="uid://drpkfsvsabt22" path="res://Assets/background/background_water_2.png" id="7_r65jg"]
-[ext_resource type="Texture2D" uid="uid://c7v16wveiervi" path="res://Assets/background/background_water_3.png" id="8_bfp6s"]
-[ext_resource type="Texture2D" uid="uid://c6jyiuf2eo0r8" path="res://Assets/background/background_water_4.png" id="9_3kewj"]
-[ext_resource type="Texture2D" uid="uid://g4gxsvl04sy6" path="res://Assets/background/rain_1.png" id="10_txhlj"]
-[ext_resource type="Texture2D" uid="uid://ci005lvkg6pth" path="res://Assets/background/rain_2.png" id="11_eyhg7"]
-[ext_resource type="Texture2D" uid="uid://c5xncqupgy2fr" path="res://Assets/background/rain_3.png" id="12_0kuvi"]
-[ext_resource type="Texture2D" uid="uid://djihpnnjg2v28" path="res://Assets/background/rain_4.png" id="13_3fhx5"]
-[ext_resource type="Texture2D" uid="uid://dko5ujbrsua1i" path="res://Assets/background/rain_5.png" id="14_vk801"]
-[ext_resource type="Texture2D" uid="uid://civ4nlpljix2c" path="res://Assets/background/rain_6.png" id="15_bdj5d"]
-[ext_resource type="Texture2D" uid="uid://cg7qgafk5l6uy" path="res://Assets/background/rain_7.png" id="16_vow18"]
-[ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="17_84u7d"]
-[ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="20_5jakm"]
-[ext_resource type="PackedScene" uid="uid://4c83ki6newmv" path="res://label.tscn" id="21_hg6n3"]
-[ext_resource type="AudioStream" uid="uid://ccu7seakgrukx" path="res://Assets/Musik/sadness_music.mp3" id="22_3hr33"]
+[ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_n06t2"]
+[ext_resource type="PackedScene" uid="uid://dfvfe30dr8e7i" path="res://Szene/GriefShadow.tscn" id="2_0688q"]
+[ext_resource type="Shader" path="res://shaders/tilemap_blue.gdshader" id="3_4fc85"]
+[ext_resource type="Texture2D" uid="uid://cmwkym6x7e72m" path="res://Assets/Katharsis_base_tileset.png" id="4_1n3vl"]
+[ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="5_rgjg1"]
+[ext_resource type="Texture2D" uid="uid://d1d5s6cnru8ef" path="res://Assets/background/Grief_stage.png" id="6_rhfs1"]
+[ext_resource type="Texture2D" uid="uid://13umutuei6fv" path="res://Assets/background/background_water_1.png" id="7_uh8di"]
+[ext_resource type="Texture2D" uid="uid://drpkfsvsabt22" path="res://Assets/background/background_water_2.png" id="8_iocc5"]
+[ext_resource type="Texture2D" uid="uid://c7v16wveiervi" path="res://Assets/background/background_water_3.png" id="9_5667d"]
+[ext_resource type="Texture2D" uid="uid://c6jyiuf2eo0r8" path="res://Assets/background/background_water_4.png" id="10_garyx"]
+[ext_resource type="Texture2D" uid="uid://g4gxsvl04sy6" path="res://Assets/background/rain_1.png" id="11_agxj3"]
+[ext_resource type="Texture2D" uid="uid://ci005lvkg6pth" path="res://Assets/background/rain_2.png" id="12_mqq4l"]
+[ext_resource type="Texture2D" uid="uid://c5xncqupgy2fr" path="res://Assets/background/rain_3.png" id="13_k6dww"]
+[ext_resource type="Texture2D" uid="uid://djihpnnjg2v28" path="res://Assets/background/rain_4.png" id="14_ur2vu"]
+[ext_resource type="Texture2D" uid="uid://dko5ujbrsua1i" path="res://Assets/background/rain_5.png" id="15_lhsbt"]
+[ext_resource type="Texture2D" uid="uid://civ4nlpljix2c" path="res://Assets/background/rain_6.png" id="16_a0qm2"]
+[ext_resource type="Texture2D" uid="uid://cg7qgafk5l6uy" path="res://Assets/background/rain_7.png" id="17_tw3w3"]
+[ext_resource type="PackedScene" uid="uid://ds3rxghfvnbm4" path="res://Szene/shadow_respawn_point.tscn" id="18_hy06n"]
+[ext_resource type="PackedScene" uid="uid://d1213mr7ug2lb" path="res://Szene/respawn_point.tscn" id="19_whdg6"]
+[ext_resource type="PackedScene" uid="uid://fh2xckn73jhk" path="res://Szene/scenechange.tscn" id="20_pfyqg"]
+[ext_resource type="AudioStream" uid="uid://ccu7seakgrukx" path="res://Assets/Musik/sadness_music.mp3" id="22_qoxy8"]
+[ext_resource type="PackedScene" uid="uid://bjrev3hvoqk3w" path="res://Szene/Camera.tscn" id="23_qcuue"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3siov"]
-shader = ExtResource("2_6d3ix")
+shader = ExtResource("3_4fc85")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_frv11"]
-texture = ExtResource("2_bq1tl")
+texture = ExtResource("4_1n3vl")
 texture_region_size = Vector2i(50, 50)
 5:2/0 = 0
 5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
@@ -55,7 +55,7 @@ texture_region_size = Vector2i(50, 50)
 9:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-25, 25, -25, -25, 25, -25, 9.19239, -19.0919, -7.77817, -10.253, -19, 7.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i5jfg"]
-texture = ExtResource("3_pp0du")
+texture = ExtResource("5_rgjg1")
 texture_region_size = Vector2i(50, 50)
 2:5/0 = 0
 2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(25, -6.875, -25, -7, -25, 25, 25, 25)
@@ -138,16 +138,16 @@ sources/1 = SubResource("TileSetAtlasSource_i5jfg")
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_j2vs6")
+"texture": ExtResource("7_uh8di")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_r65jg")
+"texture": ExtResource("8_iocc5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_bfp6s")
+"texture": ExtResource("9_5667d")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_3kewj")
+"texture": ExtResource("10_garyx")
 }],
 "loop": true,
 "name": &"default",
@@ -158,25 +158,25 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_txhlj")
+"texture": ExtResource("11_agxj3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_eyhg7")
+"texture": ExtResource("12_mqq4l")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_0kuvi")
+"texture": ExtResource("13_k6dww")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_3fhx5")
+"texture": ExtResource("14_ur2vu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_vk801")
+"texture": ExtResource("15_lhsbt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_bdj5d")
+"texture": ExtResource("16_a0qm2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_vow18")
+"texture": ExtResource("17_tw3w3")
 }],
 "loop": true,
 "name": &"default",
@@ -194,10 +194,10 @@ size = Vector2(80.4688, 715)
 
 [node name="frederick_test_scene" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_w0pvb")]
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_n06t2")]
 position = Vector2(-285, 154)
 
-[node name="CharacterBody2D2" parent="." instance=ExtResource("2_asfyl")]
+[node name="CharacterBody2D2" parent="." instance=ExtResource("2_0688q")]
 position = Vector2(515, 59)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -214,7 +214,7 @@ motion_scale = Vector2(0, 0.8)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 position = Vector2(0, 21.1112)
 scale = Vector2(1.03519, 1.03519)
-texture = ExtResource("5_n5xwt")
+texture = ExtResource("6_rhfs1")
 centered = false
 offset = Vector2(0, -600)
 
@@ -266,64 +266,64 @@ frame_progress = 0.404333
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(1308, 177)
 
-[node name="shadow_respawn_point" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(-808, -47)
 
-[node name="shadow_respawn_point2" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point2" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(-421, -46)
 
-[node name="shadow_respawn_point3" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point3" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(-85, -95)
 
-[node name="shadow_respawn_point4" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point4" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(499, -51)
 
-[node name="shadow_respawn_point5" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point5" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(962, 98)
 
-[node name="shadow_respawn_point6" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point6" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(1406, -49)
 
-[node name="shadow_respawn_point7" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point7" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(2431, -148)
 
-[node name="shadow_respawn_point8" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point8" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(2872, -52)
 
-[node name="shadow_respawn_point9" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point9" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(3456, -59)
 
-[node name="shadow_respawn_point10" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point10" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(4133, -63)
 
-[node name="shadow_respawn_point11" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point11" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(4753, -198)
 
-[node name="shadow_respawn_point12" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point12" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(5527, -159)
 
-[node name="shadow_respawn_point13" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point13" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(5870, -47)
 
-[node name="shadow_respawn_point14" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point14" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(6643, -95)
 
-[node name="shadow_respawn_point15" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point15" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(7131, -34)
 
-[node name="shadow_respawn_point16" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point16" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(7785, -164)
 
-[node name="shadow_respawn_point17" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point17" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(8490, -156)
 
-[node name="shadow_respawn_point18" parent="Node2D" instance=ExtResource("4_47rsi")]
+[node name="shadow_respawn_point18" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(1800, -47)
 
 [node name="Playerrespawns" type="Node2D" parent="."]
 position = Vector2(1366, 163)
 
-[node name="RespawnPoint2" parent="Playerrespawns" instance=ExtResource("17_84u7d")]
+[node name="RespawnPoint2" parent="Playerrespawns" instance=ExtResource("19_whdg6")]
 position = Vector2(1477, -40)
 
 [node name="RespawnArea" parent="Playerrespawns/RespawnPoint2" index="0"]
@@ -334,7 +334,7 @@ scale = Vector2(1.2, 1.24)
 position = Vector2(223.333, -167.742)
 shape = SubResource("RectangleShape2D_jf06o")
 
-[node name="RespawnPoint3" parent="Playerrespawns" groups=["first"] instance=ExtResource("17_84u7d")]
+[node name="RespawnPoint3" parent="Playerrespawns" groups=["first"] instance=ExtResource("19_whdg6")]
 position = Vector2(-1686, -35)
 scale = Vector2(0.159999, 1.27398)
 
@@ -345,7 +345,7 @@ position = Vector2(68.7502, -158.558)
 position = Vector2(210.626, -93.8008)
 shape = SubResource("RectangleShape2D_j4h3j")
 
-[node name="RespawnPoint4" parent="Playerrespawns" instance=ExtResource("17_84u7d")]
+[node name="RespawnPoint4" parent="Playerrespawns" instance=ExtResource("19_whdg6")]
 position = Vector2(4760, -184)
 scale = Vector2(1.28, 1)
 
@@ -353,18 +353,19 @@ scale = Vector2(1.28, 1)
 position = Vector2(137.109, -188.5)
 shape = SubResource("RectangleShape2D_a2byk")
 
-[node name="Scenechange" parent="." instance=ExtResource("20_5jakm")]
+[node name="Scenechange" parent="." instance=ExtResource("20_pfyqg")]
 position = Vector2(10207, -415)
 newScene = "res://Szene/level_anger.tscn"
 
 [node name="CollisionShape2D" parent="Scenechange" index="0"]
 position = Vector2(130, 138)
 
-[node name="Label" parent="." instance=ExtResource("21_hg6n3")]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("22_3hr33")
+stream = ExtResource("22_qoxy8")
 autoplay = true
+
+[node name="Camera2D" parent="." instance=ExtResource("23_qcuue")]
+position = Vector2(-1085, -704)
 
 [editable path="Playerrespawns/RespawnPoint2"]
 [editable path="Playerrespawns/RespawnPoint3"]
