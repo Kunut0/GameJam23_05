@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 			p = p.normalized()
 			var d = global_position - get_tree().get_first_node_in_group("player1").global_position
 			
-			if (0.5 < p.y or $RayCast2D.is_colliding()) and coyote < 0.1:
+			if ($RayCast2D.is_colliding()) and coyote < 0.1:
 				velocity.y = jump_force
 				$Jump.play(1)
 			
@@ -93,10 +93,10 @@ func _process(delta: float) -> void:
 				dash_timer.start()
 				$Dash.play()
 			
-			if d.x > 0 or d.x < -500:
+			if d.x > 5 or d.x < -500:
 				direction = -1
 				$RayCast2D.scale.y = 1
-			elif d.x < 0:
+			elif d.x < -5:
 				direction = 1
 				$RayCast2D.scale.y = -1
 			else:

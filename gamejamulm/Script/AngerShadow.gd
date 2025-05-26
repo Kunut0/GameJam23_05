@@ -88,10 +88,10 @@ func _process(delta: float) -> void:
 				dash_timer.start()
 				$Dash.play()
 			
-			if d.x > 0 or d.x < -400:
+			if d.x > 5 or d.x < -400:
 				direction = -1
 				$RayCast2D.scale.y = 1
-			elif d.x < 0:
+			elif d.x < -5:
 				direction = 1
 				$RayCast2D.scale.y = -1
 			else:

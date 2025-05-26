@@ -97,11 +97,11 @@ func _process(delta: float) -> void:
 				dash_timer.start()
 				$Dash.play()
 			
-			if d.x > 0 or d.x < -300:
+			if d.x > 5 or d.x < -300:
 				direction = -1
 				$RayCast2D.scale.y = 1
 				sprite.flip_h = false
-			elif d.x < 0:
+			elif d.x < -5:
 				direction = 1
 				$RayCast2D.scale.y = -1
 				sprite.flip_h = true
