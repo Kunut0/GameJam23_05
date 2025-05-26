@@ -30,6 +30,7 @@ func _on_start_pressed() -> void:
 	animation.play("fade_in")
 	await get_tree().create_timer(0.5).timeout
 	
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().call_deferred("change_scene_to_file", "res://Szene/tutorial.tscn")
 
 func _on_arcade_pressed():
@@ -38,11 +39,11 @@ func _on_arcade_pressed():
 	GlobalTimer.start()
 	MainMenuMusik.stop()
 	var i = randi_range(0, 2)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().call_deferred("change_scene_to_file", level[i])
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
-
 
 func _on_credits_pressed() -> void:
 	get_tree().change_scene_to_packed(credits)

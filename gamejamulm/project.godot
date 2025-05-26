@@ -13,7 +13,8 @@ config_version=5
 config/name="GameJamULM"
 run/main_scene="res://Szene/Start.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Design ohne Titel.jpg"
+config/windows_native_icon="res://Design ohne Titel.ico"
 
 [autoload]
 
