@@ -278,6 +278,10 @@ position = Vector2(-1225, -786)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_5783d")
 
+[node name="fire_cooldown" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+
 [editable path="RespawnPoint"]
 [editable path="RespawnPoint2"]
 [editable path="RespawnPoint3"]

@@ -67,7 +67,8 @@ func _process(delta: float) -> void:
 				firetrail.get_child(0).adding = true
 				await get_tree().create_timer(0.7).timeout
 				firetrail.get_child(0).adding = false
-				await get_tree().create_timer(3.5).timeout
+				$"../fire_cooldown".start()
+				await $"../fire_cooldown".timeout
 				fire_allowed = true
 	
 	
@@ -102,7 +103,8 @@ func _process(delta: float) -> void:
 				firetrail.get_child(0).adding = true
 				await get_tree().create_timer(0.7).timeout
 				firetrail.get_child(0).adding = false
-				await get_tree().create_timer(3.5).timeout
+				$"../fire_cooldown".start()
+				await $"../fire_cooldown".timeout
 				fire_allowed = true
 
 
@@ -149,7 +151,8 @@ func spawn():
 			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
 	global_position = shadow_res
-
+	firetrail.get_child(0).adding = false
+	firetrail.get_child(0).delete_all()
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false

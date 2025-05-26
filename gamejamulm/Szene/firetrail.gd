@@ -34,5 +34,7 @@ func _process(delta: float) -> void:
 			for i in get_tree().get_nodes_in_group("shadow_prop"):
 				i.queue_free()
 	points = curve.get_baked_points()
-	
-	
+
+func delete_all():
+	for i in curve.point_count:
+		curve.remove_point(0)
