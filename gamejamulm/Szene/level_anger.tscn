@@ -131,8 +131,8 @@ sources/1 = SubResource("TileSetAtlasSource_ax5pg")
 size = Vector2(56, 828)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5783d"]
-vertices = PackedVector2Array(11878.9, 535.297, -953.391, 930.688, -1031.61, -1097.02, 11856.1, -1130.97)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+vertices = PackedVector2Array(1553, -49, 1554, -99, 6917, -109, 7123, -108, 5122, 1, 4603, 1, 9802, -149, 9311, -150, 7244, -248, -1031.61, -1097.02, 11856.1, -1130.97, 6811, -201, 9383, -49, 5120, 49, 11878.9, 535.297, 9710, -57, 6810, -250, 7242, -199, 1093, -98, -953.391, 930.688, 1091, -51, 4603, 49)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(11, 2, 1), PackedInt32Array(7, 12, 13, 4, 3), PackedInt32Array(6, 10, 14, 15), PackedInt32Array(9, 8, 16), PackedInt32Array(17, 8, 7), PackedInt32Array(9, 16, 11, 1, 18), PackedInt32Array(19, 9, 18, 20), PackedInt32Array(14, 19, 20, 0, 21), PackedInt32Array(3, 17, 7), PackedInt32Array(0, 5, 21), PackedInt32Array(14, 21, 13), PackedInt32Array(14, 13, 12), PackedInt32Array(14, 12, 15)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1042, -1107, -963, 941, 11889, 545, 11866, -1141)])
 
 [node name="level_anger" type="Node2D"]
@@ -277,6 +277,30 @@ position = Vector2(-1225, -786)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_5783d")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+vertices = PackedVector2Array(1093, -98, 1091, -51, 1553, -49, 1554, -99)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_layers = 7
+
+[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+vertices = PackedVector2Array(4603, 1, 5122, 1, 5120, 49, 4603, 49)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_layers = 7
+
+[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+vertices = PackedVector2Array(6810, -250, 7244, -248, 7242, -199, 7123, -108, 6917, -109, 6811, -201)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_layers = 7
+
+[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+vertices = PackedVector2Array(9311, -150, 9802, -149, 9710, -57, 9383, -49)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_layers = 7
 
 [node name="fire_cooldown" type="Timer" parent="."]
 wait_time = 3.5

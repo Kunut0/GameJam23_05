@@ -90,7 +90,7 @@ func _process(delta: float) -> void:
 				dashing = true
 				dash_collision.disabled = false
 				default_collision.disabled = true
-				sprite.offset = Vector2(0, 160)
+				sprite.offset = Vector2(90, 160)
 				dash_timer.start()
 				await get_tree().create_timer(0.1).timeout
 				sprite.offset = Vector2(0, 0)

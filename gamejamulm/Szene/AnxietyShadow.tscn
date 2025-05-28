@@ -126,7 +126,8 @@ texture = ExtResource("11_4fg7c")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, -16.4706)
-target_position = Vector2(-20.5882, -0.588234)
+target_position = Vector2(-22.9412, -0.588223)
+collision_mask = 4
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
