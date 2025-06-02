@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Script/level_anxiety.gd" id="1_x71fb"]
 [ext_resource type="Texture2D" uid="uid://bfn8tj22orgg3" path="res://Assets/tilemap_decoration.png" id="2_n646c"]
 [ext_resource type="Texture2D" uid="uid://cyogdv4of2pp5" path="res://Assets/background/poison_cloud_2.png" id="3_8heci"]
-[ext_resource type="Texture2D" uid="uid://bttxgkhn62rjn" path="res://Assets/background/anxiety_arena.png" id="3_xu0fb"]
+[ext_resource type="Texture2D" uid="uid://bva375nvgxnho" path="res://Assets/background/anxiety_arena.png" id="3_xu0fb"]
 [ext_resource type="Texture2D" uid="uid://n522rdugpgck" path="res://Assets/background/poison_cloud_3.png" id="4_nj8xl"]
 [ext_resource type="Texture2D" uid="uid://cubguju4p4c36" path="res://Assets/background/poison_cloud_1.png" id="5_clghr"]
 [ext_resource type="Texture2D" uid="uid://c6oghjb5qioyr" path="res://Assets/background/tilemap_3.png" id="5_kk2e1"]
