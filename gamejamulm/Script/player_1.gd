@@ -9,11 +9,11 @@ extends CharacterBody2D
 signal flashlight
 
 # noch nicht getestet
-var jump_force = -2200
+var jump_force = -1700
 var direction
-var speed = 1000
+var speed = 700
 
-var dash_speed = 1800
+var dash_speed = 1300
 var dashing = false
 var dash_allowed = true
 
@@ -28,7 +28,7 @@ var lichtkegel_sichtbar: bool = false
 var enemy_sight: bool = false
 
 var stunned = false
-var stun_time = 0.5
+var stun_time = 1.5
 
 var coyote = 0
 
@@ -45,9 +45,9 @@ func _process(delta: float) -> void:
 	if not is_on_floor():
 		coyote += delta
 		if velocity.y > 0:
-			velocity += get_gravity() * delta * 8
+			velocity += get_gravity() * delta * 6
 		else:
-			velocity += get_gravity() * delta * 8.75
+			velocity += get_gravity() * delta * 6.75
 	
 	if is_on_floor() or $RayCast2D3.is_colliding() or $RayCast2D2.is_colliding() or $RayCast2D.is_colliding():
 		coyote = 0
@@ -58,10 +58,10 @@ func _process(delta: float) -> void:
 		
 		#checks direction to flip sprite
 		if direction < 0:
-			self.scale.y = -2
+			self.scale.y = -2.25
 			self.rotation_degrees = 180
 		elif direction > 0:
-			self.scale.y = 2
+			self.scale.y = 2.25
 			self.rotation_degrees = 0
 		
 		#generates character movement
@@ -84,35 +84,13 @@ func _process(delta: float) -> void:
 		
 		#slide
 		if Input.is_action_just_pressed("ui_s"):
-			if coyote < 0.2 and dash_allowed == true:
-				dash_allowed = false
-				$Slide.play()
-				dashing = true
-				dash_collision.disabled = false
-				default_collision.disabled = true
-				sprite.offset = Vector2(90, 160)
-				dash_timer.start()
-				await get_tree().create_timer(0.1).timeout
-				sprite.offset = Vector2(0, 0)
-			elif not is_on_floor():
+			if not is_on_floor():
 				velocity += get_gravity() * delta * 400
 	else:
 		velocity.x = 0
 	
 	move_and_slide()
-	if Input.is_action_pressed("ui_select") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false:
-		if lichtkegel_sichtbar == false:
-			$Flashlight.play()
-			lichtkegel.show()
-			lichtkegel.monitoring = true
-			lichtkegel_sichtbar = true
 	
-	elif Input.is_action_just_released("ui_select"):
-		if lichtkegel_sichtbar == true:
-			lichtkegel.hide()
-			lichtkegel.monitoring = false
-			lichtkegel_sichtbar = false
-			flashlight.emit()
 	
 	if lichtkegel_sichtbar and enemy_sight:
 		light_timer += 1*delta
@@ -145,6 +123,32 @@ func _process(delta: float) -> void:
 		sprite.play("jump")
 		jumping = true
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_pressed("ui_select") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false:
+		if lichtkegel_sichtbar == false:
+			$Flashlight.play()
+			lichtkegel.show()
+			lichtkegel.monitoring = true
+			lichtkegel_sichtbar = true
+	
+	elif Input.is_action_just_released("ui_select"):
+		if lichtkegel_sichtbar == true:
+			lichtkegel.hide()
+			lichtkegel.monitoring = false
+			lichtkegel_sichtbar = false
+			flashlight.emit()
+	
+	if Input.is_action_just_pressed("ui_s"):
+		if coyote < 0.2 and dash_allowed == true:
+			dash_allowed = false
+			$Slide.play()
+			dashing = true
+			dash_collision.disabled = false
+			default_collision.disabled = true
+			sprite.offset = Vector2(90, 160)
+			dash_timer.start()
+			await get_tree().create_timer(0.1).timeout
+			sprite.offset = Vector2(0, 0)
 
 #respawn
 func respawn():
@@ -152,6 +156,9 @@ func respawn():
 		i.queue_free()
 	global_position = respawn_ref
 	shadow_ref.spawn()
+	
+	Cooldown.on_cooldown["flashlight"][0] = false
+	stun_stop()
 
 #dash timer
 func _on_timer_timeout() -> void:
@@ -178,6 +185,9 @@ func stun():
 	stunned = true
 	$Stun2.visible = true
 	await get_tree().create_timer(stun_time).timeout
+	stun_stop()
+
+func stun_stop():
 	stunned = false
 	$Stun2.visible = false
 	lichtkegel.hide()

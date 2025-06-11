@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var nav = $NavigationAgent2D
 
 var puddle_scene = preload("res://Szene/puddle.tscn")
+var shadow_scene = preload("res://Szene/GriefShadow.tscn")
 
 var jump_force = -1600
 var direction
@@ -58,29 +59,9 @@ func _process(delta: float) -> void:
 				$Jump.play()
 			
 			if Input.is_action_just_pressed("ui_down"):
-				if is_on_floor() and dash_allowed:
-					$Dash.play()
-					dashing = true
-					dash_allowed = false
-					dash_timer.start()
-				elif not is_on_floor():
+				if not is_on_floor():
 					velocity += get_gravity() * delta * 200
 			
-			if Input.is_action_just_pressed("ui_ctrl") and puddle_allowed:
-				$Ability.play()
-				puddle_allowed = false
-				sprite.play("blink")
-				var x = -100
-				while x <= 100:
-					var puddle = puddle_scene.instantiate() #spawns bullet
-					puddle.global_position = $PuddleSpawnpoint1.global_position + Vector2(x,0) #set position to marker2D
-					get_tree().current_scene.add_child(puddle) #link bullet to tree
-					x += 100
-				await sprite.animation_finished
-				sprite.play("default")
-				await get_tree().create_timer(1).timeout
-				puddle_allowed = true
-		
 		elif GameMode.GameMode == "arcade":
 			nav.target_position = get_tree().get_first_node_in_group("player1").global_position
 			var p = nav.get_next_path_position() - global_position
@@ -94,10 +75,7 @@ func _process(delta: float) -> void:
 			
 			
 			if (d.x < -200 or d.x > 400) and coyote < 0.1 and dash_allowed:
-				dashing = true
-				dash_allowed = false
-				dash_timer.start()
-				$Dash.play()
+				dashing_action()
 			
 			if p.x < -0.05 or d.x < -300:
 				direction = -1
@@ -111,22 +89,7 @@ func _process(delta: float) -> void:
 				direction = 0
 			
 			if puddle_allowed:
-				$Ability.play()
-				puddle_allowed = false
-				sprite.play("blink")
-				var x = -100
-				while x <= 100:
-					var puddle = puddle_scene.instantiate() #spawns bullet
-					puddle.global_position = $PuddleSpawnpoint1.global_position + Vector2(x,0) #set position to marker2D
-					get_tree().current_scene.add_child(puddle) #link bullet to tree
-					x += 100
-				await sprite.animation_finished
-				sprite.play("default")
-				await get_tree().create_timer(1).timeout
-				puddle_allowed = true
-		
-		
-		
+				puddleing()
 		
 		#generates character movement
 		if direction:
@@ -149,7 +112,34 @@ func _process(delta: float) -> void:
 		
 	move_and_slide()
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_down") and is_on_floor() and dash_allowed:
+		dashing_action()
+	
+	if Input.is_action_just_pressed("ui_ctrl") and puddle_allowed:
+		puddleing()
 
+func dashing_action():
+	dashing = true
+	dash_allowed = false
+	dash_timer.start()
+	$Dash.play()
+
+func puddleing():
+	if puddle_allowed:
+		$Ability.play()
+		puddle_allowed = false
+		sprite.play("blink")
+		var x = -100
+		while x <= 100:
+			var puddle = puddle_scene.instantiate() #spawns bullet
+			puddle.global_position = $PuddleSpawnpoint1.global_position + Vector2(x,0) #set position to marker2D
+			get_tree().current_scene.add_child(puddle) #link bullet to tree
+			x += 100
+		await sprite.animation_finished
+		sprite.play("default")
+		await get_tree().create_timer(1).timeout
+		puddle_allowed = true
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	spawn()
@@ -178,7 +168,13 @@ func spawn():
 		if i.global_position.x - player_ref.global_position.x > 500:
 			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
-	global_position = shadow_res
+	
+	var shadow = shadow_scene.instantiate()
+	shadow.global_position = shadow_res
+	get_tree().current_scene.call_deferred("add_child", shadow)
+	player_ref.shadow_ref = shadow
+	
+	call_deferred("queue_free")
 
 
 func _on_dash_timer_timeout() -> void:

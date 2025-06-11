@@ -144,7 +144,7 @@ animations = [{
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player1"]]
 position = Vector2(0, 4)
-scale = Vector2(2, 2)
+scale = Vector2(2.25, 2.25)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_p1qkr")
@@ -179,17 +179,19 @@ polygon = PackedVector2Array(11.222, -7.1, 11.726, 3.22258, -3.89606, 3.22258, -
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Lichtkegel"]
 position = Vector2(12, -56.2642)
 scale = Vector2(1, 0.982955)
-polygon = PackedVector2Array(141.5, 20.1069, 125.5, 61.3092, 62, 75.552, 2.35626, 2.65757, 1, 1, 116, -45.0029, 131.5, -24.1474)
+polygon = PackedVector2Array(136.444, 37.3452, 108.444, 75.3259, 79.5556, 95.6727, 2.35626, 2.65757, 1, 1, 116, -45.0029, 132.444, -10.5829)
 
 [node name="Polygon2D" type="Polygon2D" parent="Lichtkegel/CollisionPolygon2D"]
 z_index = 4
 position = Vector2(1.19209e-07, -0.00404602)
 scale = Vector2(1, 1.00405)
 color = Color(1, 1, 1, 0.509804)
-polygon = PackedVector2Array(-5.5, -1.24813, 0.5, 1.79158, 62.5, 75.2513, 125.5, 60.5593, 141, 20.0299, 131, -23.5393, 115.5, -44.8173, 0.5, 0.271729, -6, -2.76798)
+polygon = PackedVector2Array(-5.5, -1.24813, 0.5, 1.79158, 79.5555, 95.2908, 107.111, 75.4764, 136, 38.0992, 132.889, -10.5361, 115.5, -44.8173, 0.5, 0.271729, -6, -2.76798)
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.15
+
+[node name="ScreamTimer" type="Timer" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5

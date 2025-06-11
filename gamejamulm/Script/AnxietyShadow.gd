@@ -7,13 +7,15 @@ extends CharacterBody2D
 @onready var scream_sprite: Sprite2D = $Area2D/Sprite2D
 @onready var nav = $NavigationAgent2D
 
+var shadow_scene = preload("res://Szene/AnxietyShadow.tscn")
+
 signal scream
 
 var jump_force = -2000
 var direction
-var speed = 750
+var speed = 600
 
-var dash_speed = 1700
+var dash_speed = 1100
 var dashing = false
 var dash_allowed = true
 
@@ -51,30 +53,8 @@ func _process(delta: float) -> void:
 				$Jump.play(1)
 			
 			if Input.is_action_just_pressed("ui_down"):
-				if is_on_floor() and dash_allowed:
-					$Dash.play()
-					dashing = true
-					dash_allowed = false
-					dash_timer.start()
-				elif not is_on_floor():
+				if not is_on_floor():
 					velocity += get_gravity() * delta * 300
-			
-			if Input.is_action_just_pressed("ui_ctrl") and scream_allowed:
-				scream_allowed = false
-				sprite.scale += Vector2(0.05, 0.05)
-				scream_sprite.self_modulate.a = 0.5
-				scream_sprite.show()
-				$Ability.play()
-				await get_tree().create_timer(0.7).timeout
-				scream_sprite.self_modulate.a = 1
-				scream.emit()
-				sprite.scale = Vector2(0.138, 0.138)
-				sprite.play("scream")
-				await get_tree().create_timer(0.125).timeout
-				scream_sprite.hide()
-				sprite.play("default")
-				await get_tree().create_timer(1).timeout
-				scream_allowed = true
 		
 		
 		elif GameMode.GameMode == "arcade":
@@ -89,10 +69,7 @@ func _process(delta: float) -> void:
 				$Jump.play(1)
 			
 			if (d.x < -400 or d.x > 400) and coyote < 0.1 and dash_allowed:
-				dashing = true
-				dash_allowed = false
-				dash_timer.start()
-				$Dash.play()
+				dashing_action()
 			
 			if p.x < -0.05 or d.x < -500:
 				direction = -1
@@ -104,22 +81,7 @@ func _process(delta: float) -> void:
 				direction = 0
 			
 			if scream_allowed:
-				scream_allowed = false
-				sprite.scale += Vector2(0.05, 0.05)
-				scream_sprite.self_modulate.a = 0.5
-				scream_sprite.show()
-				$Ability.play()
-				await get_tree().create_timer(0.7).timeout
-				scream_sprite.self_modulate.a = 1
-				scream.emit()
-				sprite.scale = Vector2(0.138, 0.138)
-				sprite.play("scream")
-				await get_tree().create_timer(0.125).timeout
-				scream_sprite.hide()
-				sprite.play("default")
-				await get_tree().create_timer(1).timeout
-				scream_allowed = true
-		
+				screaming()
 		
 		#generates character movement
 		if direction:
@@ -137,6 +99,43 @@ func _process(delta: float) -> void:
 		velocity.x = 0
 	move_and_slide()
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_ctrl") and scream_allowed:
+		screaming()
+	
+	if Input.is_action_just_pressed("ui_down"):
+		if is_on_floor() and dash_allowed:
+			dashing_action()
+
+func dashing_action():
+	$Dash.play()
+	dashing = true
+	dash_allowed = false
+	dash_timer.start()
+
+func screaming():
+	scream_allowed = false
+	sprite.play("scream")
+	scream_sprite.self_modulate.a = 0.5
+	scream_sprite.show()
+	$Ability.play()
+	
+	await get_tree().create_timer(0.7).timeout
+	
+	scream_sprite.self_modulate.a = 1
+	sprite.scale += Vector2(0.05, 0.05)
+	scream.emit()
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	scream_sprite.hide()
+	sprite.scale = Vector2(0.138, 0.138)
+	sprite.play("default")
+	
+	await get_tree().create_timer(2).timeout
+	
+	scream_allowed = true
+
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	spawn()
 
@@ -150,6 +149,9 @@ func stun():
 	$Stun.visible = true
 	$AnimatedSprite2D.modulate = Color("6d6d6d")
 	await get_tree().create_timer(stun_time).timeout
+	stop_stun()
+
+func stop_stun():
 	stunned = false
 	hurt.monitoring = true
 	$AnimatedSprite2D.modulate = Color("ffffff")
@@ -163,7 +165,13 @@ func spawn():
 		if i.global_position.x - player_ref.global_position.x > 500:
 			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
-	global_position = shadow_res
+	
+	var shadow = shadow_scene.instantiate()
+	shadow.global_position = shadow_res
+	get_tree().current_scene.call_deferred("add_child", shadow)
+	player_ref.shadow_ref = shadow
+	
+	call_deferred("queue_free")
 
 
 func _on_dash_timer_timeout() -> void:

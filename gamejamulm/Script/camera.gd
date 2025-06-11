@@ -4,10 +4,10 @@ var shadow_ref
 var player_ref
 
 func _ready() -> void:
-	shadow_ref = get_tree().get_first_node_in_group("shadow")
 	player_ref = get_tree().get_first_node_in_group("player1")
 
 func _process(delta: float) -> void:
+	shadow_ref = get_tree().get_first_node_in_group("shadow")
 	#Kamera Lerping
 	var pos_diff = player_ref.global_position - shadow_ref.global_position
 	var camera_pos: float

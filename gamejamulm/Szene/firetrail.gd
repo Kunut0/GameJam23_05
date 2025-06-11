@@ -7,7 +7,7 @@ var collision = preload("res://Szene/firetrail_collision.tscn")
 
 var player_ref
 var shadow_ref
-var adding = false
+var adding = 2
 var i = 0
 
 func _ready() -> void:
@@ -16,14 +16,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var pos = shadow_ref.global_position
-	if adding:
+	if adding == 0:
 		curve.add_point(pos)
 		print(pos)
 		var c = collision.instantiate()
 		c.pos = pos
 		get_parent().add_child(c)
 		i += 1
-	else:
+	elif adding != 1:
 		i = 0
 		if curve.point_count > 0:
 			for i in get_tree().get_nodes_in_group("shadow_prop"):
