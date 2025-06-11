@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
 		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_w") and coyote < 0.2:
+		if Input.is_action_just_pressed("ui_select") and coyote < 0.2:
 			velocity.y = jump_force
 			sprite.play("jump")
 			$Jump.play()
@@ -124,14 +124,14 @@ func _process(delta: float) -> void:
 		jumping = true
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("ui_select") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false:
+	if Input.is_action_pressed("ui_flashlight") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false:
 		if lichtkegel_sichtbar == false:
 			$Flashlight.play()
 			lichtkegel.show()
 			lichtkegel.monitoring = true
 			lichtkegel_sichtbar = true
 	
-	elif Input.is_action_just_released("ui_select"):
+	elif Input.is_action_just_released("ui_flashlight"):
 		if lichtkegel_sichtbar == true:
 			lichtkegel.hide()
 			lichtkegel.monitoring = false
