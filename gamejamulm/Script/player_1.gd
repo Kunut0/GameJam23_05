@@ -2,18 +2,22 @@ extends CharacterBody2D
 
 @onready var sprite = $AnimatedSprite2D
 @onready var dash_timer = $DashTimer
+@onready var jump_timer = $JumpHeightTimer
+@onready var buffering_timer = $JumpBufferingTimer
 @onready var dash_collision = $DashCollision
 @onready var default_collision = $NormalCollision
 @onready var lichtkegel: Area2D = $Lichtkegel
 
 signal flashlight
 
-# noch nicht getestet
-var jump_force = -1700
-var direction
-var speed = 700
+var pausemenu = preload("res://Szene/PauseMenu.tscn")
 
-var dash_speed = 1300
+# noch nicht getestet
+var jump_force = -1800
+var direction
+var speed = 1000
+
+var dash_speed = 1600
 var dashing = false
 var dash_allowed = true
 
@@ -45,9 +49,9 @@ func _process(delta: float) -> void:
 	if not is_on_floor():
 		coyote += delta
 		if velocity.y > 0:
-			velocity += get_gravity() * delta * 6
+			velocity += get_gravity() * delta * 6.25
 		else:
-			velocity += get_gravity() * delta * 6.75
+			velocity += get_gravity() * delta * 7
 	
 	if is_on_floor() or $RayCast2D3.is_colliding() or $RayCast2D2.is_colliding() or $RayCast2D.is_colliding():
 		coyote = 0
@@ -77,10 +81,14 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
 		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_select") and coyote < 0.2:
-			velocity.y = jump_force
-			sprite.play("jump")
-			$Jump.play()
+		if Input.is_action_just_pressed("ui_select"):
+			if coyote < 0.2:
+				jump_timer.start()
+				velocity.y = jump_force
+				sprite.play("jump")
+				$Jump.play()
+			else:
+				buffering_timer.start()
 		
 		#slide
 		if Input.is_action_just_pressed("ui_s"):
@@ -124,7 +132,7 @@ func _process(delta: float) -> void:
 		jumping = true
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("ui_flashlight") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false:
+	if Input.is_action_pressed("ui_flashlight") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false and dashing == false:
 		if lichtkegel_sichtbar == false:
 			$Flashlight.play()
 			lichtkegel.show()
@@ -132,14 +140,11 @@ func _input(event: InputEvent) -> void:
 			lichtkegel_sichtbar = true
 	
 	elif Input.is_action_just_released("ui_flashlight"):
-		if lichtkegel_sichtbar == true:
-			lichtkegel.hide()
-			lichtkegel.monitoring = false
-			lichtkegel_sichtbar = false
-			flashlight.emit()
+		deactivate_flashlight()
 	
 	if Input.is_action_just_pressed("ui_s"):
 		if coyote < 0.2 and dash_allowed == true:
+			deactivate_flashlight()
 			dash_allowed = false
 			$Slide.play()
 			dashing = true
@@ -147,7 +152,7 @@ func _input(event: InputEvent) -> void:
 			default_collision.disabled = true
 			sprite.offset = Vector2(90, 160)
 			dash_timer.start()
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.15).timeout
 			sprite.offset = Vector2(0, 0)
 
 #respawn
@@ -193,3 +198,24 @@ func stun_stop():
 	lichtkegel.hide()
 	lichtkegel.monitoring = false
 	lichtkegel_sichtbar = false
+
+func deactivate_flashlight():
+	if lichtkegel_sichtbar == true:
+		lichtkegel.hide()
+		lichtkegel.monitoring = false
+		lichtkegel_sichtbar = false
+		flashlight.emit()
+
+
+func _on_jump_height_timer_timeout() -> void:
+	if !Input.is_action_pressed("ui_select"):
+		if velocity.y < -200:
+			velocity.y = -200
+
+
+func _on_jump_buffering_timer_timeout() -> void:
+	if coyote < 0.2:
+		jump_timer.start()
+		velocity.y = jump_force
+		sprite.play("jump")
+		$Jump.play()

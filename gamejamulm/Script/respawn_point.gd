@@ -4,3 +4,4 @@ func _on_respawn_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player1"):
 		print(global_position)
 		body.respawn_ref = global_position
+		$RespawnLocked.texture = load("res://Assets/respawn unlocked.png")

@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://crbc06ybtoewg"]
+
+[ext_resource type="Script" path="res://pausemenu.gd" id="1_tw8cd"]
+[ext_resource type="FontFile" uid="uid://cn0hc03cdh36c" path="res://Assets/Corporate_HQ.ttf" id="2_0k8in"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vs3y"]
+region = Rect2(10.1115, 76.2512, 124.43, 41.6945)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+follow_viewport_enabled = true
+script = ExtResource("1_tw8cd")
+
+[node name="Return" type="Button" parent="."]
+physics_interpolation_mode = 1
+z_index = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 135.0
+offset_right = 200.0
+offset_bottom = 235.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_0k8in")
+theme_override_font_sizes/font_size = 60
+text = "Resume"
+icon = SubResource("AtlasTexture_0vs3y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Mainmenu" type="Button" parent="."]
+physics_interpolation_mode = 1
+z_index = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 260.0
+offset_right = 200.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_0k8in")
+theme_override_font_sizes/font_size = 60
+text = "Mainmenu"
+icon = SubResource("AtlasTexture_0vs3y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 145.0
+offset_top = 175.0
+offset_right = 1776.0
+offset_bottom = 533.0
+theme_override_fonts/normal_font = ExtResource("2_0k8in")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "
+[center]Game Paused"
+
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="Mainmenu" to="." method="_on_mainmenu_pressed"]

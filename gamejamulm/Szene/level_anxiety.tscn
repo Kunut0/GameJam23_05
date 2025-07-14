@@ -147,7 +147,7 @@ sources/2 = SubResource("TileSetAtlasSource_15kgb")
 size = Vector2(28.4059, 138.429)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fc3g"]
-size = Vector2(281.81, 232.203)
+size = Vector2(281.81, 310.102)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pxv17"]
 vertices = PackedVector2Array(7116, -97, 9229.42, -1403.45, 9321.57, 820.992, 7113, -52, -398.844, -870.547, 6443, -100, 6118, -99, 5548, -151, -371.156, 814, 6645, -2, 5300, -30, 5297, 54, 4941, 2, 4932, -140, 945, 97, 946, 51, 4446, 4, 601, 144, 596, 91, 4547, -3, 4542, -108, 4856, -110, 4854, -3, 6113, 49, 6534, -4, 6651, -55, 5504, -148, 5502, -48, 5595, -106, 4458, -141, 523, 150, 532, 57)
@@ -216,24 +216,22 @@ position = Vector2(648, 192)
 [node name="player_respawn" type="Node2D" parent="."]
 
 [node name="RespawnPoint" parent="player_respawn" groups=["first"] instance=ExtResource("10_nk5l4")]
-position = Vector2(-86, 214)
-scale = Vector2(1, 2.36)
+position = Vector2(-93, 188)
 
 [node name="RespawnArea" parent="player_respawn/RespawnPoint" index="0"]
 position = Vector2(35, -74.1525)
 scale = Vector2(0.13022, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_respawn/RespawnPoint/RespawnArea" index="0"]
-position = Vector2(64.8817, -105.297)
+position = Vector2(376.286, -58.8475)
 scale = Vector2(15.4371, 2.9661)
 shape = SubResource("RectangleShape2D_j4lnw")
 
 [node name="RespawnPoint2" parent="player_respawn" instance=ExtResource("10_nk5l4")]
-position = Vector2(2814, 32)
-scale = Vector2(1, 2.36)
+position = Vector2(2814, -10)
 
 [node name="RespawnArea" parent="player_respawn/RespawnPoint2" index="0"]
-position = Vector2(77, -75.4237)
+position = Vector2(25, -34)
 scale = Vector2(0.13022, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_respawn/RespawnPoint2/RespawnArea" index="0"]
@@ -241,15 +239,14 @@ position = Vector2(143.232, -17.3729)
 shape = SubResource("RectangleShape2D_1fc3g")
 
 [node name="RespawnPoint3" parent="player_respawn" instance=ExtResource("10_nk5l4")]
-position = Vector2(5817, -106)
-scale = Vector2(1, 2.36)
+position = Vector2(5816, -161)
 
 [node name="RespawnArea" parent="player_respawn/RespawnPoint3" index="0"]
 position = Vector2(77, -75.4237)
 scale = Vector2(0.13022, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_respawn/RespawnPoint3/RespawnArea" index="0"]
-position = Vector2(143.232, -17.3729)
+position = Vector2(-115.191, -17.5255)
 shape = SubResource("RectangleShape2D_1fc3g")
 
 [node name="shadow_respawn" type="Node2D" parent="."]

@@ -188,7 +188,7 @@ animations = [{
 size = Vector2(83.3333, 585.081)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4h3j"]
-size = Vector2(441.253, 578.502)
+size = Vector2(63.2503, 607.61)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2byk"]
 size = Vector2(80.4688, 715)
@@ -333,7 +333,7 @@ position = Vector2(1800, -47)
 position = Vector2(1366, 163)
 
 [node name="RespawnPoint2" parent="Playerrespawns" instance=ExtResource("19_whdg6")]
-position = Vector2(1477, -40)
+position = Vector2(1556, -65)
 
 [node name="RespawnArea" parent="Playerrespawns/RespawnPoint2" index="0"]
 position = Vector2(10, 3)
@@ -344,19 +344,17 @@ position = Vector2(223.333, -167.742)
 shape = SubResource("RectangleShape2D_jf06o")
 
 [node name="RespawnPoint3" parent="Playerrespawns" groups=["first"] instance=ExtResource("19_whdg6")]
-position = Vector2(-1686, -35)
-scale = Vector2(0.159999, 1.27398)
+position = Vector2(-1662, -73)
 
 [node name="RespawnArea" parent="Playerrespawns/RespawnPoint3" index="0"]
 position = Vector2(68.7502, -158.558)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Playerrespawns/RespawnPoint3/RespawnArea" index="0"]
-position = Vector2(210.626, -93.8008)
+position = Vector2(21.6247, -79.2469)
 shape = SubResource("RectangleShape2D_j4h3j")
 
 [node name="RespawnPoint4" parent="Playerrespawns" instance=ExtResource("19_whdg6")]
-position = Vector2(4760, -184)
-scale = Vector2(1.28, 1)
+position = Vector2(4757, -225)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Playerrespawns/RespawnPoint4/RespawnArea" index="0"]
 position = Vector2(137.109, -188.5)

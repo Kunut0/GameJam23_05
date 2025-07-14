@@ -193,6 +193,12 @@ wait_time = 0.15
 
 [node name="ScreamTimer" type="Timer" parent="."]
 
+[node name="JumpBufferingTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="JumpHeightTimer" type="Timer" parent="."]
+wait_time = 0.075
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
 position = Vector2(1, -35)
@@ -233,3 +239,5 @@ texture = ExtResource("20_72s0b")
 [connection signal="body_entered" from="Lichtkegel" to="." method="_on_lichtkegel_body_entered"]
 [connection signal="body_exited" from="Lichtkegel" to="." method="_on_lichtkegel_body_exited"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="JumpBufferingTimer" to="." method="_on_jump_buffering_timer_timeout"]
+[connection signal="timeout" from="JumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]

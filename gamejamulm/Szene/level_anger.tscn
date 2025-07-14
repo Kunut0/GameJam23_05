@@ -199,7 +199,7 @@ position = Vector2(63, -275)
 shape = SubResource("RectangleShape2D_rt5nv")
 
 [node name="RespawnPoint2" parent="." groups=["first"] instance=ExtResource("9_a77ob")]
-position = Vector2(3881, -232)
+position = Vector2(3882, -162)
 
 [node name="RespawnArea" parent="RespawnPoint2" index="0"]
 position = Vector2(33, -81)
@@ -209,7 +209,7 @@ position = Vector2(63, -275)
 shape = SubResource("RectangleShape2D_rt5nv")
 
 [node name="RespawnPoint3" parent="." groups=["first"] instance=ExtResource("9_a77ob")]
-position = Vector2(7374, 20)
+position = Vector2(7409, -10)
 
 [node name="RespawnArea" parent="RespawnPoint3" index="0"]
 position = Vector2(33, -81)

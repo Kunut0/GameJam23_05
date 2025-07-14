@@ -18,7 +18,6 @@ func _process(delta: float) -> void:
 	var pos = shadow_ref.global_position
 	if adding == 0:
 		curve.add_point(pos)
-		print(pos)
 		var c = collision.instantiate()
 		c.pos = pos
 		get_parent().add_child(c)
