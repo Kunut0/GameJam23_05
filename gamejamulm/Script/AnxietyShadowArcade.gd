@@ -9,20 +9,20 @@ extends CharacterBody2D
 @onready var scream_sprite: Sprite2D = $Area2D/Sprite2D
 @onready var nav = $NavigationAgent2D
 
-var shadow_scene = preload("res://Szene/AnxietyShadow.tscn")
+var shadow_scene = preload("res://Szene/AnxietyShadowArcade.tscn")
 
 signal scream
 
 var jump_force = -2000
 var direction
-var speed = 600
+var speed = 800
 
 var buffered_input: String
 
-var dash_speed = 1100
+var dash_speed = 1500
 var dashing = false
 var dash_allowed = true
-var dash_direction
+var dash_direction = -1
 
 var stunned = false
 var stun_time
@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 		if velocity.y > 0:
 			velocity += get_gravity() * delta * 8
 		else:
-			velocity += get_gravity() * delta * 8.75
+			velocity += get_gravity() * delta * 10
 	
 	if is_on_floor():
 		coyote = 0
@@ -150,7 +150,7 @@ func spawn():
 				shadow_res = i.global_position
 	
 	var shadow = shadow_scene.instantiate()
-	shadow.global_position = shadow_res
+	shadow.global_position = shadow_res + Vector2(100, 0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
 	get_tree().current_scene.call_deferred("add_child", shadow)
 	player_ref.shadow_ref = shadow
 	

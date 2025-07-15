@@ -101,7 +101,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="JumpHeightTimer" type="Timer" parent="."]
-wait_time = 0.07
+wait_time = 0.1
 
 [node name="BufferingTimer" type="Timer" parent="."]
 wait_time = 0.1

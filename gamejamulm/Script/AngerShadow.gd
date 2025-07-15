@@ -11,16 +11,16 @@ extends CharacterBody2D
 
 var shadow_scene = preload("res://Szene/AngerShadow.tscn")
 
-var jump_force = -900
+var jump_force = -2000
 var direction
-var speed = 400
+var speed = 800
 
 var buffered_input: String
 
-var dash_speed = 700
+var dash_speed = 1500
 var dashing = false
 var dash_allowed = true
-var dash_direction
+var dash_direction = -1
 
 var stunned = false
 var stun_time
@@ -37,8 +37,11 @@ func _process(delta: float) -> void:
 	
 	#generates gravity for player
 	if not is_on_floor():
-		velocity += get_gravity() * delta * 4
 		coyote += delta
+		if velocity.y < 0:
+			velocity += get_gravity() * delta * 4.5
+		else:
+			velocity += get_gravity() * delta * 5
 	
 	if is_on_floor():
 		coyote = 0
@@ -143,7 +146,7 @@ func spawn():
 	firetrail.get_child(0).delete_all()
 	
 	var shadow = shadow_scene.instantiate()
-	shadow.global_position = shadow_res
+	shadow.global_position = shadow_res + Vector2(200, 0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
 	get_tree().current_scene.call_deferred("add_child", shadow)
 	player_ref.shadow_ref = shadow
 	
@@ -164,8 +167,8 @@ func _on_line_2d_body_entered(body: Node2D) -> void:
 
 func _on_jump_height_timer_timeout() -> void:
 	if !Input.is_action_pressed("ui_up"):
-		if velocity.y < -200:
-			velocity.y = -200
+		if velocity.y < -400:
+			velocity.y = -400
 			jump_timer.stop()
 	elif is_on_floor():
 		jump_timer.stop()

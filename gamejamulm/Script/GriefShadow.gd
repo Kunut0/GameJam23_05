@@ -11,16 +11,16 @@ extends CharacterBody2D
 var puddle_scene = preload("res://Szene/puddle.tscn")
 var shadow_scene = preload("res://Szene/GriefShadow.tscn")
 
-var jump_force = -1600
+var jump_force = -2000
 var direction
-var speed = 500
+var speed = 600
 
 var buffered_input: String
 
 var dash_speed = 1200
 var dashing = false
 var dash_allowed = true
-var dash_direction
+var dash_direction = -1
 
 var stunned = false
 var stun_time
@@ -88,7 +88,7 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if stunned == false:
 		#makes player jump when on floor
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_just_pressed("ui_up"):
 			if coyote < 0.1:
 				velocity.y = jump_force
 				$Jump.play()
@@ -158,7 +158,7 @@ func spawn():
 				shadow_res = i.global_position
 	
 	var shadow = shadow_scene.instantiate()
-	shadow.global_position = shadow_res
+	shadow.global_position = shadow_res + Vector2 (300, 0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
 	get_tree().current_scene.call_deferred("add_child", shadow)
 	player_ref.shadow_ref = shadow
 	
@@ -173,8 +173,8 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_jump_height_timer_timeout() -> void:
 	if !Input.is_action_pressed("ui_up"):
-		if velocity.y < -200:
-			velocity.y = -200
+		if velocity.y < -300:
+			velocity.y = -300
 			jump_timer.stop()
 	elif is_on_floor():
 		jump_timer.stop()

@@ -248,6 +248,8 @@ disabled = true
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["playerhead"]]
 position = Vector2(-18.6667, -6.66667)
+collision_layer = 2
+collision_mask = 2
 
 [node name="HeadCollision" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_s0l23")
@@ -284,15 +286,16 @@ wait_time = 0.1
 one_shot = true
 
 [node name="JumpHeightTimer" type="Timer" parent="."]
-wait_time = 0.075
+wait_time = 0.15
+one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5
 position = Vector2(1, -35)
 scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_323vs")
-animation = &"death"
-autoplay = "default"
+animation = &"respawn"
+autoplay = "respawn"
 
 [node name="Flashlight" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_60oip")
@@ -328,4 +331,5 @@ texture = ExtResource("20_72s0b")
 [connection signal="timeout" from="DashTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="JumpBufferingTimer" to="." method="_on_jump_buffering_timer_timeout"]
 [connection signal="timeout" from="JumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]
+[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

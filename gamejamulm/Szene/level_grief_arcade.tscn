@@ -273,7 +273,7 @@ frame = 6
 frame_progress = 0.404333
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(1308, 177)
+position = Vector2(1108, 177)
 
 [node name="shadow_respawn_point" parent="Node2D" instance=ExtResource("18_16ave")]
 position = Vector2(-808, -47)

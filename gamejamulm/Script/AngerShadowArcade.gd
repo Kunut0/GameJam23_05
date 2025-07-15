@@ -9,18 +9,18 @@ extends CharacterBody2D
 @onready var hurt = $Hurtbox
 @onready var nav = $NavigationAgent2D
 
-var shadow_scene = preload("res://Szene/AngerShadow.tscn")
+var shadow_scene = preload("res://Szene/AngerShadowArcade.tscn")
 
-var jump_force = -900
+var jump_force = -2000
 var direction
-var speed = 400
+var speed = 700
 
 var buffered_input: String
 
 var dash_speed = 700
 var dashing = false
 var dash_allowed = true
-var dash_direction
+var dash_direction = -1
 
 var stunned = false
 var stun_time
@@ -37,8 +37,11 @@ func _process(delta: float) -> void:
 	
 	#generates gravity for player
 	if not is_on_floor():
-		velocity += get_gravity() * delta * 4
 		coyote += delta
+		if velocity.y < 0:
+			velocity += get_gravity() * delta * 4.5
+		else:
+			velocity += get_gravity() * delta * 5
 	
 	if is_on_floor():
 		coyote = 0
@@ -135,7 +138,7 @@ func spawn():
 	firetrail.get_child(0).delete_all()
 	
 	var shadow = shadow_scene.instantiate()
-	shadow.global_position = shadow_res
+	shadow.global_position = shadow_res + Vector2(200, 0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
 	get_tree().current_scene.call_deferred("add_child", shadow)
 	player_ref.shadow_ref = shadow
 	

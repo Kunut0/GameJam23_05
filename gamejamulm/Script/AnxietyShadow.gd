@@ -15,14 +15,14 @@ signal scream
 
 var jump_force = -2000
 var direction
-var speed = 600
+var speed = 1000
 
 var buffered_input: String
 
-var dash_speed = 1100
+var dash_speed = 1750
 var dashing = false
 var dash_allowed = true
-var dash_direction
+var dash_direction = -1
 
 var stunned = false
 var stun_time
@@ -31,7 +31,7 @@ var scream_allowed = true
 
 var coyote = 0
 
-func _ready() -> void:
+func _ready() -> void:	
 	stun_time = 2
 
 func _process(delta: float) -> void:
@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 		if velocity.y > 0:
 			velocity += get_gravity() * delta * 8
 		else:
-			velocity += get_gravity() * delta * 8.75
+			velocity += get_gravity() * delta * 10
 	
 	if is_on_floor():
 		coyote = 0
@@ -134,6 +134,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player1"):
+		print("hit")
 		body.respawn()
 
 func stun():
@@ -153,18 +154,20 @@ func stop_stun():
 func spawn():
 	var respawn_point_array = get_tree().get_nodes_in_group("respawn_point")
 	var player_ref = get_tree().get_first_node_in_group("player1")
-	var shadow_res = Vector2(0,0)
+	var shadow_res: Vector2
 	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
 		if i.global_position.x - player_ref.global_position.x > 500:
 			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
 	
+	global_position = Vector2(0, 2000)
+	
 	var shadow = shadow_scene.instantiate()
-	shadow.global_position = shadow_res
+	shadow.global_position = shadow_res + Vector2(100,0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
 	get_tree().current_scene.call_deferred("add_child", shadow)
 	player_ref.shadow_ref = shadow
 	
-	call_deferred("queue_free")
+	queue_free()
 
 
 func _on_dash_timer_timeout() -> void:

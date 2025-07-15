@@ -20,7 +20,7 @@ var speed = 1000
 var dash_speed = 1750
 var dashing = false
 var dash_allowed = true
-var dash_direction
+var dash_direction = 1
 
 var shadow_ref
 var respawn_ref
@@ -124,15 +124,15 @@ func _process(delta: float) -> void:
 			sprite.play("default")
 		elif direction != 0:
 			sprite.play("walk")
-	elif velocity.y < 0 and jumping == false:
+	elif velocity.y < 0 and jumping == false and not freeze:
 		sprite.play("jump")
 		jumping = true
 
 
 func _input(event: InputEvent) -> void:
-	if stunned == false:
+	if stunned == false and freeze == false:
 		#makes player jump when on floor
-		if Input.is_action_just_pressed("ui_select"):
+		if Input.is_action_just_pressed("ui_w"):
 			if coyote < 0.1:
 				jump_timer.start()
 				velocity.y = jump_force
@@ -173,7 +173,9 @@ func dash():
 #respawn
 func respawn():
 	sprite.play("death")
+	deactivate_flashlight()
 	freeze = true
+	velocity.y = 0
 
 #dash timer
 func _on_timer_timeout() -> void:
@@ -221,7 +223,7 @@ func deactivate_flashlight():
 
 
 func _on_jump_height_timer_timeout() -> void:
-	if !Input.is_action_pressed("ui_select"):
+	if !Input.is_action_pressed("ui_w"):
 		if velocity.y < -200:
 			velocity.y = -200
 			jump_timer.stop()

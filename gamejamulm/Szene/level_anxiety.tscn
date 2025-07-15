@@ -277,9 +277,10 @@ position = Vector2(-115.191, -17.5255)
 shape = SubResource("RectangleShape2D_1fc3g")
 
 [node name="shadow_respawn" type="Node2D" parent="."]
+position = Vector2(-200, 0)
 
 [node name="shadow_respawn_point" parent="shadow_respawn" instance=ExtResource("11_8r8x6")]
-position = Vector2(550, 230)
+position = Vector2(570, 198)
 
 [node name="shadow_respawn_point5" parent="shadow_respawn" instance=ExtResource("11_8r8x6")]
 position = Vector2(1079, 238)
@@ -329,7 +330,7 @@ stream = ExtResource("17_05xpj")
 autoplay = true
 
 [node name="Camera2D" parent="." instance=ExtResource("18_civ5s")]
-position = Vector2(-935, -679)
+position = Vector2(-933, -695)
 position_smoothing_speed = 10.0
 
 [node name="Area2D" parent="." instance=ExtResource("19_r63rj")]

@@ -219,6 +219,7 @@ position = Vector2(63, -275)
 shape = SubResource("RectangleShape2D_rt5nv")
 
 [node name="shadow_respawn" type="Node2D" parent="."]
+position = Vector2(-200, 0)
 
 [node name="shadow_respawn_point" parent="shadow_respawn" instance=ExtResource("10_ekrlj")]
 position = Vector2(569, 91)
