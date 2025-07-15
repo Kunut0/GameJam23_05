@@ -1,37 +1,37 @@
-[gd_scene load_steps=16 format=3 uid="uid://dfvfe30dr8e7i"]
+[gd_scene load_steps=16 format=3 uid="uid://cumde4dlacp0m"]
 
-[ext_resource type="Script" path="res://Script/GriefShadow.gd" id="1_0qffg"]
-[ext_resource type="Texture2D" uid="uid://cmdfb4y6vwwvg" path="res://Assets/grief/Katharsis_grief_eye_close_frame1.png" id="2_7c25q"]
-[ext_resource type="Texture2D" uid="uid://b2sr61i6cmgce" path="res://Assets/grief/Katharsis_grief_eye_close_frame_2.png" id="3_o0fhq"]
-[ext_resource type="Texture2D" uid="uid://hi8joo8ds4ry" path="res://Assets/grief/Katharsis_grief_eye_close_frame_3.png" id="4_1fkcb"]
-[ext_resource type="Texture2D" uid="uid://c7ss37fjw5d33" path="res://Assets/grief/Katharsis_grief_move_frame_1.png" id="5_ieboa"]
-[ext_resource type="Texture2D" uid="uid://djgm80k832i8a" path="res://Assets/grief/Katharsis_grief_move_frame_2.png" id="6_1ifyr"]
-[ext_resource type="Texture2D" uid="uid://nidjbdpk25rw" path="res://Assets/grief/Katharsis_grief_move_frame3.png" id="7_54fhh"]
-[ext_resource type="Texture2D" uid="uid://bcb35pvgu5b8t" path="res://Assets/grief/Katharsis_grief_move_frame4.png" id="8_3tbno"]
-[ext_resource type="Texture2D" uid="uid://wdr8wflgaeyl" path="res://Assets/grief/Katharsis_grief_move_frame_5.png" id="9_amoqw"]
-[ext_resource type="Texture2D" uid="uid://6no5cn8lufai" path="res://Assets/grief/Katharsis_grief_move_frame_6.png" id="10_71ohq"]
-[ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="11_dim2u"]
-[ext_resource type="AudioStream" uid="uid://bkrc2uyiiwug0" path="res://Assets/Musik/Sounds/pfuetze.wav" id="13_nwgfa"]
-[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="14_ql1w3"]
-[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="15_nocxd"]
+[ext_resource type="Script" path="res://Script/GriefShadowArcade.gd" id="1_0n2yb"]
+[ext_resource type="Texture2D" uid="uid://cmdfb4y6vwwvg" path="res://Assets/grief/Katharsis_grief_eye_close_frame1.png" id="2_phshb"]
+[ext_resource type="Texture2D" uid="uid://b2sr61i6cmgce" path="res://Assets/grief/Katharsis_grief_eye_close_frame_2.png" id="3_hqyxy"]
+[ext_resource type="Texture2D" uid="uid://hi8joo8ds4ry" path="res://Assets/grief/Katharsis_grief_eye_close_frame_3.png" id="4_pk5f8"]
+[ext_resource type="Texture2D" uid="uid://c7ss37fjw5d33" path="res://Assets/grief/Katharsis_grief_move_frame_1.png" id="5_v50r6"]
+[ext_resource type="Texture2D" uid="uid://djgm80k832i8a" path="res://Assets/grief/Katharsis_grief_move_frame_2.png" id="6_2ahpr"]
+[ext_resource type="Texture2D" uid="uid://nidjbdpk25rw" path="res://Assets/grief/Katharsis_grief_move_frame3.png" id="7_x6n4x"]
+[ext_resource type="Texture2D" uid="uid://bcb35pvgu5b8t" path="res://Assets/grief/Katharsis_grief_move_frame4.png" id="8_pquga"]
+[ext_resource type="Texture2D" uid="uid://wdr8wflgaeyl" path="res://Assets/grief/Katharsis_grief_move_frame_5.png" id="9_fct8p"]
+[ext_resource type="Texture2D" uid="uid://6no5cn8lufai" path="res://Assets/grief/Katharsis_grief_move_frame_6.png" id="10_h2dp7"]
+[ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="11_sft7u"]
+[ext_resource type="AudioStream" uid="uid://bkrc2uyiiwug0" path="res://Assets/Musik/Sounds/pfuetze.wav" id="12_f632x"]
+[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="13_phbxj"]
+[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="14_m3lxd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7jyy7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_7c25q")
+"texture": ExtResource("2_phshb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_o0fhq")
+"texture": ExtResource("3_hqyxy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_1fkcb")
+"texture": ExtResource("4_pk5f8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_o0fhq")
+"texture": ExtResource("3_hqyxy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_7c25q")
+"texture": ExtResource("2_phshb")
 }],
 "loop": false,
 "name": &"blink",
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_7c25q")
+"texture": ExtResource("2_phshb")
 }],
 "loop": true,
 "name": &"default",
@@ -47,22 +47,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_ieboa")
+"texture": ExtResource("5_v50r6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_1ifyr")
+"texture": ExtResource("6_2ahpr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_54fhh")
+"texture": ExtResource("7_x6n4x")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_3tbno")
+"texture": ExtResource("8_pquga")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_amoqw")
+"texture": ExtResource("9_fct8p")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_71ohq")
+"texture": ExtResource("10_h2dp7")
 }],
 "loop": true,
 "name": &"walk",
@@ -71,7 +71,7 @@ animations = [{
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
 scale = Vector2(0.7, 0.7)
-script = ExtResource("1_0qffg")
+script = ExtResource("1_0n2yb")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(53.1812, 44.6187)
@@ -111,14 +111,14 @@ one_shot = true
 position = Vector2(0, -34)
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_dim2u")
+stream = ExtResource("11_sft7u")
 volume_db = 5.115
 
 [node name="Ability" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("13_nwgfa")
+stream = ExtResource("12_f632x")
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("14_ql1w3")
+stream = ExtResource("13_phbxj")
 
 [node name="Stun" type="Node2D" parent="."]
 visible = false
@@ -126,13 +126,13 @@ visible = false
 [node name="StunStars" type="Sprite2D" parent="Stun"]
 position = Vector2(-5.66071, -78.1607)
 scale = Vector2(1.16987, 0.42908)
-texture = ExtResource("15_nocxd")
+texture = ExtResource("14_m3lxd")
 
 [node name="StunStars2" type="Sprite2D" parent="Stun"]
 position = Vector2(-7.14286, -57.1429)
 rotation = -3.12715
 scale = Vector2(1.16987, 0.42908)
-texture = ExtResource("15_nocxd")
+texture = ExtResource("14_m3lxd")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, 100)

@@ -2,7 +2,7 @@ extends Area2D
 
 @export var newScene: String
 
-var SceneArray = ["res://Szene/level_grief.tscn", "res://Szene/level_anxiety.tscn", "res://Szene/level_anger.tscn"]
+var SceneArray = ["res://Szene/level_grief_arcade.tscn", "res://Szene/level_anxiety_arcade.tscn", "res://Szene/level_anger_arcade.tscn"]
 
 var i = 3
 

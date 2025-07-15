@@ -1,58 +1,58 @@
-[gd_scene load_steps=21 format=3 uid="uid://cpu6frat1qktu"]
+[gd_scene load_steps=21 format=3 uid="uid://blvu525vg5w5r"]
 
-[ext_resource type="Script" path="res://Script/AngerShadow.gd" id="1_decky"]
-[ext_resource type="Texture2D" uid="uid://21fqntieakfm" path="res://Assets/anger/rage_frame_1.png" id="2_cdysb"]
-[ext_resource type="Texture2D" uid="uid://bf6bybh7n5ajh" path="res://Assets/anger/rage4.png" id="3_c05fa"]
-[ext_resource type="PackedScene" uid="uid://dtmnqp3oqf2ce" path="res://Szene/firetrail.tscn" id="3_jsoal"]
-[ext_resource type="Texture2D" uid="uid://c4w1h42hx583m" path="res://Assets/anger/rage6.png" id="4_shc6j"]
-[ext_resource type="Texture2D" uid="uid://bu264jm23gu71" path="res://Assets/anger/rage8.png" id="5_7at6g"]
-[ext_resource type="Texture2D" uid="uid://cfqh7eajc2kjm" path="res://Assets/anger/rage10.png" id="6_y3sqq"]
-[ext_resource type="Texture2D" uid="uid://6ixr5vf5l6tp" path="res://Assets/anger/rage12.png" id="7_mjid4"]
-[ext_resource type="Texture2D" uid="uid://cwln4fh2mxi45" path="res://Assets/anger/rage14.png" id="8_5mlod"]
-[ext_resource type="Texture2D" uid="uid://clg2k36mp1h7r" path="res://Assets/anger/rage16.png" id="9_btbpo"]
-[ext_resource type="Texture2D" uid="uid://cojbf0prtckpi" path="res://Assets/anger/rage18.png" id="10_3ohsg"]
-[ext_resource type="Texture2D" uid="uid://cmuy6hjvn7avp" path="res://Assets/anger/rage20.png" id="11_1ieex"]
-[ext_resource type="Texture2D" uid="uid://bych253eqnovn" path="res://Assets/anger/rage22.png" id="12_nf1ea"]
-[ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="14_n207h"]
-[ext_resource type="AudioStream" uid="uid://64dq4b4ewe4" path="res://Assets/Musik/Sounds/fire_ability.wav" id="16_a7m3x"]
-[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="17_rcbed"]
-[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="18_0jck0"]
+[ext_resource type="Script" path="res://Script/AngerShadowArcade.gd" id="1_fvo5a"]
+[ext_resource type="Texture2D" uid="uid://21fqntieakfm" path="res://Assets/anger/rage_frame_1.png" id="2_ubtvm"]
+[ext_resource type="Texture2D" uid="uid://bf6bybh7n5ajh" path="res://Assets/anger/rage4.png" id="3_l5ln8"]
+[ext_resource type="Texture2D" uid="uid://c4w1h42hx583m" path="res://Assets/anger/rage6.png" id="4_bnn0i"]
+[ext_resource type="Texture2D" uid="uid://bu264jm23gu71" path="res://Assets/anger/rage8.png" id="5_0k43l"]
+[ext_resource type="Texture2D" uid="uid://cfqh7eajc2kjm" path="res://Assets/anger/rage10.png" id="6_75gwu"]
+[ext_resource type="Texture2D" uid="uid://6ixr5vf5l6tp" path="res://Assets/anger/rage12.png" id="7_atmjb"]
+[ext_resource type="Texture2D" uid="uid://cwln4fh2mxi45" path="res://Assets/anger/rage14.png" id="8_514c7"]
+[ext_resource type="Texture2D" uid="uid://clg2k36mp1h7r" path="res://Assets/anger/rage16.png" id="9_woyku"]
+[ext_resource type="Texture2D" uid="uid://cojbf0prtckpi" path="res://Assets/anger/rage18.png" id="10_qgq56"]
+[ext_resource type="Texture2D" uid="uid://cmuy6hjvn7avp" path="res://Assets/anger/rage20.png" id="11_yqdwt"]
+[ext_resource type="Texture2D" uid="uid://bych253eqnovn" path="res://Assets/anger/rage22.png" id="12_vu658"]
+[ext_resource type="PackedScene" uid="uid://dtmnqp3oqf2ce" path="res://Szene/firetrail.tscn" id="13_acq3c"]
+[ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="14_2oou7"]
+[ext_resource type="AudioStream" uid="uid://64dq4b4ewe4" path="res://Assets/Musik/Sounds/fire_ability.wav" id="15_mdhg2"]
+[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="16_gccb7"]
+[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="17_wx4wt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x4uv4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_cdysb")
+"texture": ExtResource("2_ubtvm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_c05fa")
+"texture": ExtResource("3_l5ln8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_shc6j")
+"texture": ExtResource("4_bnn0i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_7at6g")
+"texture": ExtResource("5_0k43l")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_y3sqq")
+"texture": ExtResource("6_75gwu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_mjid4")
+"texture": ExtResource("7_atmjb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_5mlod")
+"texture": ExtResource("8_514c7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_btbpo")
+"texture": ExtResource("9_woyku")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_3ohsg")
+"texture": ExtResource("10_qgq56")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_1ieex")
+"texture": ExtResource("11_yqdwt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_nf1ea")
+"texture": ExtResource("12_vu658")
 }],
 "loop": true,
 "name": &"default",
@@ -67,7 +67,7 @@ radius = 223.517
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
 scale = Vector2(0.25, 0.25)
-script = ExtResource("1_decky")
+script = ExtResource("1_fvo5a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_x4uv4")
@@ -99,17 +99,17 @@ wait_time = 0.07
 wait_time = 0.1
 one_shot = true
 
-[node name="Line2D" parent="." instance=ExtResource("3_jsoal")]
+[node name="Line2D" parent="." instance=ExtResource("13_acq3c")]
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("14_n207h")
+stream = ExtResource("14_2oou7")
 volume_db = 5.115
 
 [node name="Ability" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("16_a7m3x")
+stream = ExtResource("15_mdhg2")
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("17_rcbed")
+stream = ExtResource("16_gccb7")
 
 [node name="Stun" type="Node2D" parent="."]
 visible = false
@@ -118,13 +118,13 @@ scale = Vector2(2.36581, 1.88742)
 [node name="StunStars" type="Sprite2D" parent="Stun"]
 position = Vector2(-5.66071, -78.1607)
 scale = Vector2(1.16987, 0.42908)
-texture = ExtResource("18_0jck0")
+texture = ExtResource("17_wx4wt")
 
 [node name="StunStars2" type="Sprite2D" parent="Stun"]
 position = Vector2(-7.14286, -57.1429)
 rotation = -3.12715
 scale = Vector2(1.16987, 0.42908)
-texture = ExtResource("18_0jck0")
+texture = ExtResource("17_wx4wt")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

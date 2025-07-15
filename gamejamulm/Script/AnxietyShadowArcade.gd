@@ -6,18 +6,20 @@ extends CharacterBody2D
 @onready var jump_timer = $JumpHeightTimer
 @onready var buffering_timer = $BufferingTimer
 @onready var hurt = $Hurtbox
+@onready var scream_sprite: Sprite2D = $Area2D/Sprite2D
 @onready var nav = $NavigationAgent2D
 
-var puddle_scene = preload("res://Szene/puddle.tscn")
-var shadow_scene = preload("res://Szene/GriefShadow.tscn")
+var shadow_scene = preload("res://Szene/AnxietyShadow.tscn")
 
-var jump_force = -1600
+signal scream
+
+var jump_force = -2000
 var direction
-var speed = 500
+var speed = 600
 
 var buffered_input: String
 
-var dash_speed = 1200
+var dash_speed = 1100
 var dashing = false
 var dash_allowed = true
 var dash_direction
@@ -25,13 +27,12 @@ var dash_direction
 var stunned = false
 var stun_time
 
-var puddle_allowed = true
+var scream_allowed = true
 
 var coyote = 0
 
 func _ready() -> void:
-	stun_time = 1.5
-	
+	stun_time = 2
 
 func _process(delta: float) -> void:
 	
@@ -47,34 +48,39 @@ func _process(delta: float) -> void:
 		coyote = 0
 	
 	if stunned == false:
-		if GameMode.GameMode == "default":
-			#gets direction imput
-			direction =  Input.get_axis("ui_left", "ui_right")
-			
-			#checks direction to flip sprite
-			if direction < 0:
-				sprite.flip_h = false
-				dash_direction = -1
-			elif direction > 0:
-				sprite.flip_h = true
-				dash_direction = 1
+		if GameMode.GameMode == "arcade":
+			nav.target_position = get_tree().get_first_node_in_group("player1").global_position
+			var p = nav.get_next_path_position() - global_position
+			p = p.normalized()
+			var d = global_position - get_tree().get_first_node_in_group("player1").global_position
 			
 			
-			if Input.is_action_just_pressed("ui_down"):
-				if not is_on_floor():
-					velocity += get_gravity() * delta * 200
+			if ((p.y < -0.99 and (d.x > 40 or d.x < -40)) or $RayCast2D.is_colliding()) and coyote < 0.1:
+				velocity.y = jump_force
+				$Jump.play(1)
+			
+			if (d.x < -400 or d.x > 400) and coyote < 0.1 and dash_allowed:
+				dashing_action()
+			
+			if p.x < -0.05 or d.x < -500:
+				direction = -1
+				$RayCast2D.target_position.x = -22.941
+			elif p.x > 0.05:
+				direction = 1
+				$RayCast2D.target_position.x = 22.941
+			else:
+				direction = 0
+			
+			if scream_allowed:
+				screaming()
 		
 		#generates character movement
 		if direction:
-			if sprite.animation != "blink":
-				sprite.play("walk")
 			if dashing:
 				velocity.x = dash_speed * direction
 			else:
 				velocity.x = speed * direction
 		else:
-			if sprite.animation != "blink":
-				sprite.play("default")
 			if dashing:
 				velocity.x = dash_speed * dash_direction
 			else:
@@ -82,58 +88,41 @@ func _process(delta: float) -> void:
 		
 	else:
 		velocity.x = 0
-		
 	move_and_slide()
 
-func _input(event: InputEvent) -> void:
-	if stunned == false:
-		#makes player jump when on floor
-		if Input.is_action_pressed("ui_up"):
-			if coyote < 0.1:
-				velocity.y = jump_force
-				$Jump.play()
-				jump_timer.start()
-			else:
-				buffering_timer.start()
-				buffered_input = "jump"
-		
-		if Input.is_action_just_pressed("ui_down"):
-			if coyote < 0.1 and dash_allowed:
-				dashing_action()
-			else:
-				buffering_timer.start()
-				buffered_input = "dash"
-		
-		if Input.is_action_just_pressed("ui_ctrl") and puddle_allowed:
-			puddleing()
-
 func dashing_action():
+	$Dash.play()
 	dashing = true
 	dash_allowed = false
 	dash_timer.start()
-	$Dash.play()
 
-func puddleing():
-	if puddle_allowed:
-		$Ability.play()
-		puddle_allowed = false
-		sprite.play("blink")
-		var x = -100
-		while x <= 100:
-			var puddle = puddle_scene.instantiate() #spawns bullet
-			puddle.global_position = $PuddleSpawnpoint1.global_position + Vector2(x,0) #set position to marker2D
-			get_tree().current_scene.add_child(puddle) #link bullet to tree
-			x += 100
-		await sprite.animation_finished
-		sprite.play("default")
-		await get_tree().create_timer(1).timeout
-		puddle_allowed = true
+func screaming():
+	scream_allowed = false
+	sprite.play("scream")
+	scream_sprite.self_modulate.a = 0.5
+	scream_sprite.show()
+	$Ability.play()
+	
+	await get_tree().create_timer(0.7).timeout
+	
+	scream_sprite.self_modulate.a = 1
+	sprite.scale += Vector2(0.05, 0.05)
+	scream.emit()
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	scream_sprite.hide()
+	sprite.scale = Vector2(0.138, 0.138)
+	sprite.play("default")
+	
+	await get_tree().create_timer(2).timeout
+	
+	scream_allowed = true
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	spawn()
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	print("hit")
 	if body.is_in_group("player1"):
 		body.respawn()
 
@@ -143,6 +132,9 @@ func stun():
 	$Stun.visible = true
 	$AnimatedSprite2D.modulate = Color("6d6d6d")
 	await get_tree().create_timer(stun_time).timeout
+	stop_stun()
+
+func stop_stun():
 	stunned = false
 	hurt.monitoring = true
 	$AnimatedSprite2D.modulate = Color("ffffff")
@@ -167,8 +159,17 @@ func spawn():
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.25).timeout
 	dash_allowed = true
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player1"):
+		scream.connect(body.stun)
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player1"):
+		scream.disconnect(body.stun)
 
 
 func _on_jump_height_timer_timeout() -> void:
@@ -184,7 +185,7 @@ func _on_buffering_timer_timeout() -> void:
 	if buffered_input == "jump":
 		if coyote < 0.1:
 			velocity.y = jump_force
-			$Jump.play()
+			$Jump.play(1)
 			jump_timer.start()
 	elif buffered_input == "dash":
 		if coyote < 0.1 and dash_allowed:

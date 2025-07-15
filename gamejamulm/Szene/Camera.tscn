@@ -6,6 +6,7 @@
 
 [node name="Camera2D" type="Camera2D"]
 offset = Vector2(960, 540)
+zoom = Vector2(0.9, 0.9)
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
 script = ExtResource("1_twlb7")

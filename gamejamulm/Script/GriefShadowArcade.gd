@@ -47,22 +47,34 @@ func _process(delta: float) -> void:
 		coyote = 0
 	
 	if stunned == false:
-		if GameMode.GameMode == "default":
-			#gets direction imput
-			direction =  Input.get_axis("ui_left", "ui_right")
+		if GameMode.GameMode == "arcade":
+			nav.target_position = get_tree().get_first_node_in_group("player1").global_position
+			var p = nav.get_next_path_position() - global_position
+			p = p.normalized()
+			var d = global_position - get_tree().get_first_node_in_group("player1").global_position
 			
-			#checks direction to flip sprite
-			if direction < 0:
+			
+			if ((p.y < -0.99 and (d.x > 30 or d.x < -30)) or $RayCast2D.is_colliding()) and coyote < 0.1:
+				velocity.y = jump_force
+				$Jump.play()
+			
+			
+			if (d.x < -200 or d.x > 400) and coyote < 0.1 and dash_allowed:
+				dashing_action()
+			
+			if p.x < -0.05 or d.x < -300:
+				direction = -1
+				$RayCast2D.target_position.x = -132
 				sprite.flip_h = false
-				dash_direction = -1
-			elif direction > 0:
+			elif p.x > 0.05:
+				direction = 1
+				$RayCast2D.target_position.x = 132
 				sprite.flip_h = true
-				dash_direction = 1
+			else:
+				direction = 0
 			
-			
-			if Input.is_action_just_pressed("ui_down"):
-				if not is_on_floor():
-					velocity += get_gravity() * delta * 200
+			if puddle_allowed:
+				puddleing()
 		
 		#generates character movement
 		if direction:
@@ -85,27 +97,6 @@ func _process(delta: float) -> void:
 		
 	move_and_slide()
 
-func _input(event: InputEvent) -> void:
-	if stunned == false:
-		#makes player jump when on floor
-		if Input.is_action_pressed("ui_up"):
-			if coyote < 0.1:
-				velocity.y = jump_force
-				$Jump.play()
-				jump_timer.start()
-			else:
-				buffering_timer.start()
-				buffered_input = "jump"
-		
-		if Input.is_action_just_pressed("ui_down"):
-			if coyote < 0.1 and dash_allowed:
-				dashing_action()
-			else:
-				buffering_timer.start()
-				buffered_input = "dash"
-		
-		if Input.is_action_just_pressed("ui_ctrl") and puddle_allowed:
-			puddleing()
 
 func dashing_action():
 	dashing = true

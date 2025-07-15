@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c482ab8jeb5l1"]
+[gd_scene load_steps=53 format=3 uid="uid://c482ab8jeb5l1"]
 
 [ext_resource type="Script" path="res://Script/player_1.gd" id="1_p1qkr"]
 [ext_resource type="Texture2D" uid="uid://ri4iy6re6m08" path="res://Assets/Player/silde_anim_1.png" id="2_bffft"]
@@ -14,12 +14,31 @@
 [ext_resource type="Texture2D" uid="uid://fwijyfvon6tr" path="res://Assets/Player/walk_anim_4.png" id="5_27nfv"]
 [ext_resource type="Texture2D" uid="uid://c0txjnkbfj46v" path="res://Assets/Player/silde_anim_4.png" id="5_dbdvu"]
 [ext_resource type="Texture2D" uid="uid://dfc1rdsdjx0c4" path="res://Assets/Player/jump_anim_2.png" id="6_3o0kx"]
+[ext_resource type="Texture2D" uid="uid://deckf7avn6l87" path="res://Assets/Player/Death_Artwork-1.png" id="6_7reel"]
 [ext_resource type="Texture2D" uid="uid://dp7i51svh6uta" path="res://Assets/Player/walk_anim_5.png" id="6_53f7o"]
+[ext_resource type="Texture2D" uid="uid://cicxibcqyvar7" path="res://Assets/Player/Death_Artwork-2.png" id="7_8ywxj"]
+[ext_resource type="Texture2D" uid="uid://wnqnu4pc4lye" path="res://Assets/Player/Death_Artwork-3.png" id="8_ej6ao"]
+[ext_resource type="Texture2D" uid="uid://bmvci6g516hv1" path="res://Assets/Player/Death_Artwork-4.png" id="9_cxdc1"]
+[ext_resource type="Texture2D" uid="uid://det6tm2m6mjfx" path="res://Assets/Player/Death_Artwork-5.png" id="10_pn777"]
+[ext_resource type="Texture2D" uid="uid://kck5pvf35fbo" path="res://Assets/Player/Untitled_Artwork-6.png" id="11_3j8p3"]
+[ext_resource type="Texture2D" uid="uid://chgssb2lrts7k" path="res://Assets/Player/Death_Artwork-6.png" id="11_f363v"]
+[ext_resource type="Texture2D" uid="uid://dqnutrf3byieq" path="res://Assets/Player/Untitled_Artwork-5.png" id="12_2r5j8"]
+[ext_resource type="Texture2D" uid="uid://b8d3pw8l06lfv" path="res://Assets/Player/Death_Artwork-7.png" id="12_b7wvu"]
+[ext_resource type="Texture2D" uid="uid://cong6pcturw0x" path="res://Assets/Player/Untitled_Artwork-4.png" id="13_m85ls"]
+[ext_resource type="Texture2D" uid="uid://d0dk2ooguvbco" path="res://Assets/Player/Death_Artwork-8.png" id="13_xm752"]
+[ext_resource type="Texture2D" uid="uid://c15q3730trvj1" path="res://Assets/Player/Death_Artwork-9.png" id="14_56o0p"]
+[ext_resource type="Texture2D" uid="uid://7c6kgj410m3d" path="res://Assets/Player/Untitled_Artwork-3.png" id="14_k54oh"]
+[ext_resource type="Texture2D" uid="uid://d2q0txdebeo4x" path="res://Assets/Player/Untitled_Artwork-2.png" id="15_lb2aq"]
+[ext_resource type="Texture2D" uid="uid://vr6v6axwn6my" path="res://Assets/Player/Death_Artwork-10.png" id="15_m1fln"]
+[ext_resource type="Texture2D" uid="uid://cihdr7fj8wsua" path="res://Assets/Player/Untitled_Artwork-1.png" id="16_46qo3"]
 [ext_resource type="AudioStream" uid="uid://cjkqv3tfff81e" path="res://Assets/Musik/Sounds/flashlight.wav" id="16_60oip"]
 [ext_resource type="AudioStream" uid="uid://bxs7whno87y7n" path="res://Assets/Musik/Sounds/player_1_jump.wav" id="17_fdvv8"]
 [ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="18_hn70k"]
 [ext_resource type="AudioStream" uid="uid://bobtvv4psvuw4" path="res://Assets/Musik/Sounds/stun.wav" id="19_ua3lf"]
 [ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="20_72s0b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s0l23"]
+radius = 2.66667
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kegoh"]
 atlas = ExtResource("2_bffft")
@@ -98,6 +117,41 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("6_7reel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8ywxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ej6ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_cxdc1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_pn777")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f363v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_b7wvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_xm752")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_56o0p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_m1fln")
+}],
+"loop": false,
+"name": &"death",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q1nb4")
 }, {
 "duration": 1.0,
@@ -119,7 +173,30 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump",
-"speed": 14.0
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("11_3j8p3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2r5j8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_m85ls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_k54oh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lb2aq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_46qo3")
+}],
+"loop": false,
+"name": &"respawn",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -166,7 +243,14 @@ collision_mask = 4
 
 [node name="DashCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2(12.5, -3)
-polygon = PackedVector2Array(-19, -25, 38, -12, 36, -1, -36, -1)
+polygon = PackedVector2Array(-19.1667, -22.3333, 38, -12, 36, -1, -36, -1)
+disabled = true
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["playerhead"]]
+position = Vector2(-18.6667, -6.66667)
+
+[node name="HeadCollision" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_s0l23")
 disabled = true
 
 [node name="NormalCollision" type="CollisionPolygon2D" parent="."]
@@ -190,11 +274,14 @@ polygon = PackedVector2Array(-5.5, -1.24813, 0.5, 1.79158, 79.5555, 95.2908, 107
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.15
+one_shot = true
 
 [node name="ScreamTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="JumpBufferingTimer" type="Timer" parent="."]
 wait_time = 0.1
+one_shot = true
 
 [node name="JumpHeightTimer" type="Timer" parent="."]
 wait_time = 0.075
@@ -204,7 +291,7 @@ z_index = 5
 position = Vector2(1, -35)
 scale = Vector2(0.125, 0.125)
 sprite_frames = SubResource("SpriteFrames_323vs")
-animation = &"dash"
+animation = &"death"
 autoplay = "default"
 
 [node name="Flashlight" type="AudioStreamPlayer2D" parent="."]
@@ -241,3 +328,4 @@ texture = ExtResource("20_72s0b")
 [connection signal="timeout" from="DashTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="JumpBufferingTimer" to="." method="_on_jump_buffering_timer_timeout"]
 [connection signal="timeout" from="JumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

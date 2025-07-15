@@ -3,6 +3,8 @@ extends CharacterBody2D
 #var anger : ShadowBase = ShadowBase.new()
 @onready var sprite = $AnimatedSprite2D
 @onready var dash_timer = $DashTimer
+@onready var jump_timer = $JumpHeightTimer
+@onready var buffering_timer = $BufferingTimer
 @onready var hurt = $Hurtbox
 @onready var scream_sprite: Sprite2D = $Area2D/Sprite2D
 @onready var nav = $NavigationAgent2D
@@ -15,9 +17,12 @@ var jump_force = -2000
 var direction
 var speed = 600
 
+var buffered_input: String
+
 var dash_speed = 1100
 var dashing = false
 var dash_allowed = true
+var dash_direction
 
 var stunned = false
 var stun_time
@@ -47,41 +52,14 @@ func _process(delta: float) -> void:
 			#gets direction imput
 			direction =  Input.get_axis("ui_left", "ui_right")
 			
-			#makes player jump when on floor
-			if Input.is_action_just_pressed("ui_up") and coyote < 0.1:
-				velocity.y = jump_force
-				$Jump.play(1)
-			
-			if Input.is_action_just_pressed("ui_down"):
+			if Input.is_action_pressed("ui_down"):
 				if not is_on_floor():
 					velocity += get_gravity() * delta * 300
-		
-		
-		elif GameMode.GameMode == "arcade":
-			nav.target_position = get_tree().get_first_node_in_group("player1").global_position
-			var p = nav.get_next_path_position() - global_position
-			p = p.normalized()
-			var d = global_position - get_tree().get_first_node_in_group("player1").global_position
 			
-			
-			if ((p.y < -0.99 and (d.x > 40 or d.x < -40)) or $RayCast2D.is_colliding()) and coyote < 0.1:
-				velocity.y = jump_force
-				$Jump.play(1)
-			
-			if (d.x < -400 or d.x > 400) and coyote < 0.1 and dash_allowed:
-				dashing_action()
-			
-			if p.x < -0.05 or d.x < -500:
-				direction = -1
-				$RayCast2D.target_position.x = -22.941
-			elif p.x > 0.05:
-				direction = 1
-				$RayCast2D.target_position.x = 22.941
-			else:
-				direction = 0
-			
-			if scream_allowed:
-				screaming()
+			if direction < 0:
+				dash_direction = -1
+			elif direction > 0:
+				dash_direction = 1
 		
 		#generates character movement
 		if direction:
@@ -91,7 +69,7 @@ func _process(delta: float) -> void:
 				velocity.x = speed * direction
 		else:
 			if dashing:
-				velocity.x = dash_speed * -1
+				velocity.x = dash_speed * dash_direction
 			else:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
@@ -100,12 +78,27 @@ func _process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_ctrl") and scream_allowed:
-		screaming()
-	
-	if Input.is_action_just_pressed("ui_down"):
-		if is_on_floor() and dash_allowed:
-			dashing_action()
+	if stunned ==  false:
+		#makes player jump when on floor
+		if Input.is_action_just_pressed("ui_up"):
+			if coyote < 0.1:
+				velocity.y = jump_force
+				$Jump.play(1)
+				jump_timer.start()
+			else:
+				buffering_timer.start()
+				buffered_input = "jump"
+				
+		
+		if Input.is_action_just_pressed("ui_ctrl") and scream_allowed:
+			screaming()
+		
+		if Input.is_action_just_pressed("ui_down"):
+			if coyote < 0.1 and dash_allowed:
+				dashing_action()
+			else:
+				buffering_timer.start()
+				buffered_input = "dash"
 
 func dashing_action():
 	$Dash.play()
@@ -176,7 +169,7 @@ func spawn():
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.25).timeout
 	dash_allowed = true
 
 
@@ -187,3 +180,23 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player1"):
 		scream.disconnect(body.stun)
+
+
+func _on_jump_height_timer_timeout() -> void:
+	if !Input.is_action_pressed("ui_up"):
+		if velocity.y < -200:
+			velocity.y = -200
+			jump_timer.stop()
+	elif is_on_floor():
+		jump_timer.stop()
+
+
+func _on_buffering_timer_timeout() -> void:
+	if buffered_input == "jump":
+		if coyote < 0.1:
+			velocity.y = jump_force
+			$Jump.play(1)
+			jump_timer.start()
+	elif buffered_input == "dash":
+		if coyote < 0.1 and dash_allowed:
+			dashing_action()

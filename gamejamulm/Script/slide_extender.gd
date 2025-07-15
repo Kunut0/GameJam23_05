@@ -6,5 +6,5 @@ func _on_body_entered(body: Node2D) -> void:
 		body.dash_timer.set_paused(true)
 
 func _on_body_left(body: Node2D) -> void:
-	if body.is_in_group("player1") and body.dashing:
-		body.dash_timer.set_paused(false)
+	if body.is_in_group("playerhead") and body.get_parent().dashing:
+		body.get_parent().dash_timer.set_paused(false)

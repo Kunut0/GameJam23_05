@@ -1,6 +1,6 @@
 extends Node2D
 
-var level = ["res://Szene/level_anger.tscn", "res://Szene/level_anxiety.tscn", "res://Szene/level_grief.tscn"]
+var level = ["res://Szene/level_anger_arcade.tscn", "res://Szene/level_anxiety_arcade.tscn", "res://Szene/level_grief_arcade.tscn"]
 var credits = preload("res://Szene/credits.tscn")
 @onready var animation: AnimationPlayer = $AnimationPlayer
 

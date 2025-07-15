@@ -3,6 +3,8 @@ extends CharacterBody2D
 #var anger : ShadowBase = ShadowBase.new()
 @onready var sprite 
 @onready var dash_timer = $DashTimer
+@onready var jump_timer = $JumpHeightTimer
+@onready var buffering_timer = $BufferingTimer
 @onready var firetrail = $Line2D
 @onready var hurt = $Hurtbox
 @onready var nav = $NavigationAgent2D
@@ -13,9 +15,12 @@ var jump_force = -900
 var direction
 var speed = 400
 
+var buffered_input: String
+
 var dash_speed = 700
 var dashing = false
 var dash_allowed = true
+var dash_direction
 
 var stunned = false
 var stun_time
@@ -39,46 +44,19 @@ func _process(delta: float) -> void:
 		coyote = 0
 	
 	if stunned == false:
-		if GameMode.GameMode == "default":
-			#gets direction imput
-			direction =  Input.get_axis("ui_left", "ui_right")
-			
-			#makes player jump when on floor
-			if Input.is_action_just_pressed("ui_up") and coyote < 0.1:
-				velocity.y = jump_force
-				$Jump.play()
-			
-			if Input.is_action_just_pressed("ui_down"):
-				if not is_on_floor():
-					velocity += get_gravity() * delta * 200
 	
-	
-		elif GameMode.GameMode == "arcade":
-			nav.target_position = get_tree().get_first_node_in_group("player1").global_position
-			var p = nav.get_next_path_position() - global_position
-			p = p.normalized()
-			var d = global_position - get_tree().get_first_node_in_group("player1").global_position
+		#gets direction imput
+		direction =  Input.get_axis("ui_left", "ui_right")
+		
+		if Input.is_action_pressed("ui_down"):
+			if not is_on_floor():
+				velocity += get_gravity() * delta * 200
+		
+		if direction < 0:
+			dash_direction = -1
+		elif direction > 0:
+			dash_direction = 1
 			
-			if ((p.y < -0.99 and (d.x > 50 or d.x < -50)) or $RayCast2D.is_colliding()) and coyote < 0.1:
-				velocity.y = jump_force
-				$Jump.play()
-			
-			if (d.x < -200 or d.x > 300) and coyote < 0.1 and dash_allowed:
-				dashing_action()
-			
-			if p.x < -0.05 or d.x < -400:
-				direction = -1
-				$RayCast2D.target_position.x = -216
-			elif p.x > 0.05:
-				direction = 1
-				$RayCast2D.target_position.x = 216
-			else:
-				direction = 0
-			
-			if fire_allowed:
-				firetrailing()
-
-
 		#generates character movement
 		if direction:
 			if dashing:
@@ -87,7 +65,7 @@ func _process(delta: float) -> void:
 				velocity.x = speed * direction
 		else:
 			if dashing:
-				velocity.x = dash_speed * -1
+				velocity.x = dash_speed * dash_direction
 			else:
 				velocity.x = move_toward(velocity.x, 0, speed)
 	else:
@@ -95,12 +73,26 @@ func _process(delta: float) -> void:
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_ctrl") and fire_allowed:
-		firetrailing()
+	if stunned == false:
+		#makes player jump when on floor
+		if Input.is_action_just_pressed("ui_up"):
+			if coyote < 0.1:
+				velocity.y = jump_force
+				jump_timer.start()
+				$Jump.play()
+			else:
+				buffering_timer.start()
+				buffered_input = "jump"
 	
-	if Input.is_action_just_pressed("ui_down"):
-		if is_on_floor() and dash_allowed:
-			dashing_action()
+		if Input.is_action_just_pressed("ui_ctrl") and fire_allowed:
+			firetrailing()
+		
+		if Input.is_action_just_pressed("ui_down"):
+			if coyote < 0.1 and dash_allowed:
+				dashing_action()
+			else: 
+				buffering_timer.start()
+				buffered_input = "dash"
 
 func dashing_action():
 	$Dash.play()
@@ -168,3 +160,23 @@ func _on_dash_timer_timeout() -> void:
 func _on_line_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player1"):
 		body.respawn()
+
+
+func _on_jump_height_timer_timeout() -> void:
+	if !Input.is_action_pressed("ui_up"):
+		if velocity.y < -200:
+			velocity.y = -200
+			jump_timer.stop()
+	elif is_on_floor():
+		jump_timer.stop()
+
+
+func _on_buffering_timer_timeout() -> void:
+	if buffered_input == "jump":
+		if coyote < 0.1:
+			velocity.y = jump_force
+			$Jump.play()
+			jump_timer.start()
+	elif buffered_input == "dash":
+		if coyote < 0.1 and dash_allowed:
+			dashing_action()

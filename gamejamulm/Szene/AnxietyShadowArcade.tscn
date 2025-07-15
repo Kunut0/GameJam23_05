@@ -1,18 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://bucvbe5gj7e0l"]
+[gd_scene load_steps=16 format=3 uid="uid://deffwa6bcthch"]
 
-[ext_resource type="Script" path="res://Script/AnxietyShadow.gd" id="1_c86et"]
-[ext_resource type="Texture2D" uid="uid://70kmouvfm5h" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_mlvtf"]
-[ext_resource type="Texture2D" uid="uid://bfxcjjor6sc82" path="res://Assets/anxiety/anxiety_move_frame_2.png" id="3_aiulf"]
-[ext_resource type="Texture2D" uid="uid://bu41omkcyrehf" path="res://Assets/anxiety/anxiety_move_frame_3.png" id="4_11pgx"]
-[ext_resource type="Texture2D" uid="uid://crchj8dn4xkg6" path="res://Assets/anxiety/anxiety_scream_frame_1.png" id="5_oehla"]
-[ext_resource type="Texture2D" uid="uid://cdjf7osrooqva" path="res://Assets/anxiety/anxiety_scream_effect.png" id="6_ro8sb"]
-[ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="7_s3lvx"]
-[ext_resource type="AudioStream" uid="uid://u1gesyfrjh3k" path="res://Assets/Musik/Sounds/scream.wav" id="9_6bl1b"]
-[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="10_616d6"]
-[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="11_4fg7c"]
+[ext_resource type="Script" path="res://Script/AnxietyShadowArcade.gd" id="1_y0bm4"]
+[ext_resource type="Texture2D" uid="uid://70kmouvfm5h" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_0ghi4"]
+[ext_resource type="Texture2D" uid="uid://bfxcjjor6sc82" path="res://Assets/anxiety/anxiety_move_frame_2.png" id="3_ey0h5"]
+[ext_resource type="Texture2D" uid="uid://bu41omkcyrehf" path="res://Assets/anxiety/anxiety_move_frame_3.png" id="4_0nsvc"]
+[ext_resource type="Texture2D" uid="uid://crchj8dn4xkg6" path="res://Assets/anxiety/anxiety_scream_frame_1.png" id="5_8dmtg"]
+[ext_resource type="Texture2D" uid="uid://cdjf7osrooqva" path="res://Assets/anxiety/anxiety_scream_effect.png" id="6_11bvg"]
+[ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="7_fq3l8"]
+[ext_resource type="AudioStream" uid="uid://u1gesyfrjh3k" path="res://Assets/Musik/Sounds/scream.wav" id="8_jrobd"]
+[ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="9_eng6j"]
+[ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="10_a3w7y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ygwlx"]
-atlas = ExtResource("2_mlvtf")
+atlas = ExtResource("2_0ghi4")
 region = Rect2(0, 0, 500, 500)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pdy03"]
@@ -22,10 +22,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_ygwlx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_aiulf")
+"texture": ExtResource("3_ey0h5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_11pgx")
+"texture": ExtResource("4_0nsvc")
 }],
 "loop": true,
 "name": &"default",
@@ -33,7 +33,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_oehla")
+"texture": ExtResource("5_8dmtg")
 }],
 "loop": false,
 "name": &"scream",
@@ -53,7 +53,7 @@ height = 36.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["shadow"]]
 scale = Vector2(1.7, 1.7)
-script = ExtResource("1_c86et")
+script = ExtResource("1_y0bm4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -21)
@@ -97,7 +97,7 @@ shape = SubResource("CircleShape2D_8qwec")
 visible = false
 position = Vector2(10.6667, -8)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("6_ro8sb")
+texture = ExtResource("6_11bvg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
@@ -105,15 +105,15 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dcgf1")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_s3lvx")
+stream = ExtResource("7_fq3l8")
 volume_db = 5.115
 
 [node name="Ability" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_6bl1b")
+stream = ExtResource("8_jrobd")
 volume_db = -6.865
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_616d6")
+stream = ExtResource("9_eng6j")
 
 [node name="Stun" type="Node2D" parent="."]
 visible = false
@@ -122,13 +122,13 @@ scale = Vector2(0.466667, 0.44)
 [node name="StunStars" type="Sprite2D" parent="Stun"]
 position = Vector2(-5.66071, -78.1607)
 scale = Vector2(1.16987, 0.42908)
-texture = ExtResource("11_4fg7c")
+texture = ExtResource("10_a3w7y")
 
 [node name="StunStars2" type="Sprite2D" parent="Stun"]
 position = Vector2(-7.14286, -57.1429)
 rotation = -3.12715
 scale = Vector2(1.16987, 0.42908)
-texture = ExtResource("11_4fg7c")
+texture = ExtResource("10_a3w7y")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
