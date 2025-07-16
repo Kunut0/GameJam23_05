@@ -15,9 +15,9 @@ var pausemenu = preload("res://Szene/PauseMenu.tscn")
 # noch nicht getestet
 var jump_force = -1800
 var direction
-var speed = 1000
+var speed = 900
 
-var dash_speed = 1750
+var dash_speed = 1600
 var dashing = false
 var dash_allowed = true
 var dash_direction = 1
@@ -31,7 +31,7 @@ var buffering = false
 var buffered_input: String
 
 var light_timer = 0
-var lichtkegel_sichtbar: bool = false
+var lichtkegel_sichtbar: bool = true
 
 var enemy_sight: bool = false
 
@@ -41,26 +41,46 @@ var stun_time = 1.5
 
 var coyote = 0
 
+var next_to_wall = false
+
+var hitcounter = 0
+
+var color_array = ["FFFFFF","8C4600","FFA500"]
+
+var death = "death"
+
 func _ready() -> void:
 	shadow_ref = get_tree().get_first_node_in_group("shadow")
 	respawn_ref = get_tree().get_first_node_in_group("first").global_position
 	
-	lichtkegel.hide()
-	lichtkegel.monitoring = false
+	activate_flashlight()
 	
 	sprite.play("respawn")
 
 func _process(delta: float) -> void:
-	#generates gravity for player
-	if not is_on_floor() and not freeze:
+	#animations
+	if coyote == 0 and not freeze:
+		jumping = false
+		if dashing:
+			sprite.play("dash")
+		elif direction == 0:
+			sprite.play("default")
+		elif direction != 0:
+			sprite.play("walk")
+	elif velocity.y < 0 and jumping == false and not freeze:
+		sprite.play("jump")
+		jumping = true
+
+func _physics_process(delta: float) -> void:
+	#generates gravity for player	
+	if is_on_floor() or $RayCast2D3.is_colliding() or $RayCast2D2.is_colliding() or $RayCast2D.is_colliding():
+		coyote = 0
+	elif not freeze:
 		coyote += delta
 		if velocity.y > 0:
 			velocity += get_gravity() * delta * 6.25
 		else:
 			velocity += get_gravity() * delta * 7
-	
-	if is_on_floor() or $RayCast2D3.is_colliding() or $RayCast2D2.is_colliding() or $RayCast2D.is_colliding():
-		coyote = 0
 	
 	if stunned == false and not freeze:
 		#gets direction imput
@@ -77,10 +97,10 @@ func _process(delta: float) -> void:
 			self.rotation_degrees = 0
 			dash_direction = 1
 		
-		#generates character movement
+	#generates character movement
 		if direction:
 			if dashing:
-				velocity.x = dash_speed * direction
+				velocity.x = dash_speed * dash_direction
 			else:
 				velocity.x = speed * direction
 		else:
@@ -90,7 +110,7 @@ func _process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
 		#slide
-		if Input.is_action_pressed("ui_s") and not is_on_floor():
+		if Input.is_action_pressed("ui_s") and coyote > 0:
 			velocity += get_gravity() * delta * 400
 	else:
 		velocity.x = 0
@@ -98,34 +118,44 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 	
-	if lichtkegel_sichtbar and enemy_sight:
-		light_timer += 1*delta
-		if light_timer > 0.25:
-			$Stun.play()
-			lichtkegel.modulate = Color("ffff00")
-			flashlight.emit()
-			lichtkegel.monitoring = false
-			await get_tree().create_timer(0.2).timeout
-			lichtkegel.modulate = Color("ffffff")
-			lichtkegel.hide()
-			Cooldown.on_cooldown["flashlight"][0] = true
-	elif light_timer > 0:
-		light_timer -= 0.5*delta
-	else:
-		light_timer = 0
 	
-	#animations
-	if is_on_floor() and not freeze:
-		jumping = false
-		if dashing:
-			sprite.play("dash")
-		elif direction == 0:
-			sprite.play("default")
-		elif direction != 0:
-			sprite.play("walk")
-	elif velocity.y < 0 and jumping == false and not freeze:
-		sprite.play("jump")
-		jumping = true
+	if dashing and $collisionahead.get_collider() is TileMapLayer:
+		var fx = $collisionahead.get_collision_point()
+		fx = Vector2i(fx)
+		var tml: TileMapLayer = $collisionahead.get_collider()
+		var cell_coords = tml.local_to_map(fx)
+		var data: TileData = tml.get_cell_tile_data(cell_coords)
+		if data != null:
+			if data.get_custom_data("slope") == true:
+				velocity.y = -100
+				next_to_wall = false
+			else:
+				next_to_wall = true
+		else:
+			next_to_wall = false
+	else:
+		next_to_wall = false
+	
+	if next_to_wall and dashing:
+		velocity.x = 0
+		dash_timer.stop()
+		_on_timer_timeout()
+	
+	#if lichtkegel_sichtbar and enemy_sight:
+	#	light_timer += delta
+	#	if light_timer > 0.25:
+	#		$Stun.play()
+	#		lichtkegel.modulate = Color("ffff00")
+	#		flashlight.emit()
+	#		lichtkegel.monitoring = false
+	#		await get_tree().create_timer(0.2).timeout
+	#		lichtkegel.modulate = Color("ffffff")
+	#		lichtkegel.hide()
+	#		Cooldown.on_cooldown["flashlight"][0] = true
+	#elif light_timer > 0:
+	#	light_timer -= 0.1*delta
+	#else:
+	#	light_timer = 0
 
 
 func _input(event: InputEvent) -> void:
@@ -141,17 +171,34 @@ func _input(event: InputEvent) -> void:
 				buffering_timer.start()
 				buffered_input = "jump"
 			
-		if Input.is_action_pressed("ui_flashlight") and Cooldown.on_cooldown["flashlight"][0] == false and stunned == false and dashing == false:
-			if lichtkegel_sichtbar == false:
-				$Flashlight.play()
-				lichtkegel.show()
-				lichtkegel.monitoring = true
-				lichtkegel_sichtbar = true
-		
-		elif Input.is_action_just_released("ui_flashlight"):
+		if Input.is_action_pressed("ui_flashlight") and lichtkegel_sichtbar: #and Cooldown.on_cooldown["flashlight"][0] == false 
+			lichtkegel_sichtbar = false
+			lichtkegel.modulate = Color("ffff00")
+			if enemy_sight == true:
+				hitcounter += 1
+				if hitcounter == 3:
+					hitcounter = 0
+					flashlight.connect(shadow_ref.stun)
+					flashlight.emit()
+					flashlight.disconnect(shadow_ref.stun)
+					$FlashlightTimer.wait_time = 2
+			else:
+				hitcounter = 0
+			lichtkegel.monitoring = false
+			await get_tree().create_timer(0.2).timeout
 			deactivate_flashlight()
+			$FlashlightTimer.start()
+			
+			#if lichtkegel_sichtbar == false:
+			#	$Flashlight.play()
+			#	lichtkegel.show()
+			#	lichtkegel.monitoring = true
+			#	lichtkegel_sichtbar = true
 		
-		if Input.is_action_just_pressed("ui_s"):
+		#elif Input.is_action_just_released("ui_flashlight"):
+		#	deactivate_flashlight()
+		
+		if Input.is_action_just_pressed("ui_s") and !next_to_wall:
 			if coyote < 0.1 and dash_allowed == true:
 				dash()
 			else:
@@ -171,19 +218,19 @@ func dash():
 
 #respawn
 func respawn():
-	sprite.play("death")
-	deactivate_flashlight()
 	freeze = true
+	deactivate_flashlight()
+	sprite.play(death)
 	velocity.y = 0
 
 #dash timer
 func _on_timer_timeout() -> void:
-	print("timeout")
 	dashing = false
 	default_collision.disabled = false
 	dash_collision.disabled = true
 	$CharacterBody2D/HeadCollision.disabled = true
 	sprite.offset = Vector2(0, 0)
+	activate_flashlight()
 	await get_tree().create_timer(0.5).timeout
 	dash_allowed = true
 
@@ -191,13 +238,10 @@ func _on_timer_timeout() -> void:
 func _on_lichtkegel_body_entered(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
 		enemy_sight = true
-		flashlight.connect(body.stun)
-
 
 func _on_lichtkegel_body_exited(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
 		enemy_sight = false
-		flashlight.disconnect(body.stun)
 
 
 func stun():
@@ -214,11 +258,14 @@ func stun_stop():
 	lichtkegel_sichtbar = false
 
 func deactivate_flashlight():
-	if lichtkegel_sichtbar == true:
-		lichtkegel.hide()
-		lichtkegel.monitoring = false
-		lichtkegel_sichtbar = false
-		flashlight.emit()
+	lichtkegel.hide()
+	lichtkegel.monitoring = false
+	lichtkegel_sichtbar = false
+
+func activate_flashlight():
+	lichtkegel.show()
+	lichtkegel.monitoring = true
+	lichtkegel_sichtbar = true
 
 
 func _on_jump_height_timer_timeout() -> void:
@@ -226,7 +273,7 @@ func _on_jump_height_timer_timeout() -> void:
 		if velocity.y < -200:
 			velocity.y = -200
 			jump_timer.stop()
-	elif is_on_floor():
+	elif coyote == 0:
 		jump_timer.stop()
 
 
@@ -244,11 +291,20 @@ func _on_jump_buffering_timer_timeout() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation == "respawn":
 		freeze = false
+		activate_flashlight()
+		death = "death"
 	elif sprite.animation == "death":
+		death = ""
 		for i in get_tree().get_nodes_in_group("shadow_prop"):
 			i.queue_free()
 		global_position = respawn_ref
 		shadow_ref.spawn()
-		Cooldown.on_cooldown["flashlight"][0] = false
+		#Cooldown.on_cooldown["flashlight"][0] = false
 		stun_stop()
 		sprite.play("respawn")
+
+
+func _on_flashlight_timer_timeout() -> void:
+	activate_flashlight()
+	lichtkegel.modulate = Color(color_array[hitcounter])
+	$FlashlightTimer.wait_time = 0.5

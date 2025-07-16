@@ -158,7 +158,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-409, -880, -381, 824, 
 size = Vector2(342, 57)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tri84"]
-size = Vector2(137, 98)
+size = Vector2(136.5, 82)
 
 [node name="level_anxiety" type="Node2D"]
 position = Vector2(0, -1)
@@ -170,8 +170,8 @@ tile_map_data = PackedByteArray("AAAAAAUAAAAFAAIAAAABAAUAAAAFAAIAAAACAAUAAAAFAAI
 tile_set = SubResource("TileSet_1mp5m")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scale = Vector2(1.1, 1.1)
-transform = Transform2D(1.1, 0, 0, 1.1, 0, 0)
+scale = Vector2(1.2, 1.2)
+transform = Transform2D(1.2, 0, 0, 1.2, 0, 0)
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 1)
@@ -252,7 +252,7 @@ position = Vector2(-115.191, -17.5255)
 shape = SubResource("RectangleShape2D_1fc3g")
 
 [node name="shadow_respawn" type="Node2D" parent="."]
-position = Vector2(-200, 0)
+position = Vector2(-100, 0)
 
 [node name="shadow_respawn_point" parent="shadow_respawn" instance=ExtResource("15_an2it")]
 position = Vector2(550, 230)
@@ -353,7 +353,7 @@ shape = SubResource("RectangleShape2D_tri84")
 position = Vector2(2428, -81)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
-position = Vector2(-3, 10)
+position = Vector2(-2.75, 18)
 shape = SubResource("RectangleShape2D_tri84")
 
 [node name="Area2D4" parent="." instance=ExtResource("19_u752b")]

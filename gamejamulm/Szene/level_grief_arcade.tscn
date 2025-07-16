@@ -216,8 +216,8 @@ tile_map_data = PackedByteArray("AADw/wUAAAAFAAIAAADw/wYAAAAFAAIAAADw/wcAAAAFAAI
 tile_set = SubResource("TileSet_14f1e")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scale = Vector2(1.1, 1.1)
-transform = Transform2D(1.1, 0, 0, 1.1, 0, 0)
+scale = Vector2(1.2, 1.2)
+transform = Transform2D(1.2, 0, 0, 1.2, 0, 0)
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0.8)

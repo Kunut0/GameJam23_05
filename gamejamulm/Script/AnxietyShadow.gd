@@ -15,11 +15,11 @@ signal scream
 
 var jump_force = -2000
 var direction
-var speed = 1000
+var speed = 850
 
 var buffered_input: String
 
-var dash_speed = 1750
+var dash_speed = 1500
 var dashing = false
 var dash_allowed = true
 var dash_direction = -1
@@ -156,14 +156,14 @@ func spawn():
 	var player_ref = get_tree().get_first_node_in_group("player1")
 	var shadow_res: Vector2
 	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
-		if i.global_position.x - player_ref.global_position.x > 500:
+		if i.global_position.x - player_ref.global_position.x > 400:
 			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
 	
 	global_position = Vector2(0, 2000)
 	
 	var shadow = shadow_scene.instantiate()
-	shadow.global_position = shadow_res + Vector2(100,0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
+	shadow.global_position = shadow_res + Vector2(200,0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
 	get_tree().current_scene.call_deferred("add_child", shadow)
 	player_ref.shadow_ref = shadow
 	

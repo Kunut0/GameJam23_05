@@ -13,11 +13,11 @@ var shadow_scene = preload("res://Szene/AngerShadow.tscn")
 
 var jump_force = -2000
 var direction
-var speed = 800
+var speed = 750
 
 var buffered_input: String
 
-var dash_speed = 1500
+var dash_speed = 1400
 var dashing = false
 var dash_allowed = true
 var dash_direction = -1
@@ -138,7 +138,7 @@ func spawn():
 	var player_ref = get_tree().get_first_node_in_group("player1")
 	var shadow_res = Vector2(0,0)
 	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
-		if i.global_position.x - player_ref.global_position.x > 500:
+		if i.global_position.x - player_ref.global_position.x > 400:
 			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
 	
