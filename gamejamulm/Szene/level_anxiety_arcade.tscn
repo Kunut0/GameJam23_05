@@ -158,7 +158,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-409, -880, -381, 824, 
 size = Vector2(342, 57)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tri84"]
-size = Vector2(96, 40)
+size = Vector2(137, 98)
 
 [node name="level_anxiety" type="Node2D"]
 position = Vector2(0, -1)
@@ -170,6 +170,8 @@ tile_map_data = PackedByteArray("AAAAAAUAAAAFAAIAAAABAAUAAAAFAAIAAAACAAUAAAAFAAI
 tile_set = SubResource("TileSet_1mp5m")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2(1.1, 1.1)
+transform = Transform2D(1.1, 0, 0, 1.1, 0, 0)
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 1)
@@ -208,7 +210,7 @@ texture = ExtResource("10_nn5mj")
 [node name="UI" parent="." instance=ExtResource("11_22c4t")]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("12_ysc38")]
-position = Vector2(-155, 247)
+position = Vector2(-155, 211)
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("13_wa5l3")]
 position = Vector2(646, 198)
@@ -216,7 +218,7 @@ position = Vector2(646, 198)
 [node name="player_respawn" type="Node2D" parent="."]
 
 [node name="RespawnPoint" parent="player_respawn" groups=["first"] instance=ExtResource("14_l3fc7")]
-position = Vector2(-93, 188)
+position = Vector2(-149, 210)
 
 [node name="RespawnArea" parent="player_respawn/RespawnPoint" index="0"]
 position = Vector2(35, -74.1525)
@@ -228,7 +230,7 @@ scale = Vector2(15.4371, 2.9661)
 shape = SubResource("RectangleShape2D_j4lnw")
 
 [node name="RespawnPoint2" parent="player_respawn" instance=ExtResource("14_l3fc7")]
-position = Vector2(2814, -10)
+position = Vector2(2827, 16)
 
 [node name="RespawnArea" parent="player_respawn/RespawnPoint2" index="0"]
 position = Vector2(25, -34)
@@ -239,7 +241,7 @@ position = Vector2(143.232, -17.3729)
 shape = SubResource("RectangleShape2D_1fc3g")
 
 [node name="RespawnPoint3" parent="player_respawn" instance=ExtResource("14_l3fc7")]
-position = Vector2(5816, -161)
+position = Vector2(5816, -139)
 
 [node name="RespawnArea" parent="player_respawn/RespawnPoint3" index="0"]
 position = Vector2(77, -75.4237)
@@ -372,7 +374,7 @@ shape = SubResource("RectangleShape2D_tri84")
 position = Vector2(6616, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D6"]
-position = Vector2(-26, 10)
+position = Vector2(-5.5, 14)
 shape = SubResource("RectangleShape2D_tri84")
 
 [editable path="player_respawn/RespawnPoint"]

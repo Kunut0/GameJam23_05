@@ -38,7 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://c0jnktmmfroae" path="res://Assets/stun_stars.png" id="20_72s0b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s0l23"]
-radius = 2.66667
+radius = 1.77781
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kegoh"]
 atlas = ExtResource("2_bffft")

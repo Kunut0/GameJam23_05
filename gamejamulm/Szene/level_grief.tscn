@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://vbvarpiq0yf1"]
+[gd_scene load_steps=34 format=4 uid="uid://vbvarpiq0yf1"]
 
 [ext_resource type="PackedScene" uid="uid://c482ab8jeb5l1" path="res://Szene/Player1.tscn" id="1_n06t2"]
 [ext_resource type="PackedScene" uid="uid://dfvfe30dr8e7i" path="res://Szene/GriefShadow.tscn" id="2_0688q"]
@@ -193,11 +193,6 @@ size = Vector2(63.2503, 607.61)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2byk"]
 size = Vector2(80.4688, 715)
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_1344u"]
-vertices = PackedVector2Array(-592.031, -916.008, 11055.7, -934.977, 7499, -642, 7449, -642, 2403, -2, 2400, -51, 9193, -1, 9151, 51, 9045, 51, 9003, 100, 2304, 29, 11149.3, 363.039, 9401, 83, 9401, 2, 7478, -267, 7456, -290, 7314, -288, 7049, -298, 7001, -301, 7295, -202, 7050, -201, 6949, -250, 6849, -249, 6801, -201, 7347, -205, 7349, -255, 2351, -100, 6876, -139, 2246, -101, -596.961, 410.953, 2151, 18, 2150, -1)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(4, 8, 9, 10), PackedInt32Array(1, 11, 12, 13), PackedInt32Array(2, 1, 13, 6, 14), PackedInt32Array(0, 3, 15, 16, 17, 18), PackedInt32Array(19, 20, 17, 16), PackedInt32Array(0, 18, 21, 22), PackedInt32Array(0, 22, 23), PackedInt32Array(24, 25, 14, 6), PackedInt32Array(6, 5, 26, 27), PackedInt32Array(28, 0, 23, 27, 26), PackedInt32Array(27, 20, 19), PackedInt32Array(9, 12, 11), PackedInt32Array(9, 11, 29, 10), PackedInt32Array(30, 10, 29), PackedInt32Array(30, 29, 0, 31), PackedInt32Array(28, 31, 0), PackedInt32Array(24, 6, 27, 19)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-602, -926, -607, 421, 11160, 373, 11065, -945)])
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gf7s8"]
 size = Vector2(113, 121)
 
@@ -216,6 +211,8 @@ tile_map_data = PackedByteArray("AADw/wUAAAAFAAIAAADw/wYAAAAFAAIAAADw/wcAAAAFAAI
 tile_set = SubResource("TileSet_14f1e")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2(1.1, 1.1)
+transform = Transform2D(1.1, 0, 0, 1.1, 0, 0)
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0.8)
@@ -333,18 +330,18 @@ position = Vector2(1800, -47)
 position = Vector2(1366, 163)
 
 [node name="RespawnPoint2" parent="Playerrespawns" instance=ExtResource("19_whdg6")]
-position = Vector2(1556, -65)
+position = Vector2(1708, -45)
 
 [node name="RespawnArea" parent="Playerrespawns/RespawnPoint2" index="0"]
 position = Vector2(10, 3)
 scale = Vector2(1.2, 1.24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Playerrespawns/RespawnPoint2/RespawnArea" index="0"]
-position = Vector2(223.333, -167.742)
+position = Vector2(83.3334, -166.935)
 shape = SubResource("RectangleShape2D_jf06o")
 
 [node name="RespawnPoint3" parent="Playerrespawns" groups=["first"] instance=ExtResource("19_whdg6")]
-position = Vector2(-1662, -73)
+position = Vector2(-1649, -57)
 
 [node name="RespawnArea" parent="Playerrespawns/RespawnPoint3" index="0"]
 position = Vector2(68.7502, -158.558)
@@ -354,7 +351,7 @@ position = Vector2(21.6247, -79.2469)
 shape = SubResource("RectangleShape2D_j4h3j")
 
 [node name="RespawnPoint4" parent="Playerrespawns" instance=ExtResource("19_whdg6")]
-position = Vector2(4757, -225)
+position = Vector2(4821, -205)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Playerrespawns/RespawnPoint4/RespawnArea" index="0"]
 position = Vector2(137.109, -188.5)
@@ -373,34 +370,6 @@ autoplay = true
 
 [node name="Camera2D" parent="." instance=ExtResource("23_qcuue")]
 position = Vector2(-1085, -704)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_1344u")
-navigation_layers = 7
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
-vertices = PackedVector2Array(2304, 29, 2440, -3, 2436, -51, 2351, -100, 2246, -101, 2124, 2, 2126, 21)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
-avoidance_layers = 7
-
-[node name="NavigationObstacle2D2" type="NavigationObstacle2D" parent="NavigationRegion2D"]
-vertices = PackedVector2Array(7078, -299, 7083, -206, 6875, -137, 6766, -203, 6849, -249, 6949, -250, 7001, -301)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
-avoidance_layers = 7
-
-[node name="NavigationObstacle2D3" type="NavigationObstacle2D" parent="NavigationRegion2D"]
-vertices = PackedVector2Array(7499, -642, 7478, -267, 7349, -255, 7347, -205, 7295, -202, 7314, -288, 7456, -290, 7449, -642)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
-avoidance_layers = 7
-
-[node name="NavigationObstacle2D4" type="NavigationObstacle2D" parent="NavigationRegion2D"]
-vertices = PackedVector2Array(9193, -1, 9459, 2, 9452, 84, 9003, 100, 9045, 51, 9151, 51)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
-avoidance_layers = 7
 
 [node name="Area2D" parent="." instance=ExtResource("23_7c8bp")]
 position = Vector2(9022, 123)

@@ -204,7 +204,7 @@ size = Vector2(113, 121)
 [node name="frederick_test_scene" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_hrx0y")]
-position = Vector2(-285, 154)
+position = Vector2(-272, 111)
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("2_hfgs0")]
 position = Vector2(514, 58)
@@ -216,6 +216,8 @@ tile_map_data = PackedByteArray("AADw/wUAAAAFAAIAAADw/wYAAAAFAAIAAADw/wcAAAAFAAI
 tile_set = SubResource("TileSet_14f1e")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2(1.1, 1.1)
+transform = Transform2D(1.1, 0, 0, 1.1, 0, 0)
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0.8)
@@ -333,18 +335,18 @@ position = Vector2(1800, -47)
 position = Vector2(1366, 163)
 
 [node name="RespawnPoint2" parent="Playerrespawns" instance=ExtResource("19_bjwwf")]
-position = Vector2(1556, -65)
+position = Vector2(1734, -43)
 
 [node name="RespawnArea" parent="Playerrespawns/RespawnPoint2" index="0"]
 position = Vector2(10, 3)
 scale = Vector2(1.2, 1.24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Playerrespawns/RespawnPoint2/RespawnArea" index="0"]
-position = Vector2(223.333, -167.742)
+position = Vector2(73.3334, -165.323)
 shape = SubResource("RectangleShape2D_jf06o")
 
 [node name="RespawnPoint3" parent="Playerrespawns" groups=["first"] instance=ExtResource("19_bjwwf")]
-position = Vector2(-1662, -73)
+position = Vector2(-1639, -53)
 
 [node name="RespawnArea" parent="Playerrespawns/RespawnPoint3" index="0"]
 position = Vector2(68.7502, -158.558)
@@ -354,7 +356,7 @@ position = Vector2(21.6247, -79.2469)
 shape = SubResource("RectangleShape2D_j4h3j")
 
 [node name="RespawnPoint4" parent="Playerrespawns" instance=ExtResource("19_bjwwf")]
-position = Vector2(4757, -225)
+position = Vector2(4767, -205)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Playerrespawns/RespawnPoint4/RespawnArea" index="0"]
 position = Vector2(137.109, -188.5)

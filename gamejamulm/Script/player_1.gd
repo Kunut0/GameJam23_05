@@ -51,7 +51,6 @@ func _ready() -> void:
 	sprite.play("respawn")
 
 func _process(delta: float) -> void:
-	
 	#generates gravity for player
 	if not is_on_floor() and not freeze:
 		coyote += delta
@@ -164,8 +163,8 @@ func dash():
 	dash_allowed = false
 	$Slide.play()
 	dashing = true
-	$CharacterBody2D/HeadCollision.disabled = false
 	dash_collision.disabled = false
+	$CharacterBody2D/HeadCollision.disabled = false
 	default_collision.disabled = true
 	sprite.offset = Vector2(90, 160)
 	dash_timer.start()
