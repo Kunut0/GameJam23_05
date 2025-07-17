@@ -31,6 +31,7 @@ func _on_start_pressed() -> void:
 	await get_tree().create_timer(0.5).timeout
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	GlobalTimer.wait_time = 240
 	get_tree().call_deferred("change_scene_to_file", "res://Szene/tutorial.tscn")
 
 func _on_arcade_pressed():

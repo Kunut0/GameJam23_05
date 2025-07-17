@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GameJamULM"
-run/main_scene="res://Szene/level_anxiety.tscn"
+run/main_scene="res://Szene/Start.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Design ohne Titel.jpg"
 config/windows_native_icon="res://Design ohne Titel.ico"

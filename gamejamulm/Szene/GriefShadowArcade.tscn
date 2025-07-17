@@ -45,6 +45,11 @@ animations = [{
 "name": &"default",
 "speed": 8.0
 }, {
+"frames": [],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_v50r6")
@@ -91,10 +96,8 @@ polygon = PackedVector2Array(-6.75373, 3.92811, 8.18358, 3.90719, 2.32687, -1.25
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7jyy7")
-animation = &"walk"
+animation = &"spawn"
 autoplay = "default"
-frame = 2
-frame_progress = 0.454971
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -142,6 +145,7 @@ target_position = Vector2(-132.857, 1.42857)
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="JumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]
 [connection signal="timeout" from="BufferingTimer" to="." method="_on_buffering_timer_timeout"]

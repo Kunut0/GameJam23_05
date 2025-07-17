@@ -38,6 +38,20 @@ animations = [{
 "loop": false,
 "name": &"scream",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mlvtf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_aiulf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_11pgx")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sc8bb"]
@@ -56,10 +70,11 @@ scale = Vector2(1.7, 1.7)
 script = ExtResource("1_c86et")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.427451, 0.427451, 0.427451, 1)
 position = Vector2(1, -21)
 scale = Vector2(0.138, 0.138)
 sprite_frames = SubResource("SpriteFrames_pdy03")
-animation = &"scream"
+animation = &"spawn"
 autoplay = "default"
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -137,6 +152,7 @@ position = Vector2(0, -16.4706)
 target_position = Vector2(-22.9412, -0.588223)
 collision_mask = 4
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

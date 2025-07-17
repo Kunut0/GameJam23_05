@@ -17,15 +17,13 @@ var jump_force = -1800
 var direction
 var speed = 900
 
-var dash_speed = 1600
+var dash_speed = 1700
 var dashing = false
 var dash_allowed = true
 var dash_direction = 1
 
 var shadow_ref
 var respawn_ref
-
-var jumping = false
 
 var buffering = false
 var buffered_input: String
@@ -45,7 +43,7 @@ var next_to_wall = false
 
 var hitcounter = 0
 
-var color_array = ["FFFFFF","8C4600","FFA500"]
+var color_array = ["FFFFFF", "FFA500"]
 
 var death = "death"
 
@@ -60,16 +58,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#animations
 	if coyote == 0 and not freeze:
-		jumping = false
 		if dashing:
 			sprite.play("dash")
 		elif direction == 0:
 			sprite.play("default")
+			$Lichtkegel.position = Vector2(-7.5,-3.5)
 		elif direction != 0:
 			sprite.play("walk")
-	elif velocity.y < 0 and jumping == false and not freeze:
-		sprite.play("jump")
-		jumping = true
+			$Lichtkegel.position = Vector2(0.4,-1.3)
 
 func _physics_process(delta: float) -> void:
 	#generates gravity for player	
@@ -109,7 +105,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = move_toward(velocity.x, 0, speed)
 		
-		#slide
+		#fast fall
 		if Input.is_action_pressed("ui_s") and coyote > 0:
 			velocity += get_gravity() * delta * 400
 	else:
@@ -120,6 +116,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if dashing and $collisionahead.get_collider() is TileMapLayer:
+		next_to_wall = true
 		var fx = $collisionahead.get_collision_point()
 		fx = Vector2i(fx)
 		var tml: TileMapLayer = $collisionahead.get_collider()
@@ -129,10 +126,6 @@ func _physics_process(delta: float) -> void:
 			if data.get_custom_data("slope") == true:
 				velocity.y = -100
 				next_to_wall = false
-			else:
-				next_to_wall = true
-		else:
-			next_to_wall = false
 	else:
 		next_to_wall = false
 	
@@ -166,6 +159,7 @@ func _input(event: InputEvent) -> void:
 				jump_timer.start()
 				velocity.y = jump_force
 				sprite.play("jump")
+				$Lichtkegel.position = Vector2(4.4,-7.5)
 				$Jump.play()
 			else:
 				buffering_timer.start()
@@ -176,14 +170,15 @@ func _input(event: InputEvent) -> void:
 			lichtkegel.modulate = Color("ffff00")
 			if enemy_sight == true:
 				hitcounter += 1
-				if hitcounter == 3:
+				if hitcounter == 2:
 					hitcounter = 0
 					flashlight.connect(shadow_ref.stun)
 					flashlight.emit()
 					flashlight.disconnect(shadow_ref.stun)
 					$FlashlightTimer.wait_time = 2
 			else:
-				hitcounter = 0
+				if hitcounter > 0:
+					hitcounter -= 1
 			lichtkegel.monitoring = false
 			await get_tree().create_timer(0.2).timeout
 			deactivate_flashlight()
@@ -237,7 +232,8 @@ func _on_timer_timeout() -> void:
 
 func _on_lichtkegel_body_entered(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
-		enemy_sight = true
+		if !body.respawning:
+			enemy_sight = true
 
 func _on_lichtkegel_body_exited(body: Node2D) -> void:
 	if body.is_in_group("shadow"):
@@ -263,9 +259,10 @@ func deactivate_flashlight():
 	lichtkegel_sichtbar = false
 
 func activate_flashlight():
-	lichtkegel.show()
-	lichtkegel.monitoring = true
-	lichtkegel_sichtbar = true
+	if sprite.animation != "death":
+		lichtkegel.show()
+		lichtkegel.monitoring = true
+		lichtkegel_sichtbar = true
 
 
 func _on_jump_height_timer_timeout() -> void:
@@ -278,13 +275,14 @@ func _on_jump_height_timer_timeout() -> void:
 
 
 func _on_jump_buffering_timer_timeout() -> void:
-	if buffered_input == "jump":
+	if buffered_input == "jump" and !freeze and !stunned:
 		if coyote < 0.1:
 			jump_timer.start()
 			velocity.y = jump_force
 			sprite.play("jump")
+			$Lichtkegel.position = Vector2(4.4,-7.5)
 			$Jump.play()
-	elif buffered_input == "dash":
+	elif buffered_input == "dash" and !freeze and !stunned:
 		if coyote < 0.1 and dash_allowed == true:
 			dash()
 

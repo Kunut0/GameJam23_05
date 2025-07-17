@@ -29,73 +29,78 @@ var puddle_allowed = true
 
 var coyote = 0
 
+var respawning = true
+
 func _ready() -> void:
 	stun_time = 1.5
 	
+	sprite.play("spawn")
 
 func _process(delta: float) -> void:
-	
-	#generates gravity for player
-	if not is_on_floor():
-		coyote += delta
-		if velocity.y > 0:
-			velocity += get_gravity() * delta * 8
-		else:
-			velocity += get_gravity() * delta * 8.75
-	
-	if is_on_floor():
-		coyote = 0
-	
-	if stunned == false:
-		if GameMode.GameMode == "arcade":
-			nav.target_position = get_tree().get_first_node_in_group("player1").global_position
-			var p = nav.get_next_path_position() - global_position
-			p = p.normalized()
-			var d = global_position - get_tree().get_first_node_in_group("player1").global_position
-			
-			
-			if ((p.y < -0.99 and (d.x > 30 or d.x < -30)) or $RayCast2D.is_colliding()) and coyote < 0.1:
-				velocity.y = jump_force
-				$Jump.play()
-			
-			
-			if (d.x < -200 or d.x > 400) and coyote < 0.1 and dash_allowed:
-				dashing_action()
-			
-			if p.x < -0.05 or d.x < -300:
-				direction = -1
-				$RayCast2D.target_position.x = -132
-				sprite.flip_h = false
-			elif p.x > 0.05:
-				direction = 1
-				$RayCast2D.target_position.x = 132
-				sprite.flip_h = true
+	if !respawning:
+		#generates gravity for player
+		if not is_on_floor():
+			coyote += delta
+			if velocity.y > 0:
+				velocity += get_gravity() * delta * 8
 			else:
-				direction = 0
-			
-			if puddle_allowed:
-				puddleing()
+				velocity += get_gravity() * delta * 8.75
 		
-		#generates character movement
-		if direction:
-			if sprite.animation != "blink":
-				sprite.play("walk")
-			if dashing:
-				velocity.x = dash_speed * direction
-			else:
-				velocity.x = speed * direction
-		else:
-			if sprite.animation != "blink":
-				sprite.play("default")
-			if dashing:
-				velocity.x = dash_speed * dash_direction
-			else:
-				velocity.x = move_toward(velocity.x, 0, speed)
+		if is_on_floor():
+			coyote = 0
 		
+		if stunned == false:
+			if GameMode.GameMode == "arcade":
+				nav.target_position = get_tree().get_first_node_in_group("player1").global_position
+				var p = nav.get_next_path_position() - global_position
+				p = p.normalized()
+				var d = global_position - get_tree().get_first_node_in_group("player1").global_position
+				
+				
+				if ((p.y < -0.99 and (d.x > 30 or d.x < -30)) or $RayCast2D.is_colliding()) and coyote < 0.1:
+					velocity.y = jump_force
+					$Jump.play()
+				
+				
+				if (d.x < -200 or d.x > 400) and coyote < 0.1 and dash_allowed:
+					dashing_action()
+				
+				if p.x < -0.05 or d.x < -300:
+					direction = -1
+					$RayCast2D.target_position.x = -132
+					sprite.flip_h = false
+				elif p.x > 0.05:
+					direction = 1
+					$RayCast2D.target_position.x = 132
+					sprite.flip_h = true
+				else:
+					direction = 0
+				
+				if puddle_allowed:
+					puddleing()
+			
+			#generates character movement
+			if direction:
+				if sprite.animation != "blink":
+					sprite.play("walk")
+				if dashing:
+					velocity.x = dash_speed * direction
+				else:
+					velocity.x = speed * direction
+			else:
+				if sprite.animation != "blink":
+					sprite.play("default")
+				if dashing:
+					velocity.x = dash_speed * dash_direction
+				else:
+					velocity.x = move_toward(velocity.x, 0, speed)
+			
+		else:
+			velocity.x = 0
+			
+		move_and_slide()
 	else:
-		velocity.x = 0
-		
-	move_and_slide()
+		velocity.y = 0
 
 
 func dashing_action():
@@ -180,3 +185,8 @@ func _on_buffering_timer_timeout() -> void:
 	elif buffered_input == "dash":
 		if coyote < 0.1 and dash_allowed:
 			dashing_action()
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if sprite.animation == "spawn":
+		respawning = false

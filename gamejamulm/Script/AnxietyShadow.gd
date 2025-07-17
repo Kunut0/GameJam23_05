@@ -31,54 +31,61 @@ var scream_allowed = true
 
 var coyote = 0
 
-func _ready() -> void:	
+var respawning = true
+
+func _ready() -> void:
 	stun_time = 2
+	
+	sprite.play("spawn")
 
 func _process(delta: float) -> void:
-	
-	#generates gravity for player
-	if not is_on_floor():
-		coyote += delta
-		if velocity.y > 0:
-			velocity += get_gravity() * delta * 8
-		else:
-			velocity += get_gravity() * delta * 10
-	
-	if is_on_floor():
-		coyote = 0
-	
-	if stunned == false:
-		if GameMode.GameMode == "default":
-			#gets direction imput
-			direction =  Input.get_axis("ui_left", "ui_right")
-			
-			if Input.is_action_pressed("ui_down"):
-				if not is_on_floor():
-					velocity += get_gravity() * delta * 300
-			
-			if direction < 0:
-				dash_direction = -1
-			elif direction > 0:
-				dash_direction = 1
-		
-		#generates character movement
-		if direction:
-			if dashing:
-				velocity.x = dash_speed * direction
+	if !respawning:
+		#generates gravity for player
+		if not is_on_floor():
+			coyote += delta
+			if velocity.y > 0:
+				velocity += get_gravity() * delta * 8
 			else:
-				velocity.x = speed * direction
-		else:
-			if dashing:
-				velocity.x = dash_speed * dash_direction
-			else:
-				velocity.x = move_toward(velocity.x, 0, speed)
+				velocity += get_gravity() * delta * 10
 		
+		if is_on_floor():
+			coyote = 0
+		
+		if stunned == false:
+			if GameMode.GameMode == "default":
+				#gets direction imput
+				direction =  Input.get_axis("ui_left", "ui_right")
+				
+				if Input.is_action_pressed("ui_down"):
+					if not is_on_floor():
+						velocity += get_gravity() * delta * 300
+				
+				if direction < 0:
+					dash_direction = -1
+				elif direction > 0:
+					dash_direction = 1
+			
+			#generates character movement
+			if direction:
+				if dashing:
+					velocity.x = dash_speed * direction
+				else:
+					velocity.x = speed * direction
+			else:
+				if dashing:
+					velocity.x = dash_speed * dash_direction
+				else:
+					velocity.x = move_toward(velocity.x, 0, speed)
+			
+		else:
+			velocity.x = 0
+		move_and_slide()
+	
 	else:
-		velocity.x = 0
-	move_and_slide()
-
+		velocity.y = 0
+	
 func _input(event: InputEvent) -> void:
-	if stunned ==  false:
+	if stunned ==  false and !respawning:
 		#makes player jump when on floor
 		if Input.is_action_just_pressed("ui_up"):
 			if coyote < 0.1:
@@ -203,3 +210,9 @@ func _on_buffering_timer_timeout() -> void:
 	elif buffered_input == "dash":
 		if coyote < 0.1 and dash_allowed:
 			dashing_action()
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if sprite.animation == "spawn":
+		respawning = false
+		sprite.modulate = Color("ffffff")
