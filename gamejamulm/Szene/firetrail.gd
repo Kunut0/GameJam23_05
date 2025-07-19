@@ -11,7 +11,7 @@ var adding: int = 2
 var i = 0
 
 func _ready() -> void:
-	shadow_ref = self.get_parent().get_parent()
+	shadow_ref = self.get_parent()
 	player_ref = get_tree().get_first_node_in_group("player1")
 
 func _process(delta: float) -> void:

@@ -136,15 +136,17 @@ func spawn():
 	var player_ref = get_tree().get_first_node_in_group("player1")
 	var shadow_res = Vector2(0,0)
 	for i in respawn_point_array: #respawn punkt für shadow wird gewählt
-		if i.global_position.x - player_ref.global_position.x > 400:
+		if i.global_position.x - player_ref.global_position.x > 250:
 			if shadow_res.x > i.global_position.x or shadow_res.x == 0:
 				shadow_res = i.global_position
+				i.shadow = "anger"
+				i.spawn_shadow()
 	
 	firetrail.get_child(0).adding = false
 	firetrail.get_child(0).delete_all()
 	
 	var shadow = shadow_scene.instantiate()
-	shadow.global_position = shadow_res + Vector2(200, 0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
+	shadow.global_position = shadow_res + Vector2(300, 0) #+vector um bug zu beheben bei dem death anim 2 mal spielt (genauer grund unbekannt)
 	get_tree().current_scene.call_deferred("add_child", shadow)
 	player_ref.shadow_ref = shadow
 	

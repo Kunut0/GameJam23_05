@@ -1,3 +1,139 @@
-[gd_scene format=3 uid="uid://ds3rxghfvnbm4"]
+[gd_scene load_steps=17 format=3 uid="uid://ds3rxghfvnbm4"]
+
+[ext_resource type="Texture2D" uid="uid://dl8u56kl3ww2m" path="res://Assets/shadow_spawnn_power_off.png" id="1_g2h7b"]
+[ext_resource type="Texture2D" uid="uid://tcbmkmp8f710" path="res://Assets/shadow_spawn_grief.png" id="1_i0vod"]
+[ext_resource type="Script" path="res://Script/shadow_respawn_point.gd" id="1_qqkre"]
+[ext_resource type="Texture2D" uid="uid://dh8xv51v71ar7" path="res://Assets/shadow_spawn_anxiety.png" id="3_nf7nr"]
+[ext_resource type="Texture2D" uid="uid://s75xdqkoeopq" path="res://Assets/shadow_spawnn_power_off2.png" id="4_cnxqk"]
+[ext_resource type="Texture2D" uid="uid://bktelqhfchbu7" path="res://Assets/shadow_spawn_rage.png" id="4_ggxeb"]
+[ext_resource type="Texture2D" uid="uid://7d065oqdl5q4" path="res://Assets/shadow_spawnn_power_off1.png" id="5_jusu5"]
+[ext_resource type="Texture2D" uid="uid://c14qk1mt4h1tg" path="res://Assets/smoke_1.png" id="6_xc0rc"]
+[ext_resource type="Texture2D" uid="uid://0cocdn6flmqk" path="res://Assets/smoke_2.png" id="7_7hfm7"]
+[ext_resource type="Texture2D" uid="uid://c81cx055kqxdv" path="res://Assets/shadow_spawnn_power_off3.png" id="7_p6rd5"]
+[ext_resource type="Texture2D" uid="uid://dxct4jijpj4s0" path="res://Assets/smoke_3.png" id="8_mrt6e"]
+[ext_resource type="Texture2D" uid="uid://crj46opyu48f" path="res://Assets/smoke_4.png" id="9_i83yb"]
+[ext_resource type="Texture2D" uid="uid://q5p5ws0gcuga" path="res://Assets/smoke_5.png" id="10_65w02"]
+[ext_resource type="Texture2D" uid="uid://c8cql0gt3qhm2" path="res://Assets/smoke_6.png" id="11_npcth"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wtg7g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cnxqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jusu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_g2h7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ggxeb")
+}],
+"loop": false,
+"name": &"anger",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cnxqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jusu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_g2h7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nf7nr")
+}],
+"loop": false,
+"name": &"anxiety",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_p6rd5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cnxqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jusu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_g2h7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_i0vod")
+}],
+"loop": false,
+"name": &"grief",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g2h7b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jusu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cnxqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p6rd5")
+}],
+"loop": false,
+"name": &"hide",
+"speed": 15.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i8kmp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_xc0rc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7hfm7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mrt6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_i83yb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_65w02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_npcth")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="shadow_respawn_point" type="Marker2D" groups=["respawn_point"]]
+script = ExtResource("1_qqkre")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(300, -20)
+sprite_frames = SubResource("SpriteFrames_wtg7g")
+autoplay = "default"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(300, -100)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_i8kmp")
+frame = 5
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animated_sprite_2d_2_animation_finished"]

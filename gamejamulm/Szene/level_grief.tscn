@@ -277,55 +277,55 @@ frame_progress = 0.404333
 position = Vector2(1107, 177)
 
 [node name="shadow_respawn_point" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(-808, -47)
+position = Vector2(-806, -55)
 
 [node name="shadow_respawn_point2" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(-421, -46)
+position = Vector2(-409, -66)
 
 [node name="shadow_respawn_point3" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(-85, -95)
+position = Vector2(-175, -118)
 
 [node name="shadow_respawn_point4" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(499, -51)
+position = Vector2(419, -67)
 
 [node name="shadow_respawn_point5" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(962, 98)
+position = Vector2(937, 83)
 
 [node name="shadow_respawn_point6" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(1406, -49)
+position = Vector2(1455, -57)
 
 [node name="shadow_respawn_point7" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(2431, -148)
+position = Vector2(2370, -167)
 
 [node name="shadow_respawn_point8" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(2872, -52)
+position = Vector2(2876, -67)
 
 [node name="shadow_respawn_point9" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(3456, -59)
+position = Vector2(3496, -66)
 
 [node name="shadow_respawn_point10" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(4133, -63)
 
 [node name="shadow_respawn_point11" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(4753, -198)
+position = Vector2(4666, -216)
 
 [node name="shadow_respawn_point12" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(5527, -159)
+position = Vector2(5223, -214)
 
 [node name="shadow_respawn_point13" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(5870, -47)
+position = Vector2(5759, -67)
 
 [node name="shadow_respawn_point14" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(6643, -95)
+position = Vector2(6602, -116)
 
 [node name="shadow_respawn_point15" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(7131, -34)
+position = Vector2(7178, 32)
 
 [node name="shadow_respawn_point16" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(7785, -164)
+position = Vector2(7869, -215)
 
 [node name="shadow_respawn_point17" parent="Node2D" instance=ExtResource("18_hy06n")]
-position = Vector2(8490, -156)
+position = Vector2(8483, -167)
 
 [node name="shadow_respawn_point18" parent="Node2D" instance=ExtResource("18_hy06n")]
 position = Vector2(1800, -47)

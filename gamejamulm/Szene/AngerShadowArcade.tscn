@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://blvu525vg5w5r"]
+[gd_scene load_steps=22 format=3 uid="uid://blvu525vg5w5r"]
 
 [ext_resource type="Script" path="res://Script/AngerShadowArcade.gd" id="1_fvo5a"]
 [ext_resource type="Texture2D" uid="uid://21fqntieakfm" path="res://Assets/anger/rage_frame_1.png" id="2_ubtvm"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cmuy6hjvn7avp" path="res://Assets/anger/rage20.png" id="11_yqdwt"]
 [ext_resource type="Texture2D" uid="uid://bych253eqnovn" path="res://Assets/anger/rage22.png" id="12_vu658"]
 [ext_resource type="PackedScene" uid="uid://dtmnqp3oqf2ce" path="res://Szene/firetrail.tscn" id="13_acq3c"]
+[ext_resource type="Texture2D" uid="uid://c81cx055kqxdv" path="res://Assets/shadow_spawnn_power_off3.png" id="13_py8e8"]
 [ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="14_2oou7"]
 [ext_resource type="AudioStream" uid="uid://64dq4b4ewe4" path="res://Assets/Musik/Sounds/fire_ability.wav" id="15_mdhg2"]
 [ext_resource type="AudioStream" uid="uid://bbpbgxsu05xxg" path="res://Assets/Musik/Sounds/slide.wav" id="16_gccb7"]
@@ -58,7 +59,16 @@ animations = [{
 "name": &"default",
 "speed": 8.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_py8e8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bnn0i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0k43l")
+}],
 "loop": false,
 "name": &"spawn",
 "speed": 5.0
@@ -75,15 +85,17 @@ scale = Vector2(0.25, 0.25)
 script = ExtResource("1_fvo5a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-18, -226)
 sprite_frames = SubResource("SpriteFrames_x4uv4")
 animation = &"spawn"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(19, 1)
+position = Vector2(1, -225)
 shape = SubResource("CircleShape2D_im4uc")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(-18, -226)
 collision_layer = 3
 collision_mask = 3
 
@@ -92,6 +104,7 @@ position = Vector2(19, 0)
 shape = SubResource("CircleShape2D_igvfn")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-18, -226)
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -105,15 +118,19 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Line2D" parent="." instance=ExtResource("13_acq3c")]
+position = Vector2(0, -228)
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-18, -226)
 stream = ExtResource("14_2oou7")
 volume_db = 5.115
 
 [node name="Ability" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-18, -226)
 stream = ExtResource("15_mdhg2")
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-18, -226)
 stream = ExtResource("16_gccb7")
 
 [node name="Stun" type="Node2D" parent="."]
@@ -134,7 +151,7 @@ texture = ExtResource("17_wx4wt")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(20, 64)
+position = Vector2(2, -162)
 target_position = Vector2(-216, 0)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

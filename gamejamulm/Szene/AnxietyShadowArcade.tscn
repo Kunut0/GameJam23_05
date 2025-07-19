@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://deffwa6bcthch"]
+[gd_scene load_steps=17 format=3 uid="uid://deffwa6bcthch"]
 
 [ext_resource type="Script" path="res://Script/AnxietyShadowArcade.gd" id="1_y0bm4"]
 [ext_resource type="Texture2D" uid="uid://70kmouvfm5h" path="res://Assets/anxiety/anxiety_move_frame_1.png" id="2_0ghi4"]
 [ext_resource type="Texture2D" uid="uid://bfxcjjor6sc82" path="res://Assets/anxiety/anxiety_move_frame_2.png" id="3_ey0h5"]
 [ext_resource type="Texture2D" uid="uid://bu41omkcyrehf" path="res://Assets/anxiety/anxiety_move_frame_3.png" id="4_0nsvc"]
 [ext_resource type="Texture2D" uid="uid://crchj8dn4xkg6" path="res://Assets/anxiety/anxiety_scream_frame_1.png" id="5_8dmtg"]
+[ext_resource type="Texture2D" uid="uid://c81cx055kqxdv" path="res://Assets/shadow_spawnn_power_off3.png" id="6_7qetb"]
 [ext_resource type="Texture2D" uid="uid://cdjf7osrooqva" path="res://Assets/anxiety/anxiety_scream_effect.png" id="6_11bvg"]
 [ext_resource type="AudioStream" uid="uid://dyanyacdbbsf5" path="res://Assets/Musik/Sounds/player_2_jump.ogg" id="7_fq3l8"]
 [ext_resource type="AudioStream" uid="uid://u1gesyfrjh3k" path="res://Assets/Musik/Sounds/scream.wav" id="8_jrobd"]
@@ -39,7 +40,16 @@ animations = [{
 "name": &"scream",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7qetb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ey0h5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0nsvc")
+}],
 "loop": false,
 "name": &"spawn",
 "speed": 5.0

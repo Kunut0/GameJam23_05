@@ -274,63 +274,6 @@ autoplay = "default"
 frame = 6
 frame_progress = 0.404333
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(1108, 177)
-
-[node name="shadow_respawn_point" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(-808, -47)
-
-[node name="shadow_respawn_point2" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(-421, -46)
-
-[node name="shadow_respawn_point3" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(-85, -95)
-
-[node name="shadow_respawn_point4" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(499, -51)
-
-[node name="shadow_respawn_point5" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(962, 98)
-
-[node name="shadow_respawn_point6" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(1406, -49)
-
-[node name="shadow_respawn_point7" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(2431, -148)
-
-[node name="shadow_respawn_point8" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(2872, -52)
-
-[node name="shadow_respawn_point9" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(3456, -59)
-
-[node name="shadow_respawn_point10" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(4133, -63)
-
-[node name="shadow_respawn_point11" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(4753, -198)
-
-[node name="shadow_respawn_point12" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(5527, -159)
-
-[node name="shadow_respawn_point13" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(5870, -47)
-
-[node name="shadow_respawn_point14" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(6643, -95)
-
-[node name="shadow_respawn_point15" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(7131, -34)
-
-[node name="shadow_respawn_point16" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(7785, -164)
-
-[node name="shadow_respawn_point17" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(8490, -156)
-
-[node name="shadow_respawn_point18" parent="Node2D" instance=ExtResource("18_16ave")]
-position = Vector2(1800, -47)
-
 [node name="Playerrespawns" type="Node2D" parent="."]
 position = Vector2(1366, 163)
 
@@ -410,6 +353,63 @@ position = Vector2(9022, 123)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(38.5, 35.5)
 shape = SubResource("RectangleShape2D_gf7s8")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1107, 177)
+
+[node name="shadow_respawn_point" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(-806, -55)
+
+[node name="shadow_respawn_point2" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(-409, -66)
+
+[node name="shadow_respawn_point3" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(-175, -118)
+
+[node name="shadow_respawn_point4" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(419, -67)
+
+[node name="shadow_respawn_point5" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(937, 83)
+
+[node name="shadow_respawn_point6" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(1455, -57)
+
+[node name="shadow_respawn_point7" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(2370, -167)
+
+[node name="shadow_respawn_point8" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(2876, -67)
+
+[node name="shadow_respawn_point9" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(3496, -66)
+
+[node name="shadow_respawn_point10" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(4133, -63)
+
+[node name="shadow_respawn_point11" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(4666, -216)
+
+[node name="shadow_respawn_point12" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(5223, -214)
+
+[node name="shadow_respawn_point13" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(5759, -67)
+
+[node name="shadow_respawn_point14" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(6602, -116)
+
+[node name="shadow_respawn_point15" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(7178, 32)
+
+[node name="shadow_respawn_point16" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(7869, -215)
+
+[node name="shadow_respawn_point17" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(8483, -167)
+
+[node name="shadow_respawn_point18" parent="Node2D" instance=ExtResource("18_16ave")]
+position = Vector2(1800, -47)
 
 [editable path="Playerrespawns/RespawnPoint2"]
 [editable path="Playerrespawns/RespawnPoint3"]

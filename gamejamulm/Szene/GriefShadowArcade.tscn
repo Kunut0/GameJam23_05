@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cumde4dlacp0m"]
+[gd_scene load_steps=17 format=3 uid="uid://cumde4dlacp0m"]
 
 [ext_resource type="Script" path="res://Script/GriefShadowArcade.gd" id="1_0n2yb"]
 [ext_resource type="Texture2D" uid="uid://cmdfb4y6vwwvg" path="res://Assets/grief/Katharsis_grief_eye_close_frame1.png" id="2_phshb"]
 [ext_resource type="Texture2D" uid="uid://b2sr61i6cmgce" path="res://Assets/grief/Katharsis_grief_eye_close_frame_2.png" id="3_hqyxy"]
 [ext_resource type="Texture2D" uid="uid://hi8joo8ds4ry" path="res://Assets/grief/Katharsis_grief_eye_close_frame_3.png" id="4_pk5f8"]
 [ext_resource type="Texture2D" uid="uid://c7ss37fjw5d33" path="res://Assets/grief/Katharsis_grief_move_frame_1.png" id="5_v50r6"]
+[ext_resource type="Texture2D" uid="uid://c81cx055kqxdv" path="res://Assets/shadow_spawnn_power_off3.png" id="5_xkoqq"]
 [ext_resource type="Texture2D" uid="uid://djgm80k832i8a" path="res://Assets/grief/Katharsis_grief_move_frame_2.png" id="6_2ahpr"]
 [ext_resource type="Texture2D" uid="uid://nidjbdpk25rw" path="res://Assets/grief/Katharsis_grief_move_frame3.png" id="7_x6n4x"]
 [ext_resource type="Texture2D" uid="uid://bcb35pvgu5b8t" path="res://Assets/grief/Katharsis_grief_move_frame4.png" id="8_pquga"]
@@ -45,7 +46,16 @@ animations = [{
 "name": &"default",
 "speed": 8.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_xkoqq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pk5f8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hqyxy")
+}],
 "loop": false,
 "name": &"spawn",
 "speed": 5.0
@@ -79,11 +89,12 @@ scale = Vector2(0.7, 0.7)
 script = ExtResource("1_0n2yb")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(53.1812, 44.6187)
+position = Vector2(52.6957, -80.7379)
 scale = Vector2(8.9375, 21.2813)
 polygon = PackedVector2Array(-19.7126, 3.44816, 6.69301, 3.21322, -4.27203, -7.45345, -11.321, -7.59442)
 
 [node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(-0.485491, -125.357)
 collision_layer = 3
 collision_mask = 3
 
@@ -93,8 +104,10 @@ scale = Vector2(18.6111, 47.8125)
 polygon = PackedVector2Array(-6.75373, 3.92811, 8.18358, 3.90719, 2.32687, -1.25882, -2.56269, -1.23791)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.485491, -125.357)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.485491, -125.357)
 sprite_frames = SubResource("SpriteFrames_7jyy7")
 animation = &"spawn"
 autoplay = "default"
@@ -111,16 +124,19 @@ wait_time = 0.1
 one_shot = true
 
 [node name="PuddleSpawnpoint1" type="Marker2D" parent="."]
-position = Vector2(0, -34)
+position = Vector2(-0.485491, -159.357)
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-0.485491, -125.357)
 stream = ExtResource("11_sft7u")
 volume_db = 5.115
 
 [node name="Ability" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-0.485491, -125.357)
 stream = ExtResource("12_f632x")
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-0.485491, -125.357)
 stream = ExtResource("13_phbxj")
 
 [node name="Stun" type="Node2D" parent="."]
@@ -138,7 +154,7 @@ scale = Vector2(1.16987, 0.42908)
 texture = ExtResource("14_m3lxd")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, 100)
+position = Vector2(-0.485491, -25.3566)
 target_position = Vector2(-132.857, 1.42857)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
